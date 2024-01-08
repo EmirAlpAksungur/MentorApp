@@ -6,11 +6,7 @@ WORKDIR /frontend
 
 COPY ./frontend .
 
-RUN npm config set legacy-peer-deps true
-RUN npm install
+RUN npm run build
+WORKDIR /frontend/build
 
-COPY /docker/frontend/entrypoint /entrypoint
-RUN sed -i 's/\r$//g' /entrypoint
-RUN chmod +x /entrypoint
-
-ENTRYPOINT [ "/entrypoint" ]
+CMD ["npx","serve"]

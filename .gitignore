@@ -132,3 +132,4 @@ dist
 # virtual evironment
 venv
 /backend/static
+build
