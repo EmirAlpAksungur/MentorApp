@@ -1,0 +1,10 @@
+.main-header {
+  height: 50px;
+  width: 100%;
+  background-color: red;
+  justify-content: space-between;
+  align-items: center;
+  &__icon {
+    font-size: 32px !important;
+  }
+}
