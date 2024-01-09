@@ -1,3 +1,3 @@
-import checkRedux from "./checkRedux";
+import auth from "./auth";
 
-export { checkRedux };
+export { auth };

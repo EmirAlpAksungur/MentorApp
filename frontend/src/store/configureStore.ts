@@ -12,10 +12,10 @@ import {
   REGISTER,
 } from "redux-persist";
 
-import { checkRedux } from "../services/reducers";
+import { auth } from "../services/reducers";
 const { logger } = require(`redux-logger`);
 export interface RootState {
-  checkRedux: any;
+  auth: any;
 }
 
 const middleware: Middleware[] = [thunk, logger];
@@ -23,11 +23,11 @@ const middleware: Middleware[] = [thunk, logger];
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["checkRedux"],
+  whitelist: [""],
 };
 
 const rootReducer = combineReducers<RootState>({
-  checkRedux: checkRedux,
+  auth: auth,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

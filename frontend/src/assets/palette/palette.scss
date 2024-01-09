@@ -1,0 +1,117 @@
+$light-bg: #ffffff;
+$dark-bg: #101418;
+
+$light-bg-header: #ffffff;
+$dark-bg-header: #101418;
+
+$light-text: #000000;
+$dark-text: #ffffff;
+$light-reverse-text: #ffffff;
+$dark-reverse-text: #000000;
+
+$dark-bg-pop-up: #3f3f3f;
+
+$dark-selected: rgba(63, 81, 181, 0.16);
+$light-selected: rgba(63, 81, 181, 0.08);
+
+$themes: (
+  light: (
+    //text
+    text: $light-text,
+    // header
+    bg-header: $light-bg-header,
+    border-header: darken($light-bg-header, 20),
+    // button
+    bg-btn-outlined: $light-bg-header,
+    text-btn-outlined: lighten($dark-bg-header, 20),
+    border-btn-outlined: lighten($dark-bg-header, 20),
+    bg-btn-hover-outlined: darken($light-bg-header, 10),
+    text-btn-hover-outlined: lighten($dark-bg-header, 10),
+    border-btn-hover-outlined: lighten($dark-bg-header, 10),
+    bg-btn-contained: lighten($dark-bg-header, 20),
+    text-btn-contained: $light-bg-header,
+    border-btn-contained: $light-bg-header,
+    bg-btn-hover-contained: lighten($dark-bg-header, 10),
+    text-btn-hover-contained: darken($light-bg-header, 10),
+    border-btn-hover-contained: darken($light-bg-header, 10),
+    bg-btn-text: $light-bg-header,
+    text-btn-text: lighten($dark-bg-header, 20),
+    bg-btn-hover-text: darken($light-bg-header, 10),
+    text-btn-hover-text: lighten($dark-bg-header, 10),
+    //select
+    border-select: lighten($dark-bg-header, 20),
+    text-select: $light-text,
+    icon-select: lighten($dark-bg-header, 20),
+    border-hover-select: $dark-bg-header,
+    text-hover-select: $light-text,
+    icon-hover-select: $dark-bg-header,
+    bg-item-hover-select: darken($light-bg, 4),
+    bg-selected-select: $light-selected,
+    bg-selected-hover-select: darken($light-selected, 4),
+    //pop-up
+    bg-pop-up: $light-bg,
+  ),
+  dark: (
+    //text
+    text: $dark-text,
+    // header
+    bg-header: $dark-bg-header,
+    border-header: lighten($dark-bg-header, 20),
+    // button
+    bg-btn-outlined: $dark-bg-header,
+    text-btn-outlined: darken($light-bg-header, 20),
+    border-btn-outlined: darken($light-bg-header, 20),
+    bg-btn-hover-outlined: lighten($dark-bg-header, 10),
+    text-btn-hover-outlined: darken($light-bg-header, 10),
+    border-btn-hover-outlined: darken($light-bg-header, 10),
+    bg-btn-contained: darken($light-bg-header, 20),
+    text-btn-contained: $dark-bg-header,
+    border-btn-contained: $dark-bg-header,
+    bg-btn-hover-contained: darken($light-bg-header, 10),
+    text-btn-hover-contained: lighten($dark-bg-header, 10),
+    border-btn-hover-contained: lighten($dark-bg-header, 10),
+    bg-btn-text: $dark-bg-header,
+    text-btn-text: darken($light-bg-header, 20),
+    bg-btn-hover-text: lighten($dark-bg-header, 10),
+    text-btn-hover-text: darken($light-bg-header, 10),
+    //select
+    border-select: darken($light-bg-header, 20),
+    text-select: $dark-text,
+    icon-select: darken($light-bg-header, 20),
+    border-hover-select: $light-bg-header,
+    text-hover-select: $dark-text,
+    icon-hover-select: $light-bg-header,
+    bg-item-hover-select: lighten($dark-bg-pop-up, 4),
+    bg-selected-select: $dark-selected,
+    bg-selected-hover-select: lighten($dark-selected, 4),
+    //pop-up
+    bg-pop-up: $dark-bg-pop-up,
+  ),
+) !default;
+
+$theme-map: null;
+
+@mixin themify($themes: $themes) {
+  @each $theme, $map in $themes {
+    .theme-#{$theme} & {
+      $theme-map: () !global;
+
+      @each $key, $submap in $map {
+        $value: map-get(map-get($themes, $theme), "#{$key}");
+        $theme-map: map-merge(
+          $theme-map,
+          (
+            $key: $value,
+          )
+        ) !global;
+      }
+
+      @content;
+      $theme-map: null !global;
+    }
+  }
+}
+
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}

@@ -1,0 +1,55 @@
+@import "../../palette/palette.scss";
+@mixin textOptions {
+  font-size: 1.2rem;
+  text-transform: capitalize;
+}
+@mixin btnRounded {
+  border-radius: 999px !important;
+}
+
+@mixin btnOutlined {
+  @include themify($themes) {
+    background-color: themed("bg-btn-outlined");
+    border-color: themed("border-btn-outlined");
+    color: themed("text-btn-outlined");
+    @include textOptions();
+    // transition: background-color 5s;
+  }
+  &:hover {
+    @include themify($themes) {
+      background-color: themed("bg-btn-hover-outlined");
+      border-color: themed("border-btn-hover-outlined");
+      color: themed("text-btn-hover-outlined");
+    }
+  }
+}
+
+@mixin btnContained {
+  @include themify($themes) {
+    background-color: themed("bg-btn-contained");
+    border-color: themed("border-btn-contained");
+    color: themed("text-btn-contained");
+    @include textOptions();
+  }
+  &:hover {
+    @include themify($themes) {
+      background-color: themed("bg-btn-hover-contained");
+      border-color: themed("border-btn-hover-contained");
+      color: themed("text-btn-hover-contained");
+    }
+  }
+}
+
+@mixin btnText {
+  @include themify($themes) {
+    background-color: themed("bg-btn-text");
+    color: themed("text-btn-text");
+    @include textOptions();
+  }
+  &:hover {
+    @include themify($themes) {
+      background-color: themed("bg-btn-hover-text");
+      color: themed("text-btn-hover-text");
+    }
+  }
+}

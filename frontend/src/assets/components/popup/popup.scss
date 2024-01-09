@@ -1,0 +1,8 @@
+@import "../../palette/palette.scss";
+
+@mixin popUpBackGroundColor() {
+  @include themify($themes) {
+    background-color: themed("bg-pop-up");
+    color: themed("text");
+  }
+}

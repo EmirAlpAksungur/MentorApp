@@ -1,0 +1,60 @@
+@import "../../palette/palette.scss";
+@import "../../components/popup/popup.scss";
+
+.my-select-box {
+  width: 100%;
+  display: inline-block;
+  &__select {
+    font-size: 1rem;
+    @include themify($themes) {
+      color: themed("text-select");
+    }
+    & .MuiOutlinedInput-input {
+      padding: 4px 8px;
+    }
+    & fieldset {
+      @include themify($themes) {
+        border-color: themed("border-select");
+      }
+    }
+    & svg {
+      @include themify($themes) {
+        color: themed("icon-select");
+      }
+    }
+    &:hover {
+      & fieldset {
+        @include themify($themes) {
+          border-color: themed("border-hover-select");
+        }
+      }
+      & svg {
+        @include themify($themes) {
+          color: themed("icon-hover-select");
+        }
+      }
+    }
+  }
+}
+.my-select-box__select__pop-up {
+  @include popUpBackGroundColor;
+  &__menu-item {
+    font-size: 1rem;
+    text-transform: capitalize;
+    &:hover {
+      @include themify($themes) {
+        background-color: themed("bg-item-hover-select");
+      }
+    }
+  }
+  &__selected {
+    @include themify($themes) {
+      background-color: themed("bg-selected-select");
+    }
+    &:hover {
+      @include themify($themes) {
+        background-color: themed("bg-selected-hover-select");
+      }
+    }
+  }
+}

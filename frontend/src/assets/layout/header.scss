@@ -1,4 +1,49 @@
+@import "../palette/palette.scss";
+@import "../components/button/btn.scss";
 .app-header {
   justify-content: space-between;
   padding: 16px;
+  border-bottom: 1px solid;
+  overflow: hidden;
+  @include themify($themes) {
+    background-color: themed("bg-header");
+    border-color: themed("border-header");
+  }
+  &__left {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    &__btn-theme {
+      @include btnText;
+      width: 31px;
+      height: 31px;
+      &__dark-mode {
+        position: relative;
+        right: -7.5px;
+        color: white;
+        top: 40px;
+      }
+      &__light-mode {
+        position: relative;
+        right: 7.5px;
+        color: black;
+        top: 0px;
+      }
+    }
+    &__lang-select {
+      width: 100px;
+    }
+    &__unauth-profile__btn {
+      @include btnText;
+      @include btnRounded;
+    }
+  }
+  &__unauth-profile__btn-log-in {
+    @include btnOutlined;
+    @include btnRounded;
+  }
+  &__unauth-profile__btn-sign-up {
+    @include btnContained;
+    @include btnRounded;
+  }
 }
