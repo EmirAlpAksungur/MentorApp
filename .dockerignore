@@ -156,3 +156,9 @@ include/
 *.sln
 *.sw?
 lib64
+*.pyc
+*.pyo
+*.pyd
+*.db
+static/
+media/

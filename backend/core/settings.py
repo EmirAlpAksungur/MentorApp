@@ -45,7 +45,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'rest_framework',
-
+    
+    'Translations.apps.TranslationsConfig',
+    'TextContent.apps.TextcontentConfig',
+    'Languages.apps.LanguagesConfig',
     'commands',
 ]
 

@@ -14,6 +14,10 @@ echo "Creating superuser..."
 /opt/venv/bin/python manage.py superuser || true
 echo "Superuser created"
 
+echo "Importing files..."
+/opt/venv/bin/python manage.py importExel || true
+echo "Files imported"
+
 echo "Collecting static files..."
 /opt/venv/bin/python manage.py collectstatic --noinput
 echo "Static files collected"
