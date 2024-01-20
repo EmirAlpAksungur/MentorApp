@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 from decouple import config
 
+from settings.apps import apps
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -29,14 +30,14 @@ SECRET_KEY = config(
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', cast=bool, default=False)
+DEBUG = config('DEBUG', cast=bool, default=True)
 
 ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
 
-INSTALLED_APPS = [
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,12 +46,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'rest_framework',
-    
-    'Translations.apps.TranslationsConfig',
-    'TextContent.apps.TextcontentConfig',
-    'Languages.apps.LanguagesConfig',
+
     'commands',
 ]
+
+INSTALLED_APPS = DJANGO_APPS + apps
 
 MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',

@@ -1,6 +1,6 @@
 from django.db import models
-from Languages.models import Languages
-from TextContent.models import TextContent
+from apps.languages.models import Languages
+from apps.textContent.models import TextContent
 
 # Create your models here.
 

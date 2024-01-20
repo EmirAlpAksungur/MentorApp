@@ -2,9 +2,9 @@ from django.core.management.base import BaseCommand, CommandError
 from django.db.models import ForeignKey
 import os
 
-from Languages.models import Languages
-from TextContent.models import TextContent
-from Translations.models import Translations
+from apps.languages.models import Languages
+from apps.textContent.models import TextContent
+from apps.translations.models import Translations
 import pandas as pd
 
 
