@@ -16,6 +16,8 @@ services:
     command: /backend/entrypoint.sh
     volumes:
       - ./backend:/backend
+    networks:
+      - network
   postgre:
     container_name: postgre
     image: postgres:16-alpine
@@ -25,6 +27,8 @@ services:
       - ./.env
     volumes:
       - db-data:/var/lib/postgresql/data
+    networks:
+      - network
 
   frontend:
     restart: unless-stopped
@@ -34,17 +38,22 @@ services:
       dockerfile: docker/frontend/Dockerfile
     ports:
       - "3000:3000"
-  # pgadmin:
-  #   restart: on-failure
-  #   image: dpage/pgadmin4:latest
-  #   container_name: pgadmin
-  #   volumes:
-  #     - pgadmin-data:/var/lib/pgadmin
-  #   environment:
-  #     PGADMIN_DEFAULT_EMAIL: ${PG_ADMIN_EMAIL}
-  #     PGADMIN_DEFAULT_PASSWORD: ${PG_ADMIN_PASSWORD}
-  #   ports:
-  #     - "5050:80"
+    networks:
+      - network
+
+  pgadmin:
+    restart: on-failure
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PG_ADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PG_ADMIN_PASSWORD}
+    ports:
+      - "5050:80"
+    networks:
+      - network
   nginx:
     container_name: nginx
     build:
@@ -54,12 +63,16 @@ services:
       - "80:80"
     volumes:
       - static:/backend/static
-
+    networks:
+      - network
     depends_on:
       - backend
       - frontend
 volumes:
-  # pgadmin-data:
+  pgadmin-data:
   db-data:
   node_modules:
   static:
+networks:
+  network:
+    driver: bridge
