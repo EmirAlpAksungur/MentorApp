@@ -2,27 +2,20 @@ import React, { useEffect, useState } from "react";
 import { Button, Grid } from "@mui/material";
 import { useAppSelector } from "../../../hooks/redux";
 import { RootState } from "../../../store/configureStore";
-import TranslationsService from "../../../services/api/translations";
+import { asyncLoadText } from "../../../services/actions/translations";
 import { TranslatedTextType } from "../../../services/types/translations";
 const Profile: React.FC = () => {
   const [text, setText] = useState<TranslatedTextType[]>([]);
-
   const LanguageId = useAppSelector(
     (state: RootState) => state.languages.LanguageId
   );
-  const asyncLoadText = async () => {
-    try {
-      let res = await TranslationsService.getTranslationsById({
-        LanguageId,
-        TextContentIds: [4, 5],
-      });
-      setText(res.data);
-    } catch (err) {
-      console.log(err);
-    }
+
+  const helperAsync = async () => {
+    const result = await asyncLoadText(LanguageId, [4, 5]);
+    Array.isArray(result) && setText(result);
   };
   useEffect(() => {
-    asyncLoadText();
+    helperAsync();
   }, [LanguageId]);
 
   return (
