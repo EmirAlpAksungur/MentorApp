@@ -6,6 +6,5 @@ from .views import (
 from django.urls.resolvers import URLPattern
 
 urlpatterns = [
-    path("languages/", LanguagesListView.as_view(), name="LanguagesList"),
-
+    path("get/", LanguagesListView.as_view(), name="LanguagesList"),
 ]

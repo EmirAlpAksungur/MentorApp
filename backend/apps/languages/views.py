@@ -9,8 +9,9 @@ class LanguagesListView(generics.ListAPIView):
         permissions.AllowAny,
     ]
 
+    def get_queryset(self):
+        return Languages.objects.all()
     def get(self, request, *args, **kwargs):
-        print("sad")
-        queryset = Languages.objects.all()
+        queryset = self.get_queryset()
         serializer = GetLanguagesSerializer(queryset, many=True)
-        return Response( serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)

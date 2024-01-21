@@ -47,6 +47,7 @@ DJANGO_APPS = [
     'django_extensions',
     'rest_framework',
 
+    'corsheaders',
     'commands',
 ]
 
@@ -61,6 +62,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:8080',
+    'http://localhost:3000',
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -138,8 +147,7 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
-print("-------------------------")
-print(STATIC_ROOT)
+
 STATICFILES_DIR = []
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

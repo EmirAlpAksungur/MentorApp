@@ -11,8 +11,6 @@ const Main: React.FC<MainProps> = ({ children }) => {
         <Header></Header>
       </Grid>
       {children}
-      <br />
-      {process.env.name}
     </Grid>
   );
 };

@@ -12,10 +12,11 @@ import {
   REGISTER,
 } from "redux-persist";
 
-import { auth } from "../services/reducers";
+import { auth, languages } from "../services/reducers";
 const { logger } = require(`redux-logger`);
 export interface RootState {
   auth: any;
+  languages: any;
 }
 
 const middleware: Middleware[] = [thunk, logger];
@@ -28,6 +29,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers<RootState>({
   auth: auth,
+  languages: languages,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

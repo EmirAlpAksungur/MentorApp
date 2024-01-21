@@ -2,7 +2,7 @@
 APP_PORT=${PORT:-8000}
 
 echo "Waiting for postgress..."
-sleep 5 
+sleep 15 
 echo "PostgreSQL started"
 
 echo "Migrating database..."

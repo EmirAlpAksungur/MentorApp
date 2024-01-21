@@ -1,3 +1,3 @@
 import auth from "./auth";
-
-export { auth };
+import languages from "./languages";
+export { auth, languages };
