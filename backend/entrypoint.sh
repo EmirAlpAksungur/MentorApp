@@ -1,26 +1,52 @@
 #!/bin/bash
 APP_PORT=${PORT:-8000}
 
-echo "Waiting for postgress..."
-sleep 15 
-echo "PostgreSQL started"
+set -o errexit
+set -o pipefail
+set -o nounset
+
+postgres_ready() {
+python << END
+import sys
+import psycopg2
+try:
+    psycopg2.connect(
+        dbname="${POSTGRES_DB}",
+        user="${POSTGRES_USER}",
+        password="${POSTGRES_PASSWORD}",
+        host="${POSTGRES_HOST}",
+        port="${POSTGRES_PORT}",
+    )
+except psycopg2.OperationalError:
+    sys.exit(-1)
+sys.exit(0)
+END
+}
+
+until postgres_ready; do
+ >&2 echo "Waiting for PostgreSQL to become available....:-("
+ sleep 1
+done
+>&2 
+
+echo "PostgreSQL is ready!!!!...:-)"
 
 echo "Migrating database..."
-/opt/venv/bin/python manage.py makemigrations --noinput
-/opt/venv/bin/python manage.py migrate --noinput
+python manage.py makemigrations --noinput
+python manage.py migrate --noinput
 echo "Database migrated"
 
 echo "Creating superuser..."
-/opt/venv/bin/python manage.py superuser || true
+python manage.py superuser || true
 echo "Superuser created"
 
 echo "Importing files..."
-/opt/venv/bin/python manage.py importExel || true
+python manage.py importExel || true
 echo "Files imported"
 
 echo "Collecting static files..."
-/opt/venv/bin/python manage.py collectstatic --noinput
+python manage.py collectstatic --noinput
 echo "Static files collected"
 
 echo "Starting Server"
-/opt/venv/bin/gunicorn core.wsgi:application --bind "0.0.0.0:${APP_PORT}" --workers 4 --reload
+gunicorn core.wsgi:application --bind "0.0.0.0:${APP_PORT}" --workers 4 --reload
