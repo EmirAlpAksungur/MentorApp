@@ -1,9 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Grid } from "@mui/material";
+import { useAppSelector } from "../../../hooks/redux";
 import ThemeSelect from "./ThemeSelect";
 import LangSelect from "./LangSelect";
+import { RootState } from "../../../store/configureStore";
+import { asyncLoadText } from "../../../services/actions/translations";
+import { TranslatedTextType } from "../../../services/types/translations";
 import "../../../assets/layout/header.scss";
+
 const Main: React.FC = () => {
+  const [text, setText] = useState<TranslatedTextType[]>([]);
+  const LanguageId = useAppSelector(
+    (state: RootState) => state.languages.LanguageId
+  );
+
+  const helperAsync = async () => {
+    const result = await asyncLoadText(LanguageId, [1, 2, 3]);
+    Array.isArray(result) && setText(result);
+  };
+  useEffect(() => {
+    helperAsync();
+  }, [LanguageId]);
+
   return (
     <Grid
       container
@@ -17,7 +35,7 @@ const Main: React.FC = () => {
               variant="text"
               className="app-header__left__unauth-profile__btn"
             >
-              Find new mentor
+              {text.find((e) => e?.TextContentId === 1)?.Translations}
             </Button>
           </Grid>
           <Grid item>
@@ -25,7 +43,7 @@ const Main: React.FC = () => {
               variant="text"
               className="app-header__left__unauth-profile__btn"
             >
-              Blog
+              {text.find((e) => e?.TextContentId === 2)?.Translations}
             </Button>
           </Grid>
           <Grid item>
@@ -33,7 +51,7 @@ const Main: React.FC = () => {
               variant="text"
               className="app-header__left__unauth-profile__btn"
             >
-              Download
+              {text.find((e) => e?.TextContentId === 3)?.Translations}
             </Button>
           </Grid>
         </Grid>

@@ -4,6 +4,8 @@ import { useAppSelector } from "../../../hooks/redux";
 import { RootState } from "../../../store/configureStore";
 import { asyncLoadText } from "../../../services/actions/translations";
 import { TranslatedTextType } from "../../../services/types/translations";
+import { routeToUrl } from "../../../routers/utils";
+
 const Profile: React.FC = () => {
   const [text, setText] = useState<TranslatedTextType[]>([]);
   const LanguageId = useAppSelector(
@@ -24,6 +26,7 @@ const Profile: React.FC = () => {
         <Button
           variant="outlined"
           className="app-header__unauth-profile__btn-log-in"
+          onClick={() => routeToUrl("log-in")}
         >
           {text.find((e) => e?.TextContentId === 4)?.Translations}
         </Button>
@@ -32,6 +35,7 @@ const Profile: React.FC = () => {
         <Button
           variant="contained"
           className="app-header__unauth-profile__btn-sign-up"
+          onClick={() => routeToUrl("sign-up")}
         >
           {text.find((e) => e?.TextContentId === 5)?.Translations}
         </Button>
