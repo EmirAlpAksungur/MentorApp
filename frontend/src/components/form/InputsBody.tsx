@@ -5,7 +5,7 @@ import { RootState } from "../../store/configureStore";
 import { asyncLoadText } from "../../services/actions/translations";
 import { InputsBodyType } from "../../services/types/form";
 import { TranslatedTextType } from "../../services/types/translations";
-import FormSplitter from "./FornSplitter";
+import FormSplitter from "./FormSplitter";
 
 import "../../assets/components/form/form.scss";
 const InputsBody: React.FC<InputsBodyType> = ({
