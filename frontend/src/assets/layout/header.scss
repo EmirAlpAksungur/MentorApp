@@ -46,4 +46,30 @@
     @include btnContained;
     @include btnRounded;
   }
+  &__mobile-menu {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .app-header {
+    &__left {
+      &__unauth-profile__btn {
+        display: none !important;
+      }
+    }
+    &__right {
+      display: none;
+    }
+    &__mobile-menu {
+      display: inline-block;
+      align-self: center;
+      @include themify($themes) {
+        color: themed("text");
+      }
+      &__menu-item {
+        width: 170px;
+      }
+    }
+  }
 }

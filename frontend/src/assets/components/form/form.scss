@@ -1,0 +1,16 @@
+@import "../../palette/palette.scss";
+
+.form-container {
+  &__label {
+    @include themify($themes) {
+      color: themed("text");
+    }
+    margin-bottom: 4px;
+    font-size: 1.4rem !important;
+  }
+  &__error {
+    font-size: 0.8rem !important;
+    color: red !important;
+    position: absolute !important;
+  }
+}

@@ -9,4 +9,4 @@ COPY ./frontend .
 RUN npm run build
 WORKDIR /frontend/build
 
-CMD ["npx","serve"]
+CMD ["npx","serve","-s"]

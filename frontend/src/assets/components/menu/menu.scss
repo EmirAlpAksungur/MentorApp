@@ -1,0 +1,17 @@
+@import "../../palette/palette.scss";
+@import "../popup/popup.scss";
+
+.my-menu {
+  &__pop-up {
+    @include popUpBackGroundColor();
+    li {
+      font-size: 1rem;
+      text-transform: capitalize;
+      &:hover {
+        @include themify($themes) {
+          background-color: themed("bg-item-hover-select");
+        }
+      }
+    }
+  }
+}

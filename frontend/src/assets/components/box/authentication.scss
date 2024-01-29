@@ -1,0 +1,51 @@
+@import "../../palette/palette.scss";
+@import "./box.scss";
+@import "../button/btn.scss";
+
+.authentication-box {
+  @include boxBorder;
+  width: 350px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  @include themify($themes) {
+    background: linear-gradient(
+      to top right,
+      rgba(themed("bg-header"), 0.15),
+      rgba(themed("bg-header"), 0.3)
+    );
+  }
+  &__header {
+    font-size: 2rem;
+    font-weight: bolder;
+    padding: 25px;
+    @include themify($themes) {
+      color: themed("text");
+    }
+  }
+  &__divider {
+    @include themify($themes) {
+      background-color: themed("border-header");
+    }
+  }
+  &__body {
+    padding: 25px;
+    &__btn {
+      font-size: 1.6rem !important;
+      width: 100%;
+      margin-top: 16px;
+      @include btnContained;
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .authentication-box {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .authentication-box {
+    border: none;
+    box-shadow: none;
+  }
+}

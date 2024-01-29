@@ -4,7 +4,7 @@ import MenuItem from "@mui/material/MenuItem";
 
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import "../../assets/components/select/select.scss";
+import "../../assets/components/inputs/select.scss";
 interface MySelectProps {
   values?: any[];
   valuesPath?: string | null;

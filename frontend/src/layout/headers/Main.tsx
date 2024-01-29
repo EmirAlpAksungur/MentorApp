@@ -11,6 +11,7 @@ const Main: React.FC = () => {
   const authText = isAuth ? "auth" : "unauth";
   const Body = lazy(() => import(`./${authText}/Main.tsx`));
   const Profile = lazy(() => import(`./${authText}/Profile.tsx`));
+  const Menu = lazy(() => import(`./${authText}/Menu.tsx`));
   return (
     <Grid container className="app-header" columnSpacing={2}>
       <Grid item className="app-header__left" xs>
@@ -19,9 +20,14 @@ const Main: React.FC = () => {
           <Body />
         </Suspense>
       </Grid>
-      <Grid item>
+      <Grid item className="app-header__right">
         <Suspense fallback={<></>}>
           <Profile />
+        </Suspense>
+      </Grid>
+      <Grid item className="app-header__mobile-menu">
+        <Suspense fallback={<></>}>
+          <Menu />
         </Suspense>
       </Grid>
     </Grid>
