@@ -145,5 +145,9 @@ backend/apps/textContent/migrations/*
 backend/apps/translations/migrations/*
 !backend/apps/translations/migrations/__init__.py
 
+backend/apps/profile/migrations/*
+!backend/apps/profile/migrations/__init__.py
+
+
 #------frontend
 frontend/package-lock.json
