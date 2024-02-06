@@ -4,7 +4,6 @@ import { PersistGate } from "redux-persist/integration/react";
 import { persistor, store } from "./store/configureStore";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-// import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -18,5 +17,3 @@ root.render(
     </Provider>
   </React.StrictMode>
 );
-
-// reportWebVitals();

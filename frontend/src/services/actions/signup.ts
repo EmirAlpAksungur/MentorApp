@@ -1,14 +1,16 @@
 import { SIGNUP_SET_ERROR } from "../types/redux";
 
 import * as yup from "yup";
-import { Dispatch } from "redux";
+import { AppDispatch } from "../../store/configureStore";
 import { RootState } from "../../store/configureStore";
-
+import ProfileService from "../api/profile";
+import { changeNotification } from "./notification";
+import { logIn } from "./login";
 const validationSchema = yup.object({
-  Name: yup.string().required("12"),
-  Surname: yup.string().required("13"),
-  Eposta: yup.string().email("14").required("15"),
-  Password: yup
+  first_name: yup.string().required("12"),
+  last_name: yup.string().required("13"),
+  email: yup.string().email("14").required("15"),
+  password: yup
     .string()
     .required("16")
     .min(8, "17")
@@ -18,16 +20,42 @@ const validationSchema = yup.object({
     .matches(/^(?=.*[!@.;'^+%&/()=?>£#$½{[}])/, `21`),
 });
 
-export const handleSubmit =
-  () => async (dispatch: Dispatch, getState: () => RootState) => {
+const _signUp: any =
+  () => async (dispatch: AppDispatch, getState: () => RootState) => {
     const values = getState().signup.values;
-    console.log(values);
+    try {
+      let res = await ProfileService.register(values);
+      dispatch(
+        changeNotification({
+          NotificationCode: "success",
+          NotificationText: 24,
+        })
+      );
+      dispatch(
+        logIn({
+          email: values.email,
+          password: values.password,
+        })
+      );
+    } catch (err: any) {
+      dispatch(
+        changeNotification({
+          NotificationCode: "error",
+          NotificationText: parseInt(err.response.data.msg_code[0]),
+        })
+      );
+    }
+  };
+
+export const handleSubmit =
+  () => async (dispatch: AppDispatch, getState: () => RootState) => {
+    const values = getState().signup.values;
     try {
       await validationSchema.validate(values, {
         abortEarly: false,
         strict: false,
       });
-      //   await dispatch(updateUserInfo(values));
+      dispatch(_signUp());
     } catch (err: any) {
       err.inner.forEach((error: any) => {
         dispatch({

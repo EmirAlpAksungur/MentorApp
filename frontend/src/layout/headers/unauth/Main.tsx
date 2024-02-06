@@ -3,6 +3,7 @@ import { Button, Grid } from "@mui/material";
 import { useAppSelector } from "../../../hooks/redux";
 import ThemeSelect from "./ThemeSelect";
 import LangSelect from "./LangSelect";
+import { routeToUrl } from "../../../routers/utils";
 import { RootState } from "../../../store/configureStore";
 import { asyncLoadText } from "../../../services/actions/translations";
 import { TranslatedTextType } from "../../../services/types/translations";
@@ -34,6 +35,7 @@ const Main: React.FC = () => {
             <Button
               variant="text"
               className="app-header__left__unauth-profile__btn"
+              onClick={() => routeToUrl("log-in")}
             >
               {text.find((e) => e?.TextContentId === 1)?.Translations}
             </Button>
@@ -42,6 +44,7 @@ const Main: React.FC = () => {
             <Button
               variant="text"
               className="app-header__left__unauth-profile__btn"
+              onClick={() => routeToUrl("blog")}
             >
               {text.find((e) => e?.TextContentId === 2)?.Translations}
             </Button>
@@ -50,6 +53,7 @@ const Main: React.FC = () => {
             <Button
               variant="text"
               className="app-header__left__unauth-profile__btn"
+              onClick={() => routeToUrl("download")}
             >
               {text.find((e) => e?.TextContentId === 3)?.Translations}
             </Button>

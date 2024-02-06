@@ -2,23 +2,23 @@ import { LOGIN_UPDATE_VALUE, LOGIN_SET_ERROR } from "../types/redux";
 
 export interface LoginStateType {
   values: {
-    Eposta: string | undefined;
-    Password: string | undefined;
+    email: string | undefined;
+    password: string | undefined;
   };
   errors: {
-    Eposta: boolean | string;
-    Password: boolean | string;
+    email: boolean | string;
+    password: boolean | string;
   };
 }
 
 const initialState: LoginStateType = {
   values: {
-    Eposta: "",
-    Password: "",
+    email: "",
+    password: "",
   },
   errors: {
-    Eposta: false,
-    Password: false,
+    email: false,
+    password: false,
   },
 };
 

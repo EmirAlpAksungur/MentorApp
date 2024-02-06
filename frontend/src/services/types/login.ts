@@ -1,17 +1,17 @@
 export interface LoginType {
-  Eposta: string;
-  Password: string;
+  email: string;
+  password: string;
 }
 
 export const LoginFormType = [
   {
-    reduxKey: "Eposta",
+    reduxKey: "email",
     size: 12,
     type: "string",
     labelId: 8,
   },
   {
-    reduxKey: "Password",
+    reduxKey: "password",
     size: 12,
     type: "password",
     labelId: 9,

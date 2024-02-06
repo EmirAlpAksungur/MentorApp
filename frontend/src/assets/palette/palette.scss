@@ -14,6 +14,10 @@ $dark-bg-pop-up: #3f3f3f;
 $dark-selected: rgba(63, 81, 181, 0.16);
 $light-selected: rgba(63, 81, 181, 0.08);
 
+$notification-error: red;
+$notification-warning: yellow;
+$notification-success: green;
+
 $themes: (
   light: (
     //text
@@ -50,6 +54,10 @@ $themes: (
     bg-selected-hover-select: darken($light-selected, 4),
     //pop-up
     bg-pop-up: $light-bg,
+    //notification
+    notification-error: lighten($notification-error, 5),
+    notification-warning: lighten($notification-warning, 5),
+    notification-success: lighten($notification-success, 5),
   ),
   dark: (
     //text
@@ -86,6 +94,10 @@ $themes: (
     bg-selected-hover-select: lighten($dark-selected, 4),
     //pop-up
     bg-pop-up: $dark-bg-pop-up,
+    //notification
+    notification-error: darken($notification-error, 5),
+    notification-warning: darken($notification-warning, 5),
+    notification-success: darken($notification-success, 5),
   ),
 ) !default;
 

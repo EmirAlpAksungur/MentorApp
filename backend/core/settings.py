@@ -137,6 +137,8 @@ if all([POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB]):
 #     },
 # ]
 
+AUTH_PASSWORD_VALIDATORS =[]
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',  
@@ -172,7 +174,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = "email"
-ACCOUNT_EMAIL_VERIFICATION = "optional"
+ACCOUNT_EMAIL_VERIFICATION = "none"
 
 ACCOUNT_ADAPTER = 'apps.profile.adapters.CustomAccountAdapter'
 AUTHENTICATION_BACKENDS = [

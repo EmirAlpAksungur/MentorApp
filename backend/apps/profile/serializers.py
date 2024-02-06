@@ -15,7 +15,7 @@ class CustomRegisterSerializer(RegisterSerializer, serializers.ModelSerializer):
         User = get_user_model()
 
         if User.objects.filter(email=email).exists():
-            raise serializers.ValidationError("Bu email zaten kullanımda.")
+            raise serializers.ValidationError({"msg_code": 22, "status_code": 400})
 
         return data
 
@@ -28,12 +28,7 @@ class CustomLoginSerializer(serializers.Serializer):
         user = authenticate(email=data['email'], password=data['password'])
 
         if not user:
-            raise serializers.ValidationError("Geçersiz e-posta veya şifre.")
+            raise serializers.ValidationError({"msg_code": 23, "status_code": 400})
         
         data['user'] = user
         return data
-
-# emiralpaksungur@gmail.com
-# Alp59300.!
-# Emir Alp
-# Aksungur

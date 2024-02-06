@@ -1,31 +1,31 @@
 export interface SignUpType {
-  Name: string;
-  Surname: string;
-  Eposta: string;
-  Password: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  password: string;
 }
 
 export const SignUpFormType = [
   {
-    reduxKey: "Name",
+    reduxKey: "first_name",
     size: 6,
     type: "string",
     labelId: 10,
   },
   {
-    reduxKey: "Surname",
+    reduxKey: "last_name",
     size: 6,
     type: "string",
     labelId: 11,
   },
   {
-    reduxKey: "Eposta",
+    reduxKey: "email",
     size: 12,
     type: "string",
     labelId: 8,
   },
   {
-    reduxKey: "Password",
+    reduxKey: "password",
     size: 12,
     type: "password",
     labelId: 9,

@@ -2,31 +2,31 @@ import { SIGNUP_UPDATE_VALUE, SIGNUP_SET_ERROR } from "../types/redux";
 
 export interface SignUpStateType {
   values: {
-    Name: string | undefined;
-    Surname: string | undefined;
-    Eposta: string | undefined;
-    Password: string | undefined;
+    first_name: string | undefined;
+    last_name: string | undefined;
+    email: string | undefined;
+    password: string | undefined;
   };
   errors: {
-    Name: boolean | string;
-    Surname: boolean | string;
-    Eposta: boolean | string;
-    Password: boolean | string;
+    first_name: boolean | string;
+    last_name: boolean | string;
+    email: boolean | string;
+    password: boolean | string;
   };
 }
 
 const initialState: SignUpStateType = {
   values: {
-    Name: "",
-    Surname: "",
-    Eposta: "",
-    Password: "",
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: "",
   },
   errors: {
-    Name: false,
-    Surname: false,
-    Eposta: false,
-    Password: false,
+    first_name: false,
+    last_name: false,
+    email: false,
+    password: false,
   },
 };
 

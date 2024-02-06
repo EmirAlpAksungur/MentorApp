@@ -1,4 +1,4 @@
-import { CHANGE_TEXT } from "../types/redux";
+import { LOGIN_SUCCESS } from "../types/redux";
 
 export interface AuthStateType {
   token: string | null;
@@ -7,7 +7,7 @@ export interface AuthStateType {
 }
 
 const initialState: AuthStateType = {
-  token: localStorage.getItem("token"),
+  token: null,
   isAuthenticated: false,
   user: null,
 };
@@ -21,10 +21,11 @@ export default function (state = <AuthStateType>initialState, action: action) {
   const { type, payload } = action;
 
   switch (type) {
-    case CHANGE_TEXT: {
+    case LOGIN_SUCCESS: {
       return {
         ...state,
         token: payload,
+        isAuthenticated: true,
       };
     }
     default:

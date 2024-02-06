@@ -60,24 +60,24 @@ const Main: React.FC = () => {
   return (
     <MyMenu Element={Element}>
       <MenuItemHelper
-        text={text.find((e) => e?.TextContentId === 4)?.Translations}
+        text={text.find((e) => e?.TextContentId === 4)?.Translations!}
         route="log-in"
       />
       <MenuItemHelper
-        text={text.find((e) => e?.TextContentId === 5)?.Translations}
+        text={text.find((e) => e?.TextContentId === 5)?.Translations!}
         route="sign-up"
       />
       <Divider />
       <MenuItemHelper
-        text={text.find((e) => e?.TextContentId === 1)?.Translations}
+        text={text.find((e) => e?.TextContentId === 1)?.Translations!}
         route="log-in"
       />
       <MenuItemHelper
-        text={text.find((e) => e?.TextContentId === 2)?.Translations}
+        text={text.find((e) => e?.TextContentId === 2)?.Translations!}
         route="blog"
       />
       <MenuItemHelper
-        text={text.find((e) => e?.TextContentId === 3)?.Translations}
+        text={text.find((e) => e?.TextContentId === 3)?.Translations!}
         route="download"
       />
     </MyMenu>
