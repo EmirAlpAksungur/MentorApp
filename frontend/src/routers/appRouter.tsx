@@ -13,6 +13,8 @@ const SignUp = Loadable(
 );
 const Community = Loadable(lazy(() => import("../pages/community/Main")));
 const PageNotFound = Loadable(lazy(() => import("../pages/errors/NotFound")));
+const Chat = Loadable(lazy(() => import("../pages/chat/Main")));
+const Download = Loadable(lazy(() => import("../pages/download/Main")));
 const AppRouter: React.FC = () => {
   return (
     <HistoryRouter history={history}>
@@ -21,6 +23,8 @@ const AppRouter: React.FC = () => {
           <Route path="/" element={<PrivateRouter />}>
             <Route path="" element={<Community />} />
             <Route path="community" element={<Community />} />
+            <Route path="chat" element={<Chat />} />
+            <Route path="download" element={<Download />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>
           <Route
@@ -34,6 +38,7 @@ const AppRouter: React.FC = () => {
             <Route path="home" element={<Home />} />
             <Route path="log-in" element={<LogIn />} />
             <Route path="sign-up" element={<SignUp />} />
+            <Route path="download" element={<Download />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>
         </Routes>

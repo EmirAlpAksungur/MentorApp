@@ -1,8 +1,7 @@
 import React from "react";
 
-import Proile from "./Profile";
 const Main: React.FC = () => {
-  return <Proile />;
+  return <>Chat</>;
 };
 
 export default React.memo(Main);

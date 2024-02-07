@@ -1,8 +1,7 @@
 import React from "react";
 
-import Proile from "./Profile";
 const Main: React.FC = () => {
-  return <Proile />;
+  return <>Download</>;
 };
 
 export default React.memo(Main);
