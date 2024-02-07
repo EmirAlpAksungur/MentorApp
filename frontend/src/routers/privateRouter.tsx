@@ -8,6 +8,7 @@ const PrivateRouter: React.FC = () => {
   const isAuth = useAppSelector(
     (state: RootState) => state.auth.isAuthenticated
   );
+
   return isAuth ? (
     <Start>
       <Outlet />

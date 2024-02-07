@@ -11,15 +11,17 @@ const LogIn = Loadable(lazy(() => import("../pages/authorization/logIn/Main")));
 const SignUp = Loadable(
   lazy(() => import("../pages/authorization/signUp/Main"))
 );
-
+const Community = Loadable(lazy(() => import("../pages/community/Main")));
+const PageNotFound = Loadable(lazy(() => import("../pages/errors/NotFound")));
 const AppRouter: React.FC = () => {
   return (
     <HistoryRouter history={history}>
       <Suspense fallback={<Outlet />}>
         <Routes>
           <Route path="/" element={<PrivateRouter />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/starter" element={<Home />} />
+            <Route path="" element={<Community />} />
+            <Route path="community" element={<Community />} />
+            <Route path="*" element={<PageNotFound />} />
           </Route>
           <Route
             path="/"
@@ -29,9 +31,10 @@ const AppRouter: React.FC = () => {
               </Start>
             }
           >
-            <Route index path="/home" element={<Home />} />
-            <Route index path="/log-in" element={<LogIn />} />
-            <Route index path="/sign-up" element={<SignUp />} />
+            <Route path="home" element={<Home />} />
+            <Route path="log-in" element={<LogIn />} />
+            <Route path="sign-up" element={<SignUp />} />
+            <Route path="*" element={<PageNotFound />} />
           </Route>
         </Routes>
       </Suspense>

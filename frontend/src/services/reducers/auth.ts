@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS } from "../types/redux";
+import { LOGIN_SUCCESS, LOG_OUT, LOAD_USER } from "../types/redux";
 
 export interface AuthStateType {
   token: string | null;
@@ -28,6 +28,14 @@ export default function (state = <AuthStateType>initialState, action: action) {
         isAuthenticated: true,
       };
     }
+    case LOAD_USER: {
+      return {
+        ...state,
+        user: payload,
+      };
+    }
+    case LOG_OUT:
+      return initialState;
     default:
       return state;
   }

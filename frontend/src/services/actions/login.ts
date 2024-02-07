@@ -1,8 +1,7 @@
-import { LOGIN_SET_ERROR, LOGIN_SUCCESS } from "../types/redux";
-
+import { LOGIN_SET_ERROR, LOGIN_SUCCESS, LOAD_USER } from "../types/redux";
 import * as yup from "yup";
 import { Dispatch } from "redux";
-import { RootState } from "../../store/configureStore";
+import { RootState, AppDispatch } from "../../store/configureStore";
 import { LoginType } from "../types/login";
 import { changeNotification } from "./notification";
 import ProfileService from "../api/profile";
@@ -13,28 +12,26 @@ const validationSchema = yup.object({
 });
 
 const __loadUser =
-  () => async (dispatch: Dispatch, getState: () => RootState) => {
+  (token: string) => async (dispatch: Dispatch, getState: () => RootState) => {
     try {
-      // let res = await ProfileService.login();
-      // console.log(res);
+      let res = await ProfileService.getUser(token);
+      dispatch({
+        type: LOAD_USER,
+        payload: res.data,
+      });
     } catch (err: any) {
-      // dispatch(
-      //   changeNotification({
-      //     NotificationCode: "error",
-      //     NotificationText: parseInt(err.response.data.msg_code[0]),
-      //   })
-      // );
+      console.log(err);
     }
   };
 
-export const logIn = (values: LoginType) => async (dispatch: Dispatch) => {
+export const logIn = (values: LoginType) => async (dispatch: AppDispatch) => {
   try {
     let res = await ProfileService.login(values);
-    console.log(res);
     dispatch({
       type: LOGIN_SUCCESS,
-      payload: res.data,
+      payload: res.data.key,
     });
+    dispatch(__loadUser(res.data.key));
     history.push("/");
   } catch (err: any) {
     dispatch(
@@ -46,14 +43,14 @@ export const logIn = (values: LoginType) => async (dispatch: Dispatch) => {
   }
 };
 export const handleSubmit =
-  () => async (dispatch: Dispatch, getState: () => RootState) => {
+  () => async (dispatch: AppDispatch, getState: () => RootState) => {
     const values = getState().login.values;
     try {
       await validationSchema.validate(values, {
         abortEarly: false,
         strict: false,
       });
-      await dispatch(logIn(values));
+      dispatch(logIn(values));
     } catch (err: any) {
       err.inner.forEach((error: any) => {
         dispatch({

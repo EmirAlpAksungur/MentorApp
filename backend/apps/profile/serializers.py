@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate
 from django.contrib.auth.backends import ModelBackend
+from .models import Profile
 
 class CustomRegisterSerializer(RegisterSerializer, serializers.ModelSerializer):
     class Meta:
@@ -32,3 +33,12 @@ class CustomLoginSerializer(serializers.Serializer):
         
         data['user'] = user
         return data
+
+class UserDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = "__all__"  
+    
+    first_name = serializers.ReadOnlyField(source='user.first_name')
+    last_name = serializers.ReadOnlyField(source='user.last_name')
+    email = serializers.ReadOnlyField(source='user.email')

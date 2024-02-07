@@ -1,8 +1,7 @@
 import { SIGNUP_SET_ERROR } from "../types/redux";
 
 import * as yup from "yup";
-import { AppDispatch } from "../../store/configureStore";
-import { RootState } from "../../store/configureStore";
+import { RootState, AppDispatch } from "../../store/configureStore";
 import ProfileService from "../api/profile";
 import { changeNotification } from "./notification";
 import { logIn } from "./login";

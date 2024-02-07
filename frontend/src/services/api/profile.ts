@@ -1,4 +1,4 @@
-import { instance, unAuthConfig } from "./baseUnit";
+import { instance, unAuthConfig, config } from "./baseUnit";
 
 import { SignUpType } from "../types/signUp";
 import { LoginType } from "../types/login";
@@ -11,9 +11,19 @@ const login = (body: LoginType) => {
   return instance.post("/profile/login/", body, unAuthConfig);
 };
 
+const logout = (token: string) => {
+  return instance.get("/profile/logout/", config(token));
+};
+
+const getUser = (token: string) => {
+  return instance.get("/profile/user-details/", config(token));
+};
+
 const ProfileService = {
   register,
   login,
+  logout,
+  getUser,
 };
 
 export default ProfileService;

@@ -8,11 +8,11 @@ export const instance = axios.create({
   baseURL: `${baseUrl}${apiVersion}`,
 });
 
-export const config = () => {
+export const config = (token: string) => {
   return {
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Token ${localStorage.getItem("token")}`,
+      Authorization: `Token ${token}`,
     },
   };
 };
