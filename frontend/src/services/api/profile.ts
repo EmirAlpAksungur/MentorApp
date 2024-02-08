@@ -19,11 +19,16 @@ const getUser = (token: string) => {
   return instance.get("/profile/user-details/", config(token));
 };
 
+const fillProfile = (body: SignUpType, token: string) => {
+  return instance.post("/profile/fill-profile-data/", body, config(token));
+};
+
 const ProfileService = {
   register,
   login,
   logout,
   getUser,
+  fillProfile,
 };
 
 export default ProfileService;

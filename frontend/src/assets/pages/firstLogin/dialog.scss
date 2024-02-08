@@ -1,0 +1,19 @@
+@import "../../palette/palette.scss";
+@import "../../components/button/btn.scss";
+.first-login-dialog {
+  @include themify($themes) {
+    background: themed("bg-header");
+  }
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  &__form {
+    flex: 1;
+    padding-bottom: 16px;
+  }
+  &__btn {
+    font-size: 1.6rem !important;
+    width: 100%;
+    @include btnContained;
+  }
+}

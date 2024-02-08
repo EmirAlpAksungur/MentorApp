@@ -42,3 +42,10 @@ class UserDetailSerializer(serializers.ModelSerializer):
     first_name = serializers.ReadOnlyField(source='user.first_name')
     last_name = serializers.ReadOnlyField(source='user.last_name')
     email = serializers.ReadOnlyField(source='user.email')
+
+class FillProfileSerializer(serializers.ModelSerializer):
+    isFilled = serializers.BooleanField(default=True) 
+    class Meta:
+        model = Profile
+        fields = ["mentorInfo","studentInfo","isFilled" ] 
+    

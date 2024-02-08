@@ -1,0 +1,22 @@
+@import "../../palette/palette.scss";
+.my-text-field {
+  width: 100%;
+  & fieldset {
+    @include themify($themes) {
+      border-color: themed("border-select");
+    }
+  }
+  &:hover {
+    & fieldset {
+      @include themify($themes) {
+        border-color: themed("border-hover-select");
+      }
+    }
+  }
+  textarea {
+    @include themify($themes) {
+      color: themed("text-select");
+      font-size: 1.2rem;
+    }
+  }
+}

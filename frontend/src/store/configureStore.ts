@@ -18,6 +18,7 @@ import {
   signup,
   login,
   notification,
+  firstLogin,
 } from "../services/reducers";
 const { logger } = require(`redux-logger`);
 export interface RootState {
@@ -26,6 +27,7 @@ export interface RootState {
   signup: any;
   login: any;
   notification: any;
+  firstLogin: any;
   [key: string]: any;
 }
 
@@ -43,6 +45,7 @@ const rootReducer = combineReducers<RootState>({
   signup: signup,
   login: login,
   notification: notification,
+  firstLogin: firstLogin,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

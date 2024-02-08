@@ -1,7 +1,7 @@
 import React from "react";
 import { useAppSelector, useAppDispatch } from "../../hooks/redux";
 import { RootState } from "../../store/configureStore";
-import { MyTextField } from "../index";
+import { MyTextField, MyLongTextField } from "../index";
 import { FormSplitterType } from "../../services/types/form";
 import { updateFormValue } from "../../services/actions/form";
 const FormSplitter: React.FC<FormSplitterType> = ({
@@ -21,6 +21,15 @@ const FormSplitter: React.FC<FormSplitterType> = ({
     case "string":
       return (
         <MyTextField
+          value={value}
+          handleChangeFunc={(val: string) => {
+            helperUpdateValue(val);
+          }}
+        />
+      );
+    case "long-string":
+      return (
+        <MyLongTextField
           value={value}
           handleChangeFunc={(val: string) => {
             helperUpdateValue(val);

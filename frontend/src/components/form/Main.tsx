@@ -19,4 +19,4 @@ const Form: React.FC<FormType> = ({ reduxConnectionString, formElements }) => {
   );
 };
 
-export default Form;
+export default React.memo(Form);

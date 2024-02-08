@@ -3,6 +3,7 @@ import { Outlet, Navigate } from "react-router-dom";
 import { useAppSelector } from "../hooks/redux";
 import Start from "../layout/Main";
 import { RootState } from "../store/configureStore";
+import FirstLogin from "../pages/firstLogin/Main";
 
 const PrivateRouter: React.FC = () => {
   const isAuth = useAppSelector(
@@ -12,6 +13,7 @@ const PrivateRouter: React.FC = () => {
   return isAuth ? (
     <Start>
       <Outlet />
+      <FirstLogin />
     </Start>
   ) : (
     <Navigate to="/home" />

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Grid } from "@mui/material";
 import { useAppSelector } from "../../../hooks/redux";
 import ThemeSelect from "../unauth/ThemeSelect";
+import LangSelect from "../unauth/LangSelect";
 import { routeToUrl } from "../../../routers/utils";
 import { RootState } from "../../../store/configureStore";
 import { asyncLoadText } from "../../../services/actions/translations";
@@ -61,6 +62,9 @@ const Main: React.FC = () => {
       </Grid>
       <Grid item>
         <Grid container columnGap={2} alignItems={"center"}>
+          <Grid item>
+            <LangSelect />
+          </Grid>
           <Grid item>
             <ThemeSelect />
           </Grid>

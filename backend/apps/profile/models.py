@@ -5,4 +5,6 @@ from django.contrib.auth.models import User
 
 class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='profil')
-    info = models.CharField(max_length = 300, blank = True ,null = True)
+    mentorInfo = models.CharField(max_length = 300, blank = True ,null = True)
+    studentInfo = models.CharField(max_length = 300, blank = True ,null = True)
+    isFilled = models.BooleanField(default=False)
