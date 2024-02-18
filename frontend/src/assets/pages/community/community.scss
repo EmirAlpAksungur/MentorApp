@@ -1,0 +1,54 @@
+@import "../../palette/palette.scss";
+@import "../../components/box/box.scss";
+@import "../../components/button/btn.scss";
+.community-container {
+  width: 100%;
+  min-height: calc(100vh - 73px);
+  @include themify($themes) {
+    background-color: themed("bg-header");
+  }
+  &__main-box {
+    max-width: 1440px;
+    margin: auto;
+    padding: 40px;
+    justify-content: center;
+    &__item {
+      @include themify($themes) {
+        color: themed("text");
+      }
+      &__body {
+        height: 100%;
+        @include boxBorder;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        &__header {
+          padding: 16px;
+          font-size: 2rem;
+          font-weight: bold;
+        }
+        &__title {
+          padding: 16px;
+          font-size: 1.5rem;
+          font-weight: 600;
+        }
+        &__divider {
+          @include themify($themes) {
+            background-color: themed("border-header");
+          }
+        }
+        &__content {
+          padding-inline: 16px;
+          padding-bottom: 16px;
+          font-size: 1.2rem;
+          word-wrap: normal;
+          word-wrap: break-word;
+        }
+        &__btn {
+          margin: 0 16px 16px 16px;
+          @include btnContained;
+        }
+      }
+    }
+  }
+}

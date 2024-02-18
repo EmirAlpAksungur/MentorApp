@@ -5,7 +5,7 @@ const Logo: React.FC = () => {
   return (
     <img
       src={applogo}
-      onClick={() => routeToUrl("home")}
+      onClick={() => routeToUrl("/")}
       style={{
         cursor: "pointer",
       }}

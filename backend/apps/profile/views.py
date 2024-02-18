@@ -4,7 +4,7 @@ from .serializers import CustomRegisterSerializer,CustomLoginSerializer
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import UserDetailSerializer,FillProfileSerializer
+from .serializers import UserDetailSerializer,FillProfileSerializer,GetProfileSerializer
 from .models import Profile
 
 
@@ -56,4 +56,13 @@ class FillProfileView(APIView):
             return Response(serializer.data)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        
+
+
+class GetProfileView(APIView):
+    
+    def get(self, request, *args, **kwargs):
+        queryset = Profile.objects.filter(
+            isFilled=True
+        ).exclude(user=request.user)
+        serializer = GetProfileSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)

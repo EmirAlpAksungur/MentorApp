@@ -23,12 +23,17 @@ const fillProfile = (body: SignUpType, token: string) => {
   return instance.post("/profile/fill-profile-data/", body, config(token));
 };
 
+const getProfile = (token: string) => {
+  return instance.get("/profile/get-profile/", config(token));
+};
+
 const ProfileService = {
   register,
   login,
   logout,
   getUser,
   fillProfile,
+  getProfile,
 };
 
 export default ProfileService;
