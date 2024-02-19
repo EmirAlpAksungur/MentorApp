@@ -1,4 +1,9 @@
-import { LOGIN_SET_ERROR, LOGIN_SUCCESS, LOAD_USER } from "../types/redux";
+import {
+  LOGIN_SET_ERROR,
+  LOGIN_SUCCESS,
+  LOAD_USER,
+  CLEAN_AUTH,
+} from "../types/redux";
 import * as yup from "yup";
 import { Dispatch } from "redux";
 import { RootState, AppDispatch } from "../../store/configureStore";
@@ -42,6 +47,26 @@ export const logIn = (values: LoginType) => async (dispatch: AppDispatch) => {
     );
   }
 };
+export const checkIsAuth =
+  () => async (dispatch: AppDispatch, getState: () => RootState) => {
+    try {
+      const token = getState().auth.token;
+      if (token) {
+        await ProfileService.isAuth(token);
+      }
+    } catch (err: any) {
+      dispatch(
+        changeNotification({
+          NotificationCode: "error",
+          NotificationText: 37,
+        })
+      );
+      dispatch({
+        type: CLEAN_AUTH,
+      });
+    }
+  };
+
 export const handleSubmit =
   () => async (dispatch: AppDispatch, getState: () => RootState) => {
     const values = getState().login.values;

@@ -3,6 +3,7 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOG_OUT = "LOG_OUT";
 export const LOAD_USER = "LOAD_USER";
 export const UPDATE_USER = "UPDATE_USER";
+export const CLEAN_AUTH = "CLEAN_AUTH";
 //------Languages
 export const CHANGE_LANGUAGE = "CHANGE_LANGUAGE";
 

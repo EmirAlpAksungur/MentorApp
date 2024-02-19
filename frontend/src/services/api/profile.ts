@@ -27,6 +27,10 @@ const getProfile = (token: string) => {
   return instance.get("/profile/get-profile/", config(token));
 };
 
+const isAuth = (token: string) => {
+  return instance.get("/profile/is-auth/", config(token));
+};
+
 const ProfileService = {
   register,
   login,
@@ -34,6 +38,7 @@ const ProfileService = {
   getUser,
   fillProfile,
   getProfile,
+  isAuth,
 };
 
 export default ProfileService;

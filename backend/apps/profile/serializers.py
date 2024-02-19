@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate
 from django.contrib.auth.backends import ModelBackend
+from rest_framework.authtoken.models import Token
 from .models import Profile
 
 class CustomRegisterSerializer(RegisterSerializer, serializers.ModelSerializer):
@@ -61,3 +62,8 @@ class GetProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = ["mentorInfo","studentInfo","user"] 
+
+class TokenSerializer(serializers.Serializer):
+    class Meta:
+        model = Token
+        fields = "__all__"  

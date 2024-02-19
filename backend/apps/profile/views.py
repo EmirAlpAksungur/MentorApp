@@ -4,12 +4,12 @@ from .serializers import CustomRegisterSerializer,CustomLoginSerializer
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import UserDetailSerializer,FillProfileSerializer,GetProfileSerializer
+from .serializers import UserDetailSerializer,FillProfileSerializer,GetProfileSerializer,TokenSerializer
+from rest_framework.authtoken.models import Token
 from .models import Profile
 
-
 class CustomRegisterView(RegisterView):
-    serializer_class = CustomRegisterSerializer  # Özel serializer'ı kullan
+    serializer_class = CustomRegisterSerializer  
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -66,3 +66,9 @@ class GetProfileView(APIView):
         ).exclude(user=request.user)
         serializer = GetProfileSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+class IsAuthView(APIView):
+    def get(self, request, *args, **kwargs):
+        queryset = Token.objects.filter(user=request.user)
+        serializer = TokenSerializer(queryset, many=True)
+        return Response(True, status=status.HTTP_200_OK)
