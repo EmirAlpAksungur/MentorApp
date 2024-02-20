@@ -49,4 +49,4 @@ python manage.py collectstatic --noinput
 echo "Static files collected"
 
 echo "Starting Server"
-gunicorn core.wsgi:application --bind "0.0.0.0:${APP_PORT}" --workers 4 --reload
+daphne -b 0.0.0.0 -p 8000 core.asgi:application

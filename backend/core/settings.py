@@ -38,6 +38,7 @@ SITE_ID = 1
 # Application definition
 
 DJANGO_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,6 +48,7 @@ DJANGO_APPS = [
     'django_extensions',
     'rest_framework',
     'rest_framework.authtoken',
+    'channels',
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
@@ -98,6 +100,20 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'core.wsgi.application'
+ASGI_APPLICATION = 'core.asgi.application'
+
+REDIS_HOST = config('REDIS_HOST', cast=str)
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [(REDIS_HOST, 6379)],
+        },
+    },
+}
+
+
 
 POSTGRES_USER = config('POSTGRES_USER', cast=str)
 POSTGRES_PASSWORD = config('POSTGRES_PASSWORD', cast=str)
@@ -118,25 +134,6 @@ if all([POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB]):
     }
 
 
-
-# Password validation
-# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
-
-# AUTH_PASSWORD_VALIDATORS = [
-#     {
-#         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-#     },
-#     {
-#         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-#     },
-#     {
-#         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-#     },
-#     {
-#         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-#     },
-# ]
-
 AUTH_PASSWORD_VALIDATORS =[]
 
 REST_FRAMEWORK = {
@@ -144,10 +141,6 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',  
     ],
 }
-
-# Internationalization
-# https://docs.djangoproject.com/en/4.2/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -156,17 +149,11 @@ USE_I18N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
-
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 STATICFILES_DIR = []
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
