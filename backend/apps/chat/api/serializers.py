@@ -1,7 +1,9 @@
 from rest_framework import serializers
-
-from apps.chat.models import Chat, Contact
+from django.db.utils import IntegrityError
+from apps.chat.models import Chat
 from apps.chat.views import get_user_contact
+from apps.profile.serializers import UserSerializer
+
 
 
 class ContactSerializer(serializers.StringRelatedField):
@@ -18,12 +20,24 @@ class ChatSerializer(serializers.ModelSerializer):
         read_only = ('id')
 
     def create(self, validated_data):
-        print(validated_data)
         participants = validated_data.pop('participants')
-        chat = Chat()
-        chat.save()
-        for username in participants:
-            contact = get_user_contact(username)
-            chat.participants.add(contact)
-        chat.save()
-        return chat
+        try:
+            chat = Chat()
+            chat.id = validated_data.pop('id')
+            chat.save()
+            for userId in participants:
+                contact = get_user_contact(userId)
+                chat.participants.add(contact)
+            chat.save()
+            return chat
+        except IntegrityError:
+            raise serializers.ValidationError("Chat ")
+
+
+class ChatListSerializer(serializers.ModelSerializer):
+    participants = UserSerializer(many=True)
+
+    class Meta:
+        model = Chat
+        fields = ('id', 'messages', 'participants')
+        read_only = ('id')

@@ -7,22 +7,24 @@ from rest_framework.generics import (
     DestroyAPIView,
     UpdateAPIView
 )
-from apps.chat.models import Chat, Contact
+from apps.chat.models import Chat
 from apps.chat.views import get_user_contact
-from .serializers import ChatSerializer
+from .serializers import ChatSerializer,ChatListSerializer
 
 User = get_user_model()
 
 
 class ChatListView(ListAPIView):
-    serializer_class = ChatSerializer
+    serializer_class = ChatListSerializer
     permission_classes = (permissions.AllowAny, )
 
     def get_queryset(self):
         queryset = Chat.objects.all()
-        username = self.request.query_params.get('username', None)
-        if username is not None:
-            contact = get_user_contact(username)
+        user = self.request.user
+        print(user)
+        if user is not None:
+            contact = get_user_contact(user.id)
+            print(contact)
             queryset = contact.chats.all()
         return queryset
 

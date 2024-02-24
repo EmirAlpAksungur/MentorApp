@@ -16,12 +16,12 @@ const MyTextfield: React.FC<MyTextfieldType> = (props) => {
 
   return (
     <TextField
-      {...rest}
       size="small"
       variant="outlined"
       value={value}
       onChange={handleChange}
       className="my-text-field"
+      {...rest}
     />
   );
 };

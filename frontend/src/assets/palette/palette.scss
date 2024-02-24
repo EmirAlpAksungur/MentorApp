@@ -18,6 +18,8 @@ $notification-error: red;
 $notification-warning: yellow;
 $notification-success: green;
 
+$msg-self: #248bf5;
+
 $themes: (
   light: (
     //text
@@ -58,6 +60,8 @@ $themes: (
     notification-error: lighten($notification-error, 5),
     notification-warning: lighten($notification-warning, 5),
     notification-success: lighten($notification-success, 5),
+    //msg
+    msg-self: $msg-self,
   ),
   dark: (
     //text
@@ -98,6 +102,8 @@ $themes: (
     notification-error: darken($notification-error, 5),
     notification-warning: darken($notification-warning, 5),
     notification-success: darken($notification-success, 5),
+    //msg
+    msg-self: darken($msg-self, 5),
   ),
 ) !default;
 

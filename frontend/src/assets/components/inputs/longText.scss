@@ -1,5 +1,5 @@
 @import "../../palette/palette.scss";
-.my-text-field {
+.my-long-text-field {
   width: 100%;
   & fieldset {
     @include themify($themes) {

@@ -21,7 +21,7 @@ const MylongTextfield: React.FC<MyLongTextfieldType> = (props) => {
       variant="outlined"
       value={value}
       onChange={handleChange}
-      className="my-text-field"
+      className="my-long-text-field"
       multiline
       minRows={4}
       maxRows={6}

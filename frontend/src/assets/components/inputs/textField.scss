@@ -1,9 +1,12 @@
 @import "../../palette/palette.scss";
 .my-text-field {
   width: 100%;
+  .MuiInputBase-root {
+    padding-right: 0px;
+  }
   & fieldset {
     @include themify($themes) {
-      border-color: themed("border-select");
+      border-color: themed("border-header");
     }
   }
   &:hover {
@@ -17,6 +20,11 @@
     @include themify($themes) {
       color: themed("text-select");
       font-size: 1.2rem;
+    }
+  }
+  .end-adorment {
+    @include themify($themes) {
+      color: themed("border-header");
     }
   }
 }
