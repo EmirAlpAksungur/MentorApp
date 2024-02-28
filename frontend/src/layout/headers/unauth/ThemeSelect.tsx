@@ -22,6 +22,19 @@ const ThemeSelect: React.FC = () => {
     animateButton(".app-header__left__btn-theme__dark-mode", darkModeTop);
     animateButton(".app-header__left__btn-theme__light-mode", lightModeTop);
   };
+
+  React.useEffect(() => {
+    const body = $("body");
+
+    const bodyClass = body.attr("class");
+    const isLightTheme = bodyClass === "theme-light";
+
+    const darkModeTop = isLightTheme ? "40px" : "0px";
+    const lightModeTop = isLightTheme ? "0px" : "-40px";
+
+    $(".app-header__left__btn-theme__dark-mode").css({ top: darkModeTop });
+    $(".app-header__left__btn-theme__light-mode").css({ top: lightModeTop });
+  }, []);
   return (
     <IconButton onClick={changeTheme} className="app-header__left__btn-theme">
       <DarkModeIcon className="app-header__left__btn-theme__dark-mode" />

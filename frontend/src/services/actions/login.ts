@@ -32,11 +32,11 @@ const __loadUser =
 export const logIn = (values: LoginType) => async (dispatch: AppDispatch) => {
   try {
     let res = await ProfileService.login(values);
+    dispatch(__loadUser(res.data.key));
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data.key,
     });
-    dispatch(__loadUser(res.data.key));
     history.push("/");
   } catch (err: any) {
     dispatch(

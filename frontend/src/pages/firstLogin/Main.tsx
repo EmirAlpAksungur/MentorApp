@@ -57,7 +57,6 @@ const Main: React.FC = () => {
   const isFilled = useAppSelector(
     (state: RootState) => state.auth.user?.isFilled
   );
-  console.log(isFilled);
 
   return (
     <div>
