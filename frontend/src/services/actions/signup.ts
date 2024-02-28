@@ -1,4 +1,4 @@
-import { SIGNUP_SET_ERROR } from "../types/redux";
+import { SIGNUP_SET_ERROR, CLEAN_SIGNUP_FORM } from "../types/redux";
 
 import * as yup from "yup";
 import { RootState, AppDispatch } from "../../store/configureStore";
@@ -64,3 +64,9 @@ export const handleSubmit =
       });
     }
   };
+
+export const cleanSignUpForm = () => (dispatch: AppDispatch) => {
+  dispatch({
+    type: CLEAN_SIGNUP_FORM,
+  });
+};

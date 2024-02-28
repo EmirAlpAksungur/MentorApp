@@ -1,4 +1,8 @@
-import { SIGNUP_UPDATE_VALUE, SIGNUP_SET_ERROR } from "../types/redux";
+import {
+  SIGNUP_UPDATE_VALUE,
+  SIGNUP_SET_ERROR,
+  CLEAN_SIGNUP_FORM,
+} from "../types/redux";
 
 export interface SignUpStateType {
   values: {
@@ -53,6 +57,8 @@ export default function (
         ...state,
         errors: { ...state.errors, [payload.key]: payload.value },
       };
+    case CLEAN_SIGNUP_FORM:
+      return initialState;
     default:
       return state;
   }

@@ -3,6 +3,7 @@ import {
   LOGIN_SUCCESS,
   LOAD_USER,
   CLEAN_AUTH,
+  CLEAN_LOGIN_FORM,
 } from "../types/redux";
 import * as yup from "yup";
 import { Dispatch } from "redux";
@@ -85,3 +86,9 @@ export const handleSubmit =
       });
     }
   };
+
+export const cleanLoginForm = () => (dispatch: AppDispatch) => {
+  dispatch({
+    type: CLEAN_LOGIN_FORM,
+  });
+};

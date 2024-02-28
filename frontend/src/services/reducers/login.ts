@@ -1,4 +1,8 @@
-import { LOGIN_UPDATE_VALUE, LOGIN_SET_ERROR } from "../types/redux";
+import {
+  LOGIN_UPDATE_VALUE,
+  LOGIN_SET_ERROR,
+  CLEAN_LOGIN_FORM,
+} from "../types/redux";
 
 export interface LoginStateType {
   values: {
@@ -45,6 +49,8 @@ export default function (
         ...state,
         errors: { ...state.errors, [payload.key]: payload.value },
       };
+    case CLEAN_LOGIN_FORM:
+      return initialState;
     default:
       return state;
   }

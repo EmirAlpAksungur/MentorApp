@@ -13,9 +13,11 @@ export const LOGIN_UPDATE_VALUE = "LOGIN_UPDATE_VALUE";
 
 //--------SIGNUP
 export const SIGNUP_SET_ERROR = "SIGNUP_SET_ERROR";
+export const CLEAN_SIGNUP_FORM = "CLEAN_SIGNUP_FORM";
 
 //--------LOGIN
 export const LOGIN_SET_ERROR = "LOGIN_SET_ERROR";
+export const CLEAN_LOGIN_FORM = "CLEAN_LOGIN_FORM";
 
 //------Notification
 export const CHANGE_NOTIFICATION = "CHANGE_NOTIFICATION";

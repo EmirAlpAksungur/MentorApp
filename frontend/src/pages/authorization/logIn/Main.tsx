@@ -6,7 +6,7 @@ import { TranslatedTextType } from "../../../services/types/translations";
 import { Divider, Button } from "@mui/material";
 import { Form, LoadingComponent, ErrorComponent } from "../../../components";
 import { LoginFormType } from "../../../services/types/login";
-import { handleSubmit } from "../../../services/actions/login";
+import { handleSubmit, cleanLoginForm } from "../../../services/actions/login";
 import "../../../assets/pages/authentication/signUp.scss";
 import "../../../assets/components/box/authentication.scss";
 
@@ -23,6 +23,9 @@ const Main: React.FC = () => {
   };
   useEffect(() => {
     helperAsync();
+    return () => {
+      dispatch(cleanLoginForm());
+    };
   }, [LanguageId]);
 
   return (
