@@ -22,10 +22,11 @@ const InputsBody: React.FC<InputsBodyType> = ({
   );
 
   const helperAsync = async () => {
-    const result = await asyncLoadText(LanguageId, [
-      formElement.labelId,
-      parseInt(errorMsg),
-    ]);
+    let body = [formElement.labelId];
+    if (parseInt(errorMsg)) {
+      body.push(parseInt(errorMsg));
+    }
+    const result = await asyncLoadText(LanguageId, body);
     Array.isArray(result) && setText(result);
   };
   useEffect(() => {
@@ -33,7 +34,11 @@ const InputsBody: React.FC<InputsBodyType> = ({
   }, [LanguageId, errorMsg]);
 
   return (
-    <Grid item xs={formElement.size}>
+    <Grid
+      item
+      xs={formElement.size}
+      key={`${formElement.reduxKey}_${formElement.labelId}`}
+    >
       <InputLabel className="form-container__label">
         {
           text.find((e) => e?.TextContentId === formElement.labelId)

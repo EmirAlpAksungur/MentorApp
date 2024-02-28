@@ -1,3 +1,5 @@
+import ErrorComponent from "./errors/ErrorComponent"
+import NetworkCheck from "./errors/NetworkCheck"
 import Loadable from "./loading/Loadable";
 import LoadingComponent from "./loading/LoadingComp";
 import MySelect from "./inputs/MySelect";
@@ -8,6 +10,6 @@ import Form from "./form/Main";
 import Notification from "./notifications/Notification"
 import MyDialog from "./dialog/Main"
 export {
-  Loadable, LoadingComponent, MySelect, MyMenu, MyTextField, Form, Notification, MyDialog
+  ErrorComponent, NetworkCheck, Loadable, LoadingComponent, MySelect, MyMenu, MyTextField, Form, Notification, MyDialog
   , MyLongTextField
 }

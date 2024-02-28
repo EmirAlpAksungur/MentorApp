@@ -1,7 +1,9 @@
+import React from "react";
 import { Box } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 import "../../assets/components/loading.scss";
-const LoadingComponent = () => {
+
+const LoadingComponent: React.FC = () => {
   return (
     <Box className="loading-component-box">
       <CircularProgress color="secondary" />
@@ -9,4 +11,4 @@ const LoadingComponent = () => {
   );
 };
 
-export default LoadingComponent;
+export default React.memo(LoadingComponent);

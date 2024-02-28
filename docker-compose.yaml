@@ -30,7 +30,6 @@ services:
       - db-data:/var/lib/postgresql/data
     networks:
       - network
-
   frontend:
     restart: unless-stopped
     container_name: frontend
@@ -43,7 +42,6 @@ services:
       - postgre
     networks:
       - network
-
   pgadmin:
     restart: on-failure
     image: dpage/pgadmin4:latest

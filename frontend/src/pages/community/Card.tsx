@@ -1,10 +1,12 @@
 import React from "react";
 import { Button, Divider } from "@mui/material";
-import { useAppSelector } from "../../hooks/redux";
+import { useAppSelector, useAppDispatch } from "../../hooks/redux";
 import { TranslatedTextType } from "../../services/types/translations";
 import { RootState } from "../../store/configureStore";
 import ChatService from "../../services/api/chat";
 import history from "../../routers/history";
+import { changeSelectedChat } from "../../services/actions/chat";
+
 interface UserType {
   first_name: string;
   last_name: string;
@@ -19,6 +21,7 @@ export interface CardPropType {
 }
 
 const Main: React.FC<CardPropType> = (props) => {
+  const dispatch = useAppDispatch();
   const token = useAppSelector((state: RootState) => state.auth.token);
   const userId = useAppSelector((state: RootState) => state.auth.user?.user);
   const handleSubmit = async () => {
@@ -38,8 +41,10 @@ const Main: React.FC<CardPropType> = (props) => {
 
       let res = await ChatService.startChat(body, token);
       history.push("/chat");
+      dispatch(changeSelectedChat(chatId));
     } catch (err) {
       history.push("/chat");
+      dispatch(changeSelectedChat(chatId));
     }
   };
 

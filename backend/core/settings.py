@@ -26,7 +26,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config(
     "DJANGO_SECRET_KEY",
     cast=str,
-    default="bjbz(*&3-$u_uxn9e#(5gt7rybu3s!%#@75x&_ascapo-x^7(p"
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -55,6 +54,12 @@ DJANGO_APPS = [
     "dj_rest_auth",
     "dj_rest_auth.registration",
 
+    'health_check',                          
+    'health_check.db',                      
+    'health_check.cache',
+    'health_check.storage',
+    'health_check.contrib.migrations',
+    'health_check.contrib.redis',  
     'corsheaders',
     'commands',
 ]
@@ -103,6 +108,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 ASGI_APPLICATION = 'core.asgi.application'
 
 REDIS_HOST = config('REDIS_HOST', cast=str)
+REDIS_URL =config('REDIS_URL', cast=str) 
 
 CHANNEL_LAYERS = {
     'default': {
@@ -167,3 +173,18 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
     'django.contrib.auth.backends.ModelBackend',
 ]
+
+HEALTHCHECK_CACHE_KEY = config(
+    "HEALTHCHECK_CACHE_KEY",
+    cast=str,
+)
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': REDIS_URL, 
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    }
+}

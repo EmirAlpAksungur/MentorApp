@@ -6,6 +6,9 @@
   @include boxBorder;
   width: 350px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
   @include themify($themes) {
     background: linear-gradient(
       to top right,
@@ -14,6 +17,7 @@
     );
   }
   &__header {
+    flex: 1;
     font-size: 2rem;
     font-weight: bolder;
     padding: 25px;
@@ -22,6 +26,7 @@
     }
   }
   &__divider {
+    flex: 1;
     @include themify($themes) {
       background-color: themed("border-header");
     }
