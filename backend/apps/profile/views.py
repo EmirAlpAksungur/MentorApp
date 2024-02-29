@@ -1,4 +1,5 @@
 from dj_rest_auth.registration.views import RegisterView
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from dj_rest_auth.views import LoginView
 from .serializers import CustomRegisterSerializer,CustomLoginSerializer
 from rest_framework import status
@@ -60,12 +61,25 @@ class FillProfileView(APIView):
 
 class GetProfileView(APIView):
     
-    def get(self, request, *args, **kwargs):
+    def get(self, request,page, *args, **kwargs):
         queryset = Profile.objects.filter(
             isFilled=True
         ).exclude(user=request.user)
-        serializer = GetProfileSerializer(queryset, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+
+        paginator = Paginator(queryset, 30)
+        print(page)
+        try:
+            items = paginator.page(page)
+        except PageNotAnInteger:
+            items = paginator.page(1)
+        except EmptyPage:
+            items = paginator.page(paginator.num_pages)
+
+        serializer = GetProfileSerializer(items, many=True)
+        return Response({
+            "length":queryset.count(),
+            "data":serializer.data
+        }, status=status.HTTP_200_OK)
 
 class IsAuthView(APIView):
     def get(self, request, *args, **kwargs):

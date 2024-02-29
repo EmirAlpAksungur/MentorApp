@@ -1,3 +1,4 @@
+import axios, { CancelTokenSource } from "axios";
 import { instance, unAuthConfig, config } from "./baseUnit";
 
 import { SignUpType } from "../types/signUp";
@@ -23,8 +24,16 @@ const fillProfile = (body: SignUpType, token: string) => {
   return instance.post("/profile/fill-profile-data/", body, config(token));
 };
 
-const getProfile = (token: string) => {
-  return instance.get("/profile/get-profile/", config(token));
+let cancelToken: null | CancelTokenSource;
+const getProfile = (token: string, pageNumber: number) => {
+  if (cancelToken) {
+    cancelToken.cancel();
+  }
+  cancelToken = axios.CancelToken.source();
+  return instance.get(`/profile/get-profile/${pageNumber}/`, {
+    ...config(token),
+    cancelToken: cancelToken.token,
+  });
 };
 
 const isAuth = (token: string) => {

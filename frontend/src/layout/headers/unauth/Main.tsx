@@ -44,7 +44,7 @@ const Main: React.FC = () => {
             <Button
               variant="text"
               className="app-header__left__unauth-profile__btn"
-              onClick={() => routeToUrl("blog")}
+              onClick={() => routeToUrl("log-in")}
             >
               {text.find((e) => e?.TextContentId === 2)?.Translations}
             </Button>

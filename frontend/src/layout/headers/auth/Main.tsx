@@ -16,7 +16,7 @@ const Main: React.FC = () => {
   );
 
   const helperAsync = async () => {
-    const result = await asyncLoadText(LanguageId, [27, 28, 3]);
+    const result = await asyncLoadText(LanguageId, [27, 28, 3, 2]);
     Array.isArray(result) && setText(result);
   };
   useEffect(() => {
@@ -47,6 +47,15 @@ const Main: React.FC = () => {
               onClick={() => routeToUrl("chat")}
             >
               {text.find((e) => e?.TextContentId === 28)?.Translations}
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              variant="text"
+              className="app-header__left__unauth-profile__btn"
+              onClick={() => routeToUrl("blog")}
+            >
+              {text.find((e) => e?.TextContentId === 2)?.Translations}
             </Button>
           </Grid>
           <Grid item>

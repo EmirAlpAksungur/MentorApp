@@ -8,7 +8,7 @@ urlpatterns = [
     path("logout/", CustomLogoutView.as_view(), name="rest_logout"),
     path("user-details/", UserDetalisView.as_view(), name="rest_user_details"),
     path("fill-profile-data/", FillProfileView.as_view(), name="rest_user_details"),
-    path("get-profile/", GetProfileView.as_view(), name="rest_user_details"),
+    path("get-profile/<int:page>/", GetProfileView.as_view(), name="rest_user_details"),
     path("is-auth/", IsAuthView.as_view(), name="rest_user_details"),
 ]
 

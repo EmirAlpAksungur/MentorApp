@@ -7,20 +7,33 @@ import { TranslatedTextType } from "../../services/types/translations";
 import ProfileService from "../../services/api/profile";
 import Card from "./Card";
 import { CardPropType } from "./Card";
+import InfiniteScroll from "react-infinite-scroll-component";
 import "../../assets/pages/community/community.scss";
+import { LoadingComponent } from "../../components";
+
 const Main: React.FC = () => {
   const [text, setText] = useState<TranslatedTextType[]>([]);
   const LanguageId = useAppSelector(
     (state: RootState) => state.languages.LanguageId
   );
   const token = useAppSelector((state: RootState) => state.auth.token);
-  const [data, setData] = useState([]);
-  const asyncLoad = async () => {
+  const [data, setData] = useState<CardPropType[]>([]);
+  const [loading, setloading] = useState<boolean>(false);
+  const [length, setLength] = useState<number>(1);
+  const fetchData = async () => {
+    if (loading) return;
     try {
-      let res = await ProfileService.getProfile(token);
-      setData(res.data);
+      setloading(true);
+      let res = await ProfileService.getProfile(token, data.length / 30 + 1);
+      setData((prev: CardPropType[]) => {
+        return [...prev, ...res.data.data];
+      });
+      setLength(res.data.length);
+      return Promise.resolve(res.data.data);
     } catch (err) {
       console.log(err);
+    } finally {
+      setloading(false);
     }
   };
   const helperTextLoad = async () => {
@@ -31,15 +44,26 @@ const Main: React.FC = () => {
       console.log(err);
     }
   };
-
   useEffect(() => {
-    asyncLoad();
+    fetchData();
   }, []);
   useEffect(() => {
+    console.log("--aa--");
     helperTextLoad();
   }, [LanguageId]);
   return (
-    <div className="community-container">
+    <InfiniteScroll
+      key={Math.floor(Math.random() * (9999999 - 0 + 1))}
+      dataLength={data.length}
+      next={fetchData}
+      hasMore={data.length < length}
+      loader={
+        <div style={{ width: "100%" }}>
+          <LoadingComponent />
+        </div>
+      }
+      className="community-container"
+    >
       <Grid
         container
         spacing={2}
@@ -47,7 +71,7 @@ const Main: React.FC = () => {
         className="community-container__main-box"
         sx={{ flexGrow: 1 }}
       >
-        {data.map((e: CardPropType, i) => {
+        {data.map((e: CardPropType, i: number) => {
           return (
             <Grid
               item
@@ -69,7 +93,7 @@ const Main: React.FC = () => {
           );
         })}
       </Grid>
-    </div>
+    </InfiniteScroll>
   );
 };
 
