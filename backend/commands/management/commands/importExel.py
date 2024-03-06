@@ -5,6 +5,9 @@ import os
 from apps.languages.models import Languages
 from apps.textContent.models import TextContent
 from apps.translations.models import Translations
+from apps.location.models import Country,City
+from apps.university.models import University
+from apps.skill.models import SkillType,Skill
 import pandas as pd
 
 
@@ -32,8 +35,8 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         base_dir = os.path.dirname(os.path.abspath(__file__))
 
-        models = [Languages, TextContent, Translations]
-        file_names = ['Languages.xlsx', 'TextContent.xlsx', 'Translations.xlsx']
+        models = [Languages, TextContent, Translations,Country,City,University,SkillType,Skill]
+        file_names = ['Languages.xlsx', 'TextContent.xlsx', 'Translations.xlsx','Country.xlsx',"City.xlsx","University.xlsx","SkillType.xlsx","Skills.xlsx"]
 
         for model, file_name in zip(models, file_names):
             excel_file_path = os.path.join(base_dir, file_name)

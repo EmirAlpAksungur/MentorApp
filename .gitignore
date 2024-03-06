@@ -151,6 +151,14 @@ backend/apps/profile/migrations/*
 backend/apps/chat/migrations/*
 !backend/apps/chat/migrations/__init__.py
 
+backend/apps/location/migrations/*
+!backend/apps/location/migrations/__init__.py
+
+backend/apps/university/migrations/*
+!backend/apps/university/migrations/__init__.py
+
+backend/apps/skill/migrations/*
+!backend/apps/skill/migrations/__init__.py
 
 #------frontend
 frontend/package-lock.json
