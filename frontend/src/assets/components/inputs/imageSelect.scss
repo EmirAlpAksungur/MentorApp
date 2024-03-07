@@ -1,0 +1,26 @@
+@import "../../palette/palette.scss";
+.my-image-select {
+  display: flex;
+  align-items: end;
+  &__btn {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    overflow: hidden !important;
+    margin-right: 20px !important;
+    &__input {
+      display: none;
+    }
+    &__img {
+      width: 100px;
+      height: auto;
+    }
+    &__icon {
+      width: 60px !important;
+      height: 60px !important;
+    }
+  }
+  &__avatar {
+    display: inline-block !important;
+  }
+}

@@ -40,7 +40,7 @@ const _signUp: any =
       dispatch(
         changeNotification({
           NotificationCode: "error",
-          NotificationText: parseInt(err.response.data.msg_code[0]),
+          NotificationText: parseInt(err?.response?.data?.msg_code?.[0]),
         })
       );
     }

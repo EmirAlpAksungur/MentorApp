@@ -12,7 +12,7 @@ import "../../assets/components/notification/notification.scss";
 
 export default function SimpleSnackbar() {
   const dispatch = useAppDispatch();
-  const [text, setText] = useState<TranslatedTextType[]>([]);
+  const [text, setText] = useState<String>();
 
   const NotificationCode = useAppSelector(
     (state: RootState) => state.notification.NotificationCode
@@ -28,10 +28,11 @@ export default function SimpleSnackbar() {
 
   const helperAsync = async () => {
     console.log(NotificationText);
-    if (typeof NotificationText === "number") {
+    if (typeof NotificationText === "number" && !isNaN(NotificationText)) {
       const result = await asyncLoadText(LanguageId, [NotificationText]);
-      console.log(result);
-      Array.isArray(result) && setText(result);
+      Array.isArray(result) && setText(result?.[0]?.Translations);
+    } else {
+      setText("Server Error Please Try Later");
     }
   };
   useEffect(() => {
@@ -66,7 +67,7 @@ export default function SimpleSnackbar() {
         open={NotificationCode}
         autoHideDuration={12000}
         onClose={handleClose}
-        message={text[0]?.Translations}
+        message={text}
         action={action}
         className={`notification-container__${NotificationCode}`}
       />

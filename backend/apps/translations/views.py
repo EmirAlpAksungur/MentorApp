@@ -31,7 +31,8 @@ class GetTranslationsByIdView(generics.ListAPIView):
         if len(data) != len(request.data["TextContentIds"]):
             print("ife Girid")
             queryset = Translations.objects.filter(
-                LanguageId = request.data["LanguageId"]
+                LanguageId = request.data["LanguageId"],
+                TextContentId__in=request.data["TextContentIds"]
             )
             serializer = GetTranslationsSerializer(queryset, many=True)
             data = serializer.data
