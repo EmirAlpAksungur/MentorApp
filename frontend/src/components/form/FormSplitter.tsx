@@ -1,7 +1,12 @@
 import React from "react";
 import { useAppSelector, useAppDispatch } from "../../hooks/redux";
 import { RootState } from "../../store/configureStore";
-import { MyTextField, MyLongTextField, ImageSelect } from "../index";
+import {
+  MyTextField,
+  MyLongTextField,
+  ImageSelect,
+  LocationSelect,
+} from "../index";
 import { FormSplitterType } from "../../services/types/form";
 import { updateFormValue } from "../../services/actions/form";
 const FormSplitter: React.FC<FormSplitterType> = ({
@@ -51,6 +56,15 @@ const FormSplitter: React.FC<FormSplitterType> = ({
         <ImageSelect
           value={value}
           handleChangeFunc={(val: Blob | null) => {
+            helperUpdateValue(val);
+          }}
+        />
+      );
+    case "location":
+      return (
+        <LocationSelect
+          value={value}
+          handleChangeFunc={(val: string) => {
             helperUpdateValue(val);
           }}
         />
