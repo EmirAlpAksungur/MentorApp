@@ -6,4 +6,5 @@ urlpatterns = [
     path("profile/", include("apps.profile.urls")),
     path("chat/", include("apps.chat.api.urls")),
     path("location/", include("apps.location.urls")),
+    path("university/", include("apps.university.urls")),
 ]

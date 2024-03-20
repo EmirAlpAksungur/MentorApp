@@ -10,7 +10,7 @@ interface MySelectProps {
   valuesPath?: string | null;
   dataTextPath?: string | null;
   handleChangeFunc?: (value: any) => void;
-  defaultValue?: string;
+  defaultValue?: string | number;
   errFunc?: () => boolean;
   disabled?: boolean;
   [key: string]: any;

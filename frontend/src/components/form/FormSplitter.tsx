@@ -6,6 +6,8 @@ import {
   MyLongTextField,
   ImageSelect,
   LocationSelect,
+  UniversitySelect,
+  UniversityContainer,
 } from "../index";
 import { FormSplitterType } from "../../services/types/form";
 import { updateFormValue } from "../../services/actions/form";
@@ -68,6 +70,15 @@ const FormSplitter: React.FC<FormSplitterType> = ({
             helperUpdateValue(val);
           }}
         />
+      );
+    case "university":
+      return (
+        <UniversityContainer
+          value={value}
+          handleChangeFunc={(val: number[]) => {
+            helperUpdateValue(val);
+          }}
+        ></UniversityContainer>
       );
     default:
       return <></>;
