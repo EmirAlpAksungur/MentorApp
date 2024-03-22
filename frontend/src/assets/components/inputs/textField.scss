@@ -6,7 +6,7 @@
   }
   & fieldset {
     @include themify($themes) {
-      border-color: themed("border-header");
+      border-color: themed("border-select");
     }
   }
   &:hover {

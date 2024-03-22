@@ -6,9 +6,10 @@ import {
   MyLongTextField,
   ImageSelect,
   LocationSelect,
-  UniversitySelect,
   UniversityContainer,
+  LanguageContainer,
 } from "../index";
+import { LanguageElementType } from "../inputs/containers/LanguageContainer";
 import { FormSplitterType } from "../../services/types/form";
 import { updateFormValue } from "../../services/actions/form";
 const FormSplitter: React.FC<FormSplitterType> = ({
@@ -79,6 +80,15 @@ const FormSplitter: React.FC<FormSplitterType> = ({
             helperUpdateValue(val);
           }}
         ></UniversityContainer>
+      );
+    case "languages":
+      return (
+        <LanguageContainer
+          value={value}
+          handleChangeFunc={(val: LanguageElementType[]) => {
+            helperUpdateValue(val);
+          }}
+        ></LanguageContainer>
       );
     default:
       return <></>;

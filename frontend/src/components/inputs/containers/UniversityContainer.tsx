@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Grid } from "@mui/material";
 import UniversitySelect from "../UniversitySelect";
 interface UniversitySelectContType {
@@ -11,7 +11,7 @@ interface ElementType {
   key: number;
   value: number;
 }
-export default function UniversityContainer(props: UniversitySelectContType) {
+function UniversityContainer(props: UniversitySelectContType) {
   const { handleChangeFunc = () => {}, value = [], ...rest } = props;
   const [element, setElement] = useState<ElementType[]>([
     { key: 0, value: -1 },
@@ -61,3 +61,5 @@ export default function UniversityContainer(props: UniversitySelectContType) {
     </Grid>
   );
 }
+
+export default React.memo(UniversityContainer);
