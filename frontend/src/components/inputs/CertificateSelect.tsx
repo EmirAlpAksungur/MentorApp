@@ -1,34 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Grid, IconButton } from "@mui/material";
-import { MyTextField, MySlide } from "..";
+import { ImageSelect, MyLongTextField } from "..";
 import RemoveIcon from "@mui/icons-material/Remove";
 import "../../assets/components/inputs/textField.scss";
-interface LanguageSelectType {
-  handleChangeFunc?: (uuid: string, name: string, level: number) => void;
+interface CertificateSelectType {
+  handleChangeFunc?: (
+    uuid: string,
+    image: Blob | null,
+    comment: string
+  ) => void;
   removeElement?: (uuid: string) => void;
   uuid: string;
-  name: string;
-  level: number;
+  image: Blob | null;
+  comment: string;
   [key: string]: any;
 }
 
-const LanguageSelect: React.FC<LanguageSelectType> = (props) => {
+const CertificateSelect: React.FC<CertificateSelectType> = (props) => {
   const {
     handleChangeFunc = () => {},
     removeElement = () => {},
     uuid,
-    name,
-    value,
-    level,
+    image,
+    comment,
     ...rest
   } = props;
 
-  const handleLevelChange = async (e: number) => {
-    handleChangeFunc(uuid, name, e);
+  const handleCommentChange = async (e: string) => {
+    handleChangeFunc(uuid, image, e);
   };
 
-  const handleNameChange = async (e: string) => {
-    handleChangeFunc(uuid, e, level);
+  const handleImageChange = async (e: Blob | null) => {
+    handleChangeFunc(uuid, e, comment);
   };
 
   return (
@@ -50,17 +53,13 @@ const LanguageSelect: React.FC<LanguageSelectType> = (props) => {
       </Grid>
       <Grid item sx={{ flexGrow: 1 }}>
         <Grid container columnSpacing={2}>
-          <Grid item xs={4}>
-            <MyTextField value={name} handleChangeFunc={handleNameChange} />
+          <Grid>
+            <ImageSelect value={image} handleChangeFunc={handleImageChange} />
           </Grid>
           <Grid item xs={8} alignSelf={"center"}>
-            <MySlide
-              min={0}
-              max={5}
-              step={1}
-              value={level}
-              color="success"
-              handleChangeFunc={handleLevelChange}
+            <MyLongTextField
+              value={comment}
+              handleChangeFunc={handleCommentChange}
             />
           </Grid>
         </Grid>
@@ -69,4 +68,4 @@ const LanguageSelect: React.FC<LanguageSelectType> = (props) => {
   );
 };
 
-export default React.memo(LanguageSelect);
+export default React.memo(CertificateSelect);

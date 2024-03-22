@@ -8,8 +8,10 @@ import {
   LocationSelect,
   UniversityContainer,
   LanguageContainer,
+  CertificateContainer,
 } from "../index";
 import { LanguageElementType } from "../inputs/containers/LanguageContainer";
+import { CertificateElementType } from "../inputs/containers/CertificateContainer";
 import { FormSplitterType } from "../../services/types/form";
 import { updateFormValue } from "../../services/actions/form";
 const FormSplitter: React.FC<FormSplitterType> = ({
@@ -61,6 +63,7 @@ const FormSplitter: React.FC<FormSplitterType> = ({
           handleChangeFunc={(val: Blob | null) => {
             helperUpdateValue(val);
           }}
+          className="my-image-select__btn-rounded"
         />
       );
     case "location":
@@ -89,6 +92,15 @@ const FormSplitter: React.FC<FormSplitterType> = ({
             helperUpdateValue(val);
           }}
         ></LanguageContainer>
+      );
+    case "certificate":
+      return (
+        <CertificateContainer
+          value={value}
+          handleChangeFunc={(val: CertificateElementType[]) => {
+            helperUpdateValue(val);
+          }}
+        ></CertificateContainer>
       );
     default:
       return <></>;

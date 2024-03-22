@@ -1,16 +1,16 @@
 import React from "react";
-import IconButton from "@mui/material/IconButton";
+import Button from "@mui/material/Button";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 
 import "../../assets/components/inputs/imageSelect.scss";
-import { Avatar } from "@mui/material";
-interface MyTextfieldType {
+
+interface MyImageSelectType {
   handleChangeFunc?: (value: Blob | null) => void;
-  value?: Blob | undefined;
+  value?: Blob | null;
   [key: string]: any;
 }
 
-const MyTextfield: React.FC<MyTextfieldType> = (props) => {
+const MyTextfield: React.FC<MyImageSelectType> = (props) => {
   const { handleChangeFunc = () => {}, value = null, ...rest } = props;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,7 +24,10 @@ const MyTextfield: React.FC<MyTextfieldType> = (props) => {
 
   return (
     <div className="my-image-select">
-      <IconButton component="label" className="my-image-select__btn">
+      <Button
+        component="label"
+        className={`my-image-select__btn ${props?.className}`}
+      >
         <input
           type="file"
           accept="image/*"
@@ -40,13 +43,7 @@ const MyTextfield: React.FC<MyTextfieldType> = (props) => {
         ) : (
           <PhotoCameraIcon className="my-image-select__btn__icon" />
         )}
-      </IconButton>
-      {value && (
-        <Avatar
-          src={URL.createObjectURL(value)}
-          className="my-image-select__avatar"
-        />
-      )}
+      </Button>
     </div>
   );
 };
