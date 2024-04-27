@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate
 from django.contrib.auth.backends import ModelBackend
 from rest_framework.authtoken.models import Token
-from .models import Profile
+from .models import Profile, UnKnownSkills
 
 class CustomRegisterSerializer(RegisterSerializer, serializers.ModelSerializer):
     class Meta:
@@ -48,8 +48,12 @@ class FillProfileSerializer(serializers.ModelSerializer):
     isFilled = serializers.BooleanField(default=True) 
     class Meta:
         model = Profile
-        fields = ["mentorInfo","studentInfo","isFilled" ] 
-    
+        fields = ["about","knownSkills",
+        "location","photo",
+        "unKnownSkills",
+        #"languages","certificate",
+        "university","isFilled" ] 
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -61,7 +65,7 @@ class GetProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer()
     class Meta:
         model = Profile
-        fields = ["mentorInfo","studentInfo","user"] 
+        fields = ["user"] 
 
 class TokenSerializer(serializers.Serializer):
     class Meta:

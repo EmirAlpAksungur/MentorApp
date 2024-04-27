@@ -7,6 +7,7 @@ import MyTextField from "./inputs/MyTextField";
 import MyLongTextField from "./inputs/MyLongString";
 import ImageSelect from "./inputs/ImageSelect";
 import LocationSelect from "./inputs/Location";
+import SkillSelect from "./inputs/SkillSelect";
 import MySlide from "./inputs/Slide";
 import UniversitySelect from "./inputs/UniversitySelect";
 import LanguageSelect from "./inputs/LanguageSelect";
@@ -20,6 +21,6 @@ import Notification from "./notifications/Notification"
 import MyDialog from "./dialog/Main"
 export {
   ErrorComponent, NetworkCheck, Loadable, LoadingComponent, MySelect, MySlide, LocationSelect, UniversitySelect, LanguageSelect, CertificateSelect,
-  UniversityContainer, LanguageContainer, CertificateContainer, MyMenu, MyTextField, ImageSelect, Form, Notification, MyDialog
+  SkillSelect, UniversityContainer, LanguageContainer, CertificateContainer, MyMenu, MyTextField, ImageSelect, Form, Notification, MyDialog
   , MyLongTextField
 }

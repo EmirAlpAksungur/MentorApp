@@ -9,11 +9,13 @@ import {
   UniversityContainer,
   LanguageContainer,
   CertificateContainer,
+  SkillSelect,
 } from "../index";
 import { LanguageElementType } from "../inputs/containers/LanguageContainer";
 import { CertificateElementType } from "../inputs/containers/CertificateContainer";
 import { FormSplitterType } from "../../services/types/form";
 import { updateFormValue } from "../../services/actions/form";
+import MyUnKnownSkillSelect from "../inputs/UnKnownSkillSelect";
 const FormSplitter: React.FC<FormSplitterType> = ({
   reduxConnectionString,
   reduxKey,
@@ -101,6 +103,24 @@ const FormSplitter: React.FC<FormSplitterType> = ({
             helperUpdateValue(val);
           }}
         ></CertificateContainer>
+      );
+    case "knownSkills":
+      return (
+        <SkillSelect
+          value={value}
+          handleChangeFunc={(val: number[]) => {
+            helperUpdateValue(val);
+          }}
+        ></SkillSelect>
+      );
+    case "unKnownSkills":
+      return (
+        <MyUnKnownSkillSelect
+          value={value}
+          handleChangeFunc={(val: { value: number; level: number }[]) => {
+            helperUpdateValue(val);
+          }}
+        ></MyUnKnownSkillSelect>
       );
     default:
       return <></>;

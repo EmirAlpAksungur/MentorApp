@@ -16,6 +16,7 @@ const Element: React.FC = () => {
   const last_name = useAppSelector(
     (state: RootState) => state.auth?.user?.last_name
   );
+  const photo = useAppSelector((state: RootState) => state.auth?.user?.photo);
   function stringToColor(string: string) {
     let hash = 0;
     let i;
@@ -43,7 +44,12 @@ const Element: React.FC = () => {
     };
   }
 
-  return <Avatar {...stringAvatar(first_name + " " + last_name)} />;
+  return (
+    <Avatar
+      src={`data:image/jpeg;base64,${photo}`}
+      {...stringAvatar(first_name + " " + last_name)}
+    />
+  );
 };
 
 const Main: React.FC = () => {

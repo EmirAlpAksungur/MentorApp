@@ -12,6 +12,16 @@ export const config = (token: string) => {
   return {
     headers: {
       "Content-Type": "application/json",
+
+      Authorization: `Token ${token}`,
+    },
+  };
+};
+
+export const configForm = (token: string) => {
+  return {
+    headers: {
+      "Content-Type": "multipart/form-data",
       Authorization: `Token ${token}`,
     },
   };

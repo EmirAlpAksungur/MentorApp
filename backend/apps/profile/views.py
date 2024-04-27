@@ -7,7 +7,11 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import UserDetailSerializer,FillProfileSerializer,GetProfileSerializer,TokenSerializer
 from rest_framework.authtoken.models import Token
-from .models import Profile
+from .models import Profile,UnKnownSkills,Languages
+from django.http.multipartparser import MultiPartParser
+from apps.skill.models import Skill
+import json
+import uuid
 
 class CustomRegisterView(RegisterView):
     serializer_class = CustomRegisterSerializer  
@@ -48,10 +52,65 @@ class UserDetalisView(APIView):
 
 
 class FillProfileView(APIView):
+
     def post(self, request):
         item = Profile.objects.get(user=request.user)
-        serializer = FillProfileSerializer(instance=item, data=request.data)
+        parser = MultiPartParser(request.META, request, request.upload_handlers)
 
+        unKnownSkills = request.POST.getlist('unKnownSkills')  
+        unKnownSkillsPk = []
+        for skill in unKnownSkills:
+            skillDict = json.loads(skill)
+            random_uuid = uuid.uuid4()
+            unKnownSkillsPk.append(str(random_uuid))
+            skillDict['uuid'] = str(random_uuid)
+            skill_instance = Skill.objects.get(pk=int(skillDict["skill"]))
+            saveInstance = UnKnownSkills(
+                skill=skill_instance,
+                level=int(skillDict["level"]),
+                uuid=skillDict["uuid"]
+            )
+            saveInstance.save()
+
+        languages = request.POST.get('languages')  
+        languagesPk = []
+        print(languages)
+        for language in json.loads(languages):
+            print(language)
+            random_uuid = uuid.uuid4()
+            languagesPk.append(language["uuid"])
+            saveInstance = Languages(
+                uuid=language["uuid"],
+                name=language["name"],
+                level=int(language["level"])
+            )
+            saveInstance.save()
+
+        certificates = request.POST.get('certificate')  
+        certificatePk = []
+        print(certificates)
+        for certificate in json.loads(certificates):
+            print(certificate)
+            random_uuid = uuid.uuid4()
+            languagesPk.append(certificate["uuid"])
+            saveInstance = certificate(
+                uuid=certificate["uuid"],
+                image=certificate["image"],
+                comment=certificate["comment"]
+            )
+            saveInstance.save()
+        data = {
+            'about': request.POST.get('about'),
+            'location': request.POST.get('location'),
+            'university': [int(id) for id in request.POST.getlist('university')],
+            'languages': [str(id) for id in languagesPk],
+            'certificate': request.POST.getlist('certificate'),
+            'knownSkills': [int(skill_id) for skill_id in request.POST.getlist('knownSkills')],  
+            'unKnownSkills': [str(id) for id in unKnownSkillsPk],
+            'photo' : request.FILES.get('photo').read()
+        }
+        
+        serializer = FillProfileSerializer(instance=item, data=data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)

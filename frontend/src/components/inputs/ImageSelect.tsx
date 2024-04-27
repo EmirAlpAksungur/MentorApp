@@ -17,7 +17,10 @@ const MyTextfield: React.FC<MyImageSelectType> = (props) => {
     const selectedFile = e.target.files?.[0] || null;
 
     if (selectedFile) {
-      const blobImage = new Blob([selectedFile], { type: selectedFile.type });
+      console.log(selectedFile.type);
+      const blobImage = new Blob([selectedFile], {
+        type: selectedFile.type.split("/")[1],
+      });
       handleChangeFunc(blobImage);
     }
   };

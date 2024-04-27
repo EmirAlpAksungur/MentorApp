@@ -12,6 +12,7 @@ import { LoginType } from "../types/login";
 import { changeNotification } from "./notification";
 import ProfileService from "../api/profile";
 import history from "../../routers/history";
+import { log } from "console";
 const validationSchema = yup.object({
   email: yup.string().email("14").required("15"),
   password: yup.string().required("16"),
@@ -21,6 +22,8 @@ const __loadUser =
   (token: string) => async (dispatch: Dispatch, getState: () => RootState) => {
     try {
       let res = await ProfileService.getUser(token);
+      console.log(res);
+
       dispatch({
         type: LOAD_USER,
         payload: res.data,

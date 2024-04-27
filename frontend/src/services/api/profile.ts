@@ -1,5 +1,5 @@
 import axios, { CancelTokenSource } from "axios";
-import { instance, unAuthConfig, config } from "./baseUnit";
+import { instance, unAuthConfig, config, configForm } from "./baseUnit";
 
 import { SignUpType } from "../types/signUp";
 import { LoginType } from "../types/login";
@@ -20,8 +20,8 @@ const getUser = (token: string) => {
   return instance.get("/profile/user-details/", config(token));
 };
 
-const fillProfile = (body: SignUpType, token: string) => {
-  return instance.post("/profile/fill-profile-data/", body, config(token));
+const fillProfile = (body: FormData, token: string) => {
+  return instance.post("/profile/fill-profile-data/", body, configForm(token));
 };
 
 let cancelToken: null | CancelTokenSource;
