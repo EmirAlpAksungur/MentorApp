@@ -1,0 +1,109 @@
+@import "../../palette/palette.scss";
+@import "../../components/button/btn.scss";
+@import "../../components/scroll/scroll.scss";
+.blog-container {
+  width: 100%;
+  min-height: calc(100vh - 73px);
+  @include themify($themes) {
+    background-color: themed("bg-header");
+  }
+  &__border-right {
+    border-right: 1px solid;
+    @include themify($themes) {
+      border-color: themed("border-header");
+    }
+  }
+  &__body {
+    height: calc(100vh - 73px);
+    overflow: auto;
+    @include scroll;
+    align-content: flex-start;
+    &__btn-group {
+      padding: 24px;
+      &__container {
+        width: 100%;
+        &__btn {
+          width: 50%;
+          @include btnContained;
+        }
+      }
+    }
+    &__profile {
+      &__create-blog {
+        padding: 24px;
+        border-top: 1px solid;
+        border-bottom: 1px solid;
+        @include themify($themes) {
+          border-color: themed("border-header");
+        }
+        &__btn {
+          @include btnContained;
+        }
+        &__form {
+          padding-bottom: 16px;
+        }
+      }
+    }
+    &__accordion {
+      @include themify($themes) {
+        background-color: themed("bg-header");
+        color: themed("text");
+      }
+      &__header {
+        &__img-blog {
+          position: relative;
+          height: 300px;
+          max-width: 75% !important;
+          overflow: hidden;
+          background-size: cover;
+          background-position: cover;
+          border-top-left-radius: 50px;
+          border-top-right-radius: 50px;
+          &__gradiant {
+            height: 300px;
+            @include themify($themes) {
+              background: linear-gradient(
+                to bottom,
+                transparent,
+                rgba(themed("bg-header"), 0.6) 50%,
+                rgba(themed("bg-header"), 0.85) 75%,
+                rgba(themed("bg-header"), 1) 100%
+              );
+            }
+          }
+          &__header {
+            position: absolute;
+            bottom: 0;
+            left: 12px;
+            font-size: 2.2rem;
+            font-weight: bold;
+          }
+        }
+        &__details {
+          height: 300px;
+          &__container {
+            height: 300px;
+            padding: 8px;
+            &__user-name {
+              font-size: 1.4rem;
+            }
+            &__update-icon {
+              @include btnOutlined;
+            }
+            &__summary {
+              height: calc(300px - 16px - 16px - 14.5px - 16px);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .blog-container {
+    &__top-list {
+      display: none;
+    }
+  }
+}

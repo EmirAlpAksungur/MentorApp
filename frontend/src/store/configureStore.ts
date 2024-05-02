@@ -14,6 +14,7 @@ import {
 
 import {
   auth,
+  blog,
   languages,
   signup,
   login,
@@ -24,6 +25,7 @@ import {
 const { logger } = require(`redux-logger`);
 export interface RootState {
   auth: any;
+  blog: any;
   languages: any;
   signup: any;
   login: any;
@@ -43,6 +45,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers<RootState>({
   auth: auth,
+  blog: blog,
   languages: languages,
   signup: signup,
   login: login,

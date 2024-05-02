@@ -71,7 +71,7 @@ const Main: React.FC = () => {
     <MyMenu Element={Element}>
       <MenuItem
         className={"app-header__mobile-menu__menu-item"}
-        onClick={() => routeToUrl("profile")}
+        onClick={() => routeToUrl("/profile")}
       >
         {text.find((e) => e?.TextContentId === 25)?.Translations}
       </MenuItem>
@@ -79,7 +79,7 @@ const Main: React.FC = () => {
         className={"app-header__mobile-menu__menu-item"}
         onClick={() => {
           dispatch(logOut());
-          routeToUrl("home");
+          routeToUrl("/home");
         }}
       >
         {text.find((e) => e?.TextContentId === 26)?.Translations}

@@ -178,7 +178,8 @@ HEALTHCHECK_CACHE_KEY = config(
     "HEALTHCHECK_CACHE_KEY",
     cast=str,
 )
-FILE_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024
+FILE_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024 * 1024
+DATA_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024 * 1024
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',

@@ -5,11 +5,22 @@ import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import "../../assets/components/inputs/imageSelect.scss";
 
 interface MyImageSelectType {
-  handleChangeFunc?: (value: Blob | null) => void;
-  value?: Blob | null;
+  handleChangeFunc?: (value: string | null) => void;
+  value?: string | null;
   [key: string]: any;
 }
-
+function fileToBase64(
+  file: File,
+  callback: (base64String: string) => void
+): void {
+  const reader = new FileReader();
+  reader.onload = function (event) {
+    const base64String = event?.target?.result as string;
+    const base64Data = base64String.split(",")[1]; // Data URL'inden base64 veriyi ayırma
+    callback(base64Data);
+  };
+  reader.readAsDataURL(file);
+}
 const MyTextfield: React.FC<MyImageSelectType> = (props) => {
   const { handleChangeFunc = () => {}, value = null, ...rest } = props;
 
@@ -17,11 +28,11 @@ const MyTextfield: React.FC<MyImageSelectType> = (props) => {
     const selectedFile = e.target.files?.[0] || null;
 
     if (selectedFile) {
+      console.log(selectedFile);
       console.log(selectedFile.type);
-      const blobImage = new Blob([selectedFile], {
-        type: selectedFile.type.split("/")[1],
+      fileToBase64(selectedFile, (e: string) => {
+        handleChangeFunc(e);
       });
-      handleChangeFunc(blobImage);
     }
   };
 
@@ -40,7 +51,7 @@ const MyTextfield: React.FC<MyImageSelectType> = (props) => {
 
         {value ? (
           <img
-            src={URL.createObjectURL(value)}
+            src={`data:image/jpeg;base64,${value}`}
             className="my-image-select__btn__img"
           />
         ) : (

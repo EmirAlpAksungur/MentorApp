@@ -62,7 +62,7 @@ const FormSplitter: React.FC<FormSplitterType> = ({
       return (
         <ImageSelect
           value={value}
-          handleChangeFunc={(val: Blob | null) => {
+          handleChangeFunc={(val: string | null) => {
             helperUpdateValue(val);
           }}
           className="my-image-select__btn-rounded"

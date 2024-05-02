@@ -12,6 +12,12 @@ const SignUp = Loadable(
   lazy(() => import("../pages/authorization/signUp/Main"))
 );
 const Community = Loadable(lazy(() => import("../pages/community/Main")));
+const BlogHome = Loadable(lazy(() => import("../pages/blog/Home")));
+const BlogExplore = Loadable(lazy(() => import("../pages/blog/Explore")));
+const BlogProfile = Loadable(lazy(() => import("../pages/blog/Profile")));
+
+const BlogContainer = Loadable(lazy(() => import("../layout/blog/Container")));
+
 const PageNotFound = Loadable(lazy(() => import("../pages/errors/NotFound")));
 const Chat = Loadable(lazy(() => import("../pages/chat/Main")));
 const Download = Loadable(lazy(() => import("../pages/download/Main")));
@@ -24,6 +30,13 @@ const AppRouter: React.FC = () => {
             <Route path="" element={<Community />} />
             <Route path="community" element={<Community />} />
             <Route path="chat" element={<Chat />} />
+            <Route path="blog" element={<BlogContainer />}>
+              <Route path="home" element={<BlogHome />} />
+              <Route path="explore" element={<BlogExplore />} />
+              <Route path="profile" element={<BlogProfile />} />
+              <Route path=":blog-id" element={<BlogHome />} />
+            </Route>
+
             <Route path="download" element={<Download />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>

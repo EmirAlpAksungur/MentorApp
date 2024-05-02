@@ -35,7 +35,7 @@ const Main: React.FC = () => {
             <Button
               variant="text"
               className="app-header__left__unauth-profile__btn"
-              onClick={() => routeToUrl("community")}
+              onClick={() => routeToUrl("/community")}
             >
               {text.find((e) => e?.TextContentId === 27)?.Translations}
             </Button>
@@ -44,7 +44,7 @@ const Main: React.FC = () => {
             <Button
               variant="text"
               className="app-header__left__unauth-profile__btn"
-              onClick={() => routeToUrl("chat")}
+              onClick={() => routeToUrl("/chat")}
             >
               {text.find((e) => e?.TextContentId === 28)?.Translations}
             </Button>
@@ -53,7 +53,7 @@ const Main: React.FC = () => {
             <Button
               variant="text"
               className="app-header__left__unauth-profile__btn"
-              onClick={() => routeToUrl("blog")}
+              onClick={() => routeToUrl("/blog/home")}
             >
               {text.find((e) => e?.TextContentId === 2)?.Translations}
             </Button>

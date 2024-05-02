@@ -6,12 +6,12 @@ import "../../assets/components/inputs/textField.scss";
 interface CertificateSelectType {
   handleChangeFunc?: (
     uuid: string,
-    image: Blob | null,
+    image: string | null,
     comment: string
   ) => void;
   removeElement?: (uuid: string) => void;
   uuid: string;
-  image: Blob | null;
+  image: string | null;
   comment: string;
   [key: string]: any;
 }
@@ -30,7 +30,7 @@ const CertificateSelect: React.FC<CertificateSelectType> = (props) => {
     handleChangeFunc(uuid, image, e);
   };
 
-  const handleImageChange = async (e: Blob | null) => {
+  const handleImageChange = async (e: string | null) => {
     handleChangeFunc(uuid, e, comment);
   };
 

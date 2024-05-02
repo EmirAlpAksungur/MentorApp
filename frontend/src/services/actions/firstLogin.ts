@@ -3,6 +3,7 @@ import { FIRSTLOGIN_SET_ERROR, UPDATE_USER } from "../types/redux";
 import * as yup from "yup";
 import { RootState, AppDispatch } from "../../store/configureStore";
 import ProfileService from "../api/profile";
+import { loadUser } from "./login";
 const validationSchema = yup.object({
   // mentorInfo: yup.string().required("32").min(50, "33").max(300, "33"),
   // studentInfo: yup.string().required("32").min(50, "33").max(300, "33"),
@@ -65,6 +66,7 @@ const _fillProfile: any =
           value: true,
         },
       });
+      dispatch(loadUser(token));
     } catch (err: any) {
       console.log(err);
     }

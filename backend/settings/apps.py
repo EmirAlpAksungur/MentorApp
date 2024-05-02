@@ -7,4 +7,5 @@ apps = [
     "apps.location.apps.LocationConfig",
     "apps.university.apps.UniversityConfig",
     "apps.skill.apps.SkillConfig",
+    "apps.blog.apps.BlogConfig",
 ]

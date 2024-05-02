@@ -82,7 +82,7 @@ const Main: React.FC = () => {
       <MenuItem
         className={"app-header__mobile-menu__menu-item"}
         onClick={() => {
-          routeToUrl("/blog");
+          routeToUrl("/blog/home");
         }}
       >
         {text.find((e) => e?.TextContentId === 2)?.Translations}
@@ -90,7 +90,7 @@ const Main: React.FC = () => {
       <MenuItem
         className={"app-header__mobile-menu__menu-item"}
         onClick={() => {
-          routeToUrl("download");
+          routeToUrl("/download");
         }}
       >
         {text.find((e) => e?.TextContentId === 3)?.Translations}
@@ -99,7 +99,7 @@ const Main: React.FC = () => {
 
       <MenuItem
         className={"app-header__mobile-menu__menu-item"}
-        onClick={() => routeToUrl("profile")}
+        onClick={() => routeToUrl("/profile")}
       >
         {text.find((e) => e?.TextContentId === 25)?.Translations}
       </MenuItem>
@@ -107,7 +107,7 @@ const Main: React.FC = () => {
         className={"app-header__mobile-menu__menu-item"}
         onClick={() => {
           dispatch(logOut());
-          routeToUrl("home");
+          routeToUrl("/home");
         }}
       >
         {text.find((e) => e?.TextContentId === 26)?.Translations}

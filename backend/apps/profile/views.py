@@ -89,25 +89,25 @@ class FillProfileView(APIView):
         certificates = request.POST.get('certificate')  
         certificatePk = []
         print(certificates)
-        for certificate in json.loads(certificates):
-            print(certificate)
-            random_uuid = uuid.uuid4()
-            languagesPk.append(certificate["uuid"])
-            saveInstance = certificate(
-                uuid=certificate["uuid"],
-                image=certificate["image"],
-                comment=certificate["comment"]
-            )
-            saveInstance.save()
+        # for certificate in json.loads(certificates):
+        #     print(certificate)
+        #     random_uuid = uuid.uuid4()
+        #     languagesPk.append(certificate["uuid"])
+        #     saveInstance = certificate(
+        #         uuid=certificate["uuid"],
+        #         image=certificate["image"],
+        #         comment=certificate["comment"]
+        #     )
+        #     saveInstance.save()
         data = {
             'about': request.POST.get('about'),
             'location': request.POST.get('location'),
             'university': [int(id) for id in request.POST.getlist('university')],
             'languages': [str(id) for id in languagesPk],
-            'certificate': request.POST.getlist('certificate'),
+            # 'certificate': request.POST.getlist('certificate'),
             'knownSkills': [int(skill_id) for skill_id in request.POST.getlist('knownSkills')],  
             'unKnownSkills': [str(id) for id in unKnownSkillsPk],
-            'photo' : request.FILES.get('photo').read()
+            'photo' : request.POST.get('photo')
         }
         
         serializer = FillProfileSerializer(instance=item, data=data)

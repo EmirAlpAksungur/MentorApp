@@ -43,3 +43,4 @@ class Profile(models.Model):
     likes = models.IntegerField(default = 0)
     dislikes = models.IntegerField(default = 0)
     
+    
