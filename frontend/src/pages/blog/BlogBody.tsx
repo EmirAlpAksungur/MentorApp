@@ -7,10 +7,11 @@ import {
   AccordionDetails,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import ThumbDownIcon from "@mui/icons-material/ThumbDown";
-import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import { useAppSelector } from "../../hooks/redux";
+import { RootState } from "../../store/configureStore";
 import UpdateIcon from "./utils/UpdateIcon";
+import IconGroup from "./utils/IconGroup";
+import BlogService from "../../services/api/blog";
 export interface BlogType {
   user: {
     name: string;
@@ -21,21 +22,33 @@ export interface BlogType {
   blog: string;
   title: string;
   uuid: string;
-  likes: number;
-  dislikes: number;
-  views: number;
+  likes: number[];
+  dislikes: number[];
+  views: number[];
 }
 
 export interface BlogBodyType {
   blogList: BlogType[];
 }
 const Main: React.FC<BlogBodyType> = ({ blogList }) => {
+  const token = useAppSelector((state: RootState) => state?.auth?.token);
+  const userId = useAppSelector((state: RootState) => state?.auth?.user?.user);
+
+  const handleSummaryClick = (uuid: string, views: number[]) => {
+    if (!views.includes(userId)) BlogService.blogAddView({ uuid }, token);
+  };
+
   return (
     <div>
       {blogList.map((e: BlogType) => {
         return (
           <Accordion key={e.uuid} className="blog-container__body__accordion">
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              onClick={() => {
+                handleSummaryClick(e.uuid, e.views);
+              }}
+            >
               <Grid
                 container
                 className="blog-container__body__accordion__header"
@@ -91,17 +104,12 @@ const Main: React.FC<BlogBodyType> = ({ blogList }) => {
                       {e?.summary}
                     </Grid>
                     <Grid item xs={12}>
-                      <Grid container>
-                        <Grid item xs={4}>
-                          <ThumbUpIcon fontSize="small" /> {e?.likes}
-                        </Grid>
-                        <Grid item xs={4}>
-                          <ThumbDownIcon fontSize="small" /> {e?.dislikes}
-                        </Grid>
-                        <Grid item xs={4}>
-                          <RemoveRedEyeIcon fontSize="small" /> {e?.views}
-                        </Grid>
-                      </Grid>
+                      <IconGroup
+                        likes={e.likes}
+                        dislikes={e.dislikes}
+                        views={e.views}
+                        uuid={e.uuid}
+                      />
                     </Grid>
                   </Grid>
                 </Grid>

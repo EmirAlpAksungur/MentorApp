@@ -84,6 +84,11 @@
           &__container {
             height: 300px;
             padding: 8px;
+            &__icon-group {
+              &__btn {
+                @include btnOutlined;
+              }
+            }
             &__user-name {
               font-size: 1.4rem;
             }
@@ -91,7 +96,7 @@
               @include btnOutlined;
             }
             &__summary {
-              height: calc(300px - 16px - 16px - 14.5px - 16px);
+              height: calc(300px - 16px - 15px - 44.5px);
             }
           }
         }

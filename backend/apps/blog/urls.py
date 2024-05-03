@@ -3,7 +3,9 @@ from .views import (
     BlogListWiew,
     BlogCreateWiew,
     BlogProfileListWiew,
-    BlogDeleteView
+    BlogDeleteView,
+    BlogLikesWiew,
+    BlogViewsWiew
 )
 
 from django.urls.resolvers import URLPattern
@@ -13,4 +15,6 @@ urlpatterns = [
     path("get-profiler/", BlogProfileListWiew.as_view(), name="blog-list-profile"),
     path("post/", BlogCreateWiew.as_view(), name="blog-create"),
     path('delete/<uuid:uuid>/', BlogDeleteView.as_view(), name='blog-delete'),
+    path("like/", BlogLikesWiew.as_view(), name="blog-like"),
+    path("add-view/", BlogViewsWiew.as_view(), name="blog-view"),
 ]

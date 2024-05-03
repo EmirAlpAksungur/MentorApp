@@ -8,8 +8,22 @@ const getBlogList = (token: string) => {
   return instance.get("/blog/get/", config(token));
 };
 
+const blogAddView = (body: { uuid: string }, token: string) => {
+  return instance.post("/blog/add-view/", body, config(token));
+};
+
 const getBlogProfileList = (token: string) => {
   return instance.get("/blog/get-profiler/", config(token));
+};
+const likeBlog = (
+  body: {
+    from: number;
+    to: number;
+    uuid: string;
+  },
+  token: string
+) => {
+  return instance.post("/blog/like/", body, config(token));
 };
 
 const destroy = (body: { uuid: string }, token: string) => {
@@ -20,6 +34,8 @@ const BlogService = {
   create,
   getBlogProfileList,
   getBlogList,
+  likeBlog,
+  blogAddView,
   destroy,
 };
 

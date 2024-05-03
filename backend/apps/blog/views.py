@@ -6,6 +6,8 @@ from rest_framework.views import APIView
 from .models import Blog
 from django.http.multipartparser import MultiPartParser
 from .serializers import BlogSerializer,BlogGetSerializer,BlogDeleteSerializer
+from django.shortcuts import get_object_or_404
+
 class BlogListWiew(generics.ListAPIView):
     def get_queryset(self):
         return Blog.objects.all()
@@ -62,3 +64,36 @@ class BlogDeleteView(APIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
         except Blog.DoesNotExist:
             return Response({"error": "Blog not found"}, status=status.HTTP_404_NOT_FOUND)
+
+class BlogLikesWiew(generics.CreateAPIView):
+
+    def post(self, request):
+        data = request.data
+        uuid = data.get('uuid')
+        my_from = data.get('from')
+        my_to = data.get('to')
+        user_id = request.user.id
+        blog_instance = get_object_or_404(Blog, uuid=uuid)
+
+        if my_from == 1:
+            blog_instance.likes.remove(user_id)
+        elif my_from == -1:
+            blog_instance.dislikes.remove(user_id)
+
+        if my_to == 1:
+            blog_instance.likes.add(user_id)
+        elif my_to == -1:
+            blog_instance.dislikes.add(user_id)
+        
+        return Response("OK")
+
+
+class BlogViewsWiew(generics.CreateAPIView):
+
+    def post(self, request):
+        user_id = request.user.id
+        uuid = request.data.get('uuid')
+        blog_instance = get_object_or_404(Blog, uuid=uuid)
+        blog_instance.views.add(user_id)
+
+        return Response("OK")
