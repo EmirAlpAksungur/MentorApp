@@ -7,7 +7,7 @@ from .models import Blog
 from django.http.multipartparser import MultiPartParser
 from .serializers import BlogSerializer,BlogGetSerializer,BlogDeleteSerializer
 from django.shortcuts import get_object_or_404
-
+from apps.profile.models import Profile
 class BlogListWiew(generics.ListAPIView):
     def get_queryset(self):
         return Blog.objects.all()
@@ -97,3 +97,15 @@ class BlogViewsWiew(generics.CreateAPIView):
         blog_instance.views.add(user_id)
 
         return Response("OK")
+
+class BlogHomeWiew(APIView):
+    serializer_class = BlogGetSerializer
+
+    def get_queryset(self):
+        profile = Profile.objects.filter(user=self.request.user.id).first()
+        followed_users = profile.follows.all()
+        return Blog.objects.filter(user__in=followed_users)
+    def post(self, request):
+        queryset = self.get_queryset()
+        serializer = self.serializer_class(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)

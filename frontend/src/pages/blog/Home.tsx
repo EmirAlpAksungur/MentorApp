@@ -8,11 +8,15 @@ import BlogService from "../../services/api/blog";
 import { BlogType } from "./BlogBody";
 const Main: React.FC = () => {
   const token = useAppSelector((state: RootState) => state.auth.token);
+  const follows = useAppSelector(
+    (state: RootState) => state.auth?.user?.follows
+  );
   const [blogList, setBlogList] = useState<BlogType[]>([]);
 
   const asyncLoad = async () => {
     try {
-      let res = await BlogService.getBlogList(token);
+      const body = { follows };
+      let res = await BlogService.getBlogHomeList(body, token);
       setBlogList(res.data);
     } catch (err) {
       console.log(err);

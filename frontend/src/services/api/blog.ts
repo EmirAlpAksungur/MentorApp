@@ -8,6 +8,15 @@ const getBlogList = (token: string) => {
   return instance.get("/blog/get/", config(token));
 };
 
+const getBlogHomeList = (
+  body: {
+    follows: number[];
+  },
+  token: string
+) => {
+  return instance.post("/blog/get-home/", body, config(token));
+};
+
 const blogAddView = (body: { uuid: string }, token: string) => {
   return instance.post("/blog/add-view/", body, config(token));
 };
@@ -37,6 +46,7 @@ const BlogService = {
   likeBlog,
   blogAddView,
   destroy,
+  getBlogHomeList,
 };
 
 export default BlogService;
