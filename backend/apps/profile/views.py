@@ -2,7 +2,7 @@ from dj_rest_auth.registration.views import RegisterView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from dj_rest_auth.views import LoginView
 from .serializers import CustomRegisterSerializer,CustomLoginSerializer
-from rest_framework import status
+from rest_framework import status, generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import UserDetailSerializer,FillProfileSerializer,GetProfileSerializer,TokenSerializer
@@ -12,6 +12,7 @@ from django.http.multipartparser import MultiPartParser
 from apps.skill.models import Skill
 import json
 import uuid
+from apps.translations.models import Translations
 
 class CustomRegisterView(RegisterView):
     serializer_class = CustomRegisterSerializer  
@@ -126,7 +127,6 @@ class GetProfileView(APIView):
         ).exclude(user=request.user)
 
         paginator = Paginator(queryset, 30)
-        print(page)
         try:
             items = paginator.page(page)
         except PageNotAnInteger:
@@ -145,3 +145,19 @@ class IsAuthView(APIView):
         queryset = Token.objects.filter(user=request.user)
         serializer = TokenSerializer(queryset, many=True)
         return Response(True, status=status.HTTP_200_OK)
+
+class GetUnKnownSkillView(generics.ListAPIView):
+    
+    def post(self, request):
+        language_id = request.data.get('LanguageId')
+        SkillId = request.data.get('SkillId')
+        unKnownSkill = UnKnownSkills.objects.filter(uuid=SkillId).first()
+        print(unKnownSkill)
+        print(unKnownSkill.skill.SkillId)
+        print(unKnownSkill.skill.TextContentId)
+        translation = Translations.objects.filter(TextContentId=unKnownSkill.skill.TextContentId, LanguageId=language_id).first()
+
+        return Response({
+            'content':translation.Translations,
+            'level':unKnownSkill.level
+        }, status=status.HTTP_200_OK)

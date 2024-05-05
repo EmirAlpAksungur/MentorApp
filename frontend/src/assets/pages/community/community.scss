@@ -28,8 +28,13 @@
         justify-content: space-between;
         &__header {
           padding: 16px;
-          font-size: 2rem;
-          font-weight: bold;
+          &__name {
+            font-size: 1.8rem;
+            font-weight: bold;
+          }
+          &__btn {
+            @include btnOutlined;
+          }
         }
         &__title {
           padding: 16px;
@@ -43,13 +48,9 @@
         }
         &__content {
           padding-inline: 16px;
-          padding-bottom: 16px;
-          font-size: 1.2rem;
-          word-wrap: normal;
-          word-wrap: break-word;
         }
         &__btn {
-          margin: 0 16px 16px 16px;
+          margin: 16px;
           @include btnContained;
         }
       }

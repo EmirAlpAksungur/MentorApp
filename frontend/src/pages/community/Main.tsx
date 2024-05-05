@@ -5,8 +5,8 @@ import { RootState } from "../../store/configureStore";
 import { asyncLoadText } from "../../services/actions/translations";
 import { TranslatedTextType } from "../../services/types/translations";
 import ProfileService from "../../services/api/profile";
-import Card from "./Card";
-import { CardPropType } from "./Card";
+import Card from "./card/Card";
+import { CardPropType } from "./card/Card";
 import InfiniteScroll from "react-infinite-scroll-component";
 import "../../assets/pages/community/community.scss";
 import { LoadingComponent } from "../../components";
@@ -48,7 +48,6 @@ const Main: React.FC = () => {
     fetchData();
   }, []);
   useEffect(() => {
-    console.log("--aa--");
     helperTextLoad();
   }, [LanguageId]);
   return (
@@ -78,17 +77,11 @@ const Main: React.FC = () => {
               xs={60}
               sm={30}
               md={20}
-              lg={15}
-              xl={12}
+              xl={15}
               key={i}
               className="community-container__main-box__item"
             >
-              <Card
-                mentorInfo={e.mentorInfo}
-                studentInfo={e.studentInfo}
-                user={e.user}
-                text={text}
-              />
+              <Card {...e} text={text} />
             </Grid>
           );
         })}

@@ -1,0 +1,23 @@
+@import "../../palette/palette.scss";
+$colors: "primary", "secondary", "info", "success", "error", "warning";
+.known-skill {
+  &__box {
+    &__chip {
+      span {
+        font-size: 1.2rem;
+        @include themify($themes) {
+          color: themed("text");
+        }
+      }
+    }
+    @for $i from 1 through 7 {
+      &:nth-child(#{$i}) {
+        div {
+          @include themify($themes) {
+            border-color: themed(nth($colors, random(length($colors))));
+          }
+        }
+      }
+    }
+  }
+}

@@ -20,10 +20,21 @@ const getSkills = (body: SkillsListBodyType, token: string) => {
 const allTypes = (token: string) => {
   return instance.get("/skill/get-type/", config(token));
 };
+const oneSkillContent = (
+  body: {
+    LanguageId: number;
+    SkillId: number;
+  },
+  token: string
+) => {
+  return instance.post("/skill/get-one-skill-content/", body, config(token));
+};
+
 const SkillService = {
   allSkills,
   getSkills,
   allTypes,
+  oneSkillContent,
 };
 
 export default SkillService;

@@ -62,6 +62,15 @@ $themes: (
     notification-success: lighten($notification-success, 5),
     //msg
     msg-self: $msg-self,
+
+    //General
+    primary: #e3f2fd,
+    secondary: #f3e5f5,
+    error: #e57373,
+    warning: #ffb74d,
+    info: #4fc3f7,
+    success: #81c784,
+    grays: #ced4da,
   ),
   dark: (
     //text
@@ -104,6 +113,14 @@ $themes: (
     notification-success: darken($notification-success, 5),
     //msg
     msg-self: darken($msg-self, 5),
+    //General
+    primary: #42a5f5,
+    secondary: #ab47bc,
+    error: #d32f2f,
+    warning: #f57c00,
+    info: #0288d1,
+    success: #388e3c,
+    grays: #495057,
   ),
 ) !default;
 

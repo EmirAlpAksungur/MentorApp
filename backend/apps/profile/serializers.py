@@ -65,7 +65,7 @@ class GetProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer()
     class Meta:
         model = Profile
-        fields = ["user"] 
+        fields = "__all__" 
 
 class TokenSerializer(serializers.Serializer):
     class Meta:

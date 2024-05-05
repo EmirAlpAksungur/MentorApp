@@ -41,3 +41,13 @@ class SkillListAllView(generics.ListAPIView):
             })
 
         return Response(skills_data, status=status.HTTP_200_OK)
+
+class GetSkillContentView(generics.ListAPIView):
+    
+    def post(self, request):
+        language_id = request.data.get('LanguageId')
+        SkillId = request.data.get('SkillId')
+        queryset = Skill.objects.filter(SkillId=SkillId)
+        translation = Translations.objects.filter(TextContentId=queryset.first().TextContentId, LanguageId=language_id).first()
+
+        return Response(translation.Translations, status=status.HTTP_200_OK)

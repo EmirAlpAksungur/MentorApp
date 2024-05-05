@@ -1,0 +1,24 @@
+@import "../../palette/palette.scss";
+
+.connection-bar {
+  height: 20px;
+  &__item {
+    width: 5px;
+    height: 30%;
+    box-shadow: 1px 1px 0.5px rgba(0, 0, 0, 0.5);
+    @include themify($themes) {
+      background-color: themed("grays");
+    }
+    &__success {
+      @include themify($themes) {
+        background-color: themed("success");
+      }
+    }
+    margin-left: 2px;
+    @for $i from 2 through 5 {
+      &:nth-child(#{$i}) {
+        height: calc(30% + (#{17.5%} * ($i - 1)));
+      }
+    }
+  }
+}

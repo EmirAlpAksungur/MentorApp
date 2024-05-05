@@ -1,3 +1,4 @@
+import ConnectionBar from "./connectionbar/ConnectionBar";
 import ErrorComponent from "./errors/ErrorComponent"
 import NetworkCheck from "./errors/NetworkCheck"
 import Loadable from "./loading/Loadable";
@@ -20,7 +21,7 @@ import Form from "./form/Main";
 import Notification from "./notifications/Notification"
 import MyDialog from "./dialog/Main"
 export {
-  ErrorComponent, NetworkCheck, Loadable, LoadingComponent, MySelect, MySlide, LocationSelect, UniversitySelect, LanguageSelect, CertificateSelect,
+  ConnectionBar, ErrorComponent, NetworkCheck, Loadable, LoadingComponent, MySelect, MySlide, LocationSelect, UniversitySelect, LanguageSelect, CertificateSelect,
   SkillSelect, UniversityContainer, LanguageContainer, CertificateContainer, MyMenu, MyTextField, ImageSelect, Form, Notification, MyDialog
   , MyLongTextField
 }

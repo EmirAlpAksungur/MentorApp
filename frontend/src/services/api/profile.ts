@@ -39,7 +39,19 @@ const getProfile = (token: string, pageNumber: number) => {
 const isAuth = (token: string) => {
   return instance.get("/profile/is-auth/", config(token));
 };
-
+const oneUnKnownSkillContent = (
+  body: {
+    LanguageId: number;
+    SkillId: string;
+  },
+  token: string
+) => {
+  return instance.post(
+    "/profile/get-un-known-skill-content/",
+    body,
+    config(token)
+  );
+};
 const ProfileService = {
   register,
   login,
@@ -48,6 +60,7 @@ const ProfileService = {
   fillProfile,
   getProfile,
   isAuth,
+  oneUnKnownSkillContent,
 };
 
 export default ProfileService;

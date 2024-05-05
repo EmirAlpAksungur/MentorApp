@@ -1,21 +1,40 @@
 import React from "react";
-import { Button, Divider } from "@mui/material";
-import { useAppSelector, useAppDispatch } from "../../hooks/redux";
-import { TranslatedTextType } from "../../services/types/translations";
-import { RootState } from "../../store/configureStore";
-import ChatService from "../../services/api/chat";
-import history from "../../routers/history";
-import { changeSelectedChat } from "../../services/actions/chat";
-
+import { Avatar, Button, Divider, Grid } from "@mui/material";
+import { useAppSelector, useAppDispatch } from "../../../hooks/redux";
+import { TranslatedTextType } from "../../../services/types/translations";
+import { RootState } from "../../../store/configureStore";
+import ChatService from "../../../services/api/chat";
+import history from "../../../routers/history";
+import { changeSelectedChat } from "../../../services/actions/chat";
+import Header from "./Header";
+import KnownSkill from "../../../components/view/KnownSkill";
+import UnKnownSkill from "../../../components/view/UnKnownSkill";
 interface UserType {
   first_name: string;
   last_name: string;
   email: string;
   id: number;
 }
+interface Certificate {
+  photo: string;
+}
+interface Languages {
+  photo: string;
+}
+interface References {
+  photo: string;
+}
 export interface CardPropType {
-  mentorInfo: string;
-  studentInfo: string;
+  about: string;
+  certificate: Certificate[];
+  dislikes: number;
+  likes: number;
+  knownSkills: number[];
+  unKnownSkills: string[];
+  languages: Languages[];
+  photo: string;
+  references: References[];
+  university: number[];
   user: UserType;
   text: TranslatedTextType[];
 }
@@ -47,24 +66,23 @@ const Main: React.FC<CardPropType> = (props) => {
       dispatch(changeSelectedChat(chatId));
     }
   };
+  console.log(props);
 
   return (
     <div className="community-container__main-box__item__body">
-      <div className="community-container__main-box__item__body__header">
-        {props.user?.first_name} {props.user?.last_name}
-      </div>
+      <Header photo={props?.photo} user={props?.user} />
       <Divider className="community-container__main-box__item__body__divider" />
       <div className="community-container__main-box__item__body__title">
         {props.text.find((e) => e?.TextContentId === 35)?.Translations}
       </div>
       <div className="community-container__main-box__item__body__content">
-        {props.mentorInfo}
+        <KnownSkill knownSkills={props?.knownSkills} />
       </div>
       <div className="community-container__main-box__item__body__title">
         {props.text.find((e) => e?.TextContentId === 36)?.Translations}
       </div>
       <div className="community-container__main-box__item__body__content">
-        {props.studentInfo}
+        <UnKnownSkill unKnownSkills={props?.unKnownSkills} />
       </div>
       <Button
         className="community-container__main-box__item__body__btn"
