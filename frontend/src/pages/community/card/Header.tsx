@@ -1,15 +1,9 @@
 import React from "react";
-import { Avatar, Grid, IconButton } from "@mui/material";
-import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-interface HeaderType {
-  photo: string;
-  user: {
-    first_name: string;
-    last_name: string;
-  };
-}
+import { Avatar, Grid } from "@mui/material";
+import MainDetails from "./details/MainDetails";
+import { CardPropType } from "./Card";
 
-const Main: React.FC<HeaderType> = (props) => {
+const Main: React.FC<CardPropType> = (props) => {
   return (
     <div className="community-container__main-box__item__body__header">
       <Grid
@@ -28,9 +22,7 @@ const Main: React.FC<HeaderType> = (props) => {
           {props.user?.first_name} {props.user?.last_name}
         </Grid>
         <Grid item>
-          <IconButton className="community-container__main-box__item__body__header__btn">
-            <InfoOutlinedIcon fontSize="large" />
-          </IconButton>
+          <MainDetails {...props} />
         </Grid>
       </Grid>
     </div>

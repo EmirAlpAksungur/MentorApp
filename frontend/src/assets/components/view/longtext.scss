@@ -1,0 +1,20 @@
+@import "../button/btn.scss";
+
+.long-text-view {
+  &__text-container {
+    max-height: 145px;
+    overflow: hidden;
+    &__content {
+      font-size: 1.4rem;
+    }
+  }
+  &__more-icon {
+    text-align: right;
+    &__btn {
+      @include btnOutlined;
+    }
+  }
+}
+.long-text-view__text-container-full {
+  max-height: min-content;
+}

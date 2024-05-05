@@ -18,10 +18,17 @@ const Main: React.FC<ConnectionBarType> = ({ connection }) => {
           return (
             <Grid
               item
+              key={`connection-${i}`}
               className="connection-bar__item connection-bar__item__success"
             ></Grid>
           );
-        return <Grid item className="connection-bar__item"></Grid>;
+        return (
+          <Grid
+            item
+            key={`connection-${i}`}
+            className="connection-bar__item"
+          ></Grid>
+        );
       })}
     </Grid>
   );

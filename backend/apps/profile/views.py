@@ -51,7 +51,6 @@ class UserDetalisView(APIView):
         serializer = UserDetailSerializer(queryset, many=True)
         return Response(serializer.data[0], status=status.HTTP_200_OK)
 
-
 class FillProfileView(APIView):
 
     def post(self, request):
@@ -118,7 +117,6 @@ class FillProfileView(APIView):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
 class GetProfileView(APIView):
     
     def get(self, request,page, *args, **kwargs):
@@ -161,3 +159,17 @@ class GetUnKnownSkillView(generics.ListAPIView):
             'content':translation.Translations,
             'level':unKnownSkill.level
         }, status=status.HTTP_200_OK)
+
+class FollowView(APIView):
+    def post(self, request):
+        sender = request.user.id
+        profile = Profile.objects.filter(user=sender).first()
+        receiver = request.data.get('user_id')
+        followed_users = list(profile.follows.all()) if profile.follows.exists() else []
+        user_ids = [user.id for user in followed_users]
+        if int(receiver) in user_ids:
+            profile.follows.remove(receiver)
+        else:
+            profile.follows.add(receiver)
+        
+        return Response("Ok", status=status.HTTP_200_OK)

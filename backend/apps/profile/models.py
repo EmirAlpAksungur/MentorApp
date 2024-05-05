@@ -30,9 +30,11 @@ class References(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='profil')
+    follows = models.ManyToManyField(User,related_name='follow')
     isFilled = models.BooleanField(default=False)
+    profession = models.CharField(max_length = 100, blank = True ,null = True)
     photo = models.BinaryField(null=True, editable=True)
-    about = models.CharField(max_length = 500,default = "", blank = True)
+    about = models.TextField(default = "", blank = True)
     location =  models.ForeignKey(City, on_delete=models.CASCADE, null= True)
     university =  models.ManyToManyField(University, blank= False)
     languages = models.ManyToManyField(Languages)

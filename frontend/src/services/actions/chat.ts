@@ -5,6 +5,7 @@ import {
 } from "../types/redux";
 import { RootState, AppDispatch } from "../../store/configureStore";
 import ChatService from "../api/chat";
+import history from "../../routers/history";
 export const loadChatList =
   () => async (dispatch: AppDispatch, getState: () => RootState) => {
     try {
@@ -33,3 +34,28 @@ export const refreshChat = () => async (dispatch: AppDispatch) => {
     type: REFRESH_CHAT,
   });
 };
+
+export const sendMessage =
+  (sender: number, receiver: number) =>
+  async (dispatch: AppDispatch, getState: () => RootState) => {
+    let chatId = "";
+    const token = getState().auth.token;
+    sender > receiver
+      ? (chatId = receiver.toString() + "_" + sender.toString())
+      : (chatId = sender.toString() + "_" + receiver.toString());
+
+    try {
+      const body = {
+        id: chatId,
+        participants: [sender, receiver],
+        messages: [],
+      };
+
+      let res = await ChatService.startChat(body, token);
+      history.push("/chat");
+      dispatch(changeSelectedChat(chatId));
+    } catch (err) {
+      history.push("/chat");
+      dispatch(changeSelectedChat(chatId));
+    }
+  };
