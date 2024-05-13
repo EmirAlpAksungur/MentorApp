@@ -81,26 +81,22 @@ const Main: React.FC = () => {
                     loadMoreRows={fetchData}
                     rowCount={length}
                   >
-                    {({ onRowsRendered, registerChild }) => {
-                      console.log(width);
-
-                      return (
-                        <List
-                          autoHeight
-                          onRowsRendered={onRowsRendered}
-                          ref={registerChild}
-                          height={height ? height : 0}
-                          isScrolling={isScrolling}
-                          onScroll={onChildScroll}
-                          rowCount={blogList?.length}
-                          rowHeight={width < 800 ? 442.6 : 324.1}
-                          rowRenderer={rowRenderer}
-                          scrollTop={scrollTop}
-                          width={width}
-                          data={blogList}
-                        />
-                      );
-                    }}
+                    {({ onRowsRendered, registerChild }) => (
+                      <List
+                        autoHeight
+                        onRowsRendered={onRowsRendered}
+                        ref={registerChild}
+                        height={height ? height : 0}
+                        isScrolling={isScrolling}
+                        onScroll={onChildScroll}
+                        rowCount={blogList?.length}
+                        rowHeight={width < 800 ? 442.6 : 324.1}
+                        rowRenderer={rowRenderer}
+                        scrollTop={scrollTop}
+                        width={width}
+                        data={blogList}
+                      />
+                    )}
                   </InfiniteLoader>
                 )}
               </WindowScroller>

@@ -41,7 +41,12 @@ const Main: React.FC<ElementType> = ({ likes, dislikes, views, uuid }) => {
   useEffect(() => {
     isLiked();
     isDisliked();
-  }, []);
+    return () => {
+      setLike(0);
+      setLikeCount(0);
+      setDislikeCount(0);
+    };
+  }, [uuid]);
   return (
     <Grid
       container

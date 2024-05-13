@@ -12,9 +12,9 @@ const Main: React.FC = (props: any) => {
   let [data, setData] = useState<BlogType | null>(null);
   const token = useAppSelector((state: RootState) => state.auth.token);
 
-  const asyncHelper = async () => {
+  const asyncHelper = async (uuid: string) => {
     try {
-      const body = { uuid: props.uuid };
+      const body = { uuid };
       let res = await BlogService.blogDetails(body, token);
       console.log(res);
 
@@ -23,9 +23,12 @@ const Main: React.FC = (props: any) => {
       console.log(err);
     }
   };
+
   useEffect(() => {
-    asyncHelper();
-  }, []);
+    console.log(props.uuid);
+
+    asyncHelper(props.uuid);
+  }, [props.uuid]);
   if (data)
     return (
       <Box className={"blog-container__body__dialog"}>

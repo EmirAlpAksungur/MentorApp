@@ -39,10 +39,11 @@ const Main: React.FC<BlogBodyType> = ({ data }) => {
       container
       className="blog-container__body__header"
       onClick={() => {
-        if (window.location.pathname.split("/").length <= 3) {
-          handleSummaryClick(data?.uuid, data?.views);
-          history.push(`${window.location.pathname}/${data?.uuid}`);
-        }
+        let path = window.location.pathname.split("/");
+        path[3] = data?.uuid;
+        let urlStr = path.join("/");
+        handleSummaryClick(data?.uuid, data?.views);
+        history.push(urlStr);
       }}
     >
       <Grid
