@@ -20,5 +20,10 @@ class BlogSerializer(serializers.ModelSerializer):
         model = Blog
         fields = ('uuid','user', 'photo', 'blog','summary', 'title')
 
+class BlogTopSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Blog
+        fields = ('uuid', 'likes','dislikes', 'title','views')
+
 class BlogDeleteSerializer(serializers.Serializer):
-    uuid = serializers.UUIDField()  # uuid alanı
+    uuid = serializers.UUIDField() 

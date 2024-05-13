@@ -1,11 +1,11 @@
 from django.shortcuts import render
 from rest_framework import generics, permissions, status
 from rest_framework.response import Response
-
+from django.db.models import Count
 from rest_framework.views import APIView
 from .models import Blog
 from django.http.multipartparser import MultiPartParser
-from .serializers import BlogSerializer,BlogGetSerializer,BlogDeleteSerializer
+from .serializers import BlogSerializer,BlogGetSerializer,BlogDeleteSerializer,BlogTopSerializer
 from django.shortcuts import get_object_or_404
 from apps.profile.models import Profile
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -122,9 +122,7 @@ class BlogHomeWiew(APIView):
             "data":serializer.data
         }, status=status.HTTP_200_OK)
 
-
 class BlogProfileListWiew(generics.ListAPIView):
-
     def get(self, request,page, *args, **kwargs):
         user = request.user.id
         queryset =  Blog.objects.filter(user=user)
@@ -143,9 +141,20 @@ class BlogProfileListWiew(generics.ListAPIView):
         }, status=status.HTTP_200_OK)
 
 class BlogDetailsWiew(generics.CreateAPIView):
-
     def post(self, request):
         uuid = request.data.get('uuid')
         blog_instance = get_object_or_404(Blog, uuid=uuid)
         serializer = BlogGetSerializer(blog_instance)
+        return Response(serializer.data)
+
+class BlogTopViewsWiew(generics.CreateAPIView):
+    def get(self, request):
+        popular_blogs = Blog.objects.annotate(num_views=Count('views')).order_by('-num_views')[:10]
+        serializer = BlogTopSerializer(popular_blogs, many=True)
+        return Response(serializer.data)
+
+class BlogTopLikesWiew(generics.CreateAPIView):
+    def get(self, request):
+        popular_blogs = Blog.objects.annotate(num_views=Count('likes')).order_by('-num_views')[:10]
+        serializer = BlogTopSerializer(popular_blogs, many=True)
         return Response(serializer.data)

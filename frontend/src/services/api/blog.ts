@@ -69,6 +69,13 @@ const blogDetails = (body: { uuid: string }, token: string) => {
   return instance.post("/blog/get-details/", body, config(token));
 };
 
+const blogTopView = (token: string) => {
+  return instance.get(`/blog/get-top-views/`, config(token));
+};
+
+const blogTopLikes = (token: string) => {
+  return instance.get(`/blog/get-top-likes/`, config(token));
+};
 const BlogService = {
   create,
   getBlogProfileList,
@@ -78,6 +85,8 @@ const BlogService = {
   destroy,
   getBlogHomeList,
   blogDetails,
+  blogTopView,
+  blogTopLikes,
 };
 
 export default BlogService;

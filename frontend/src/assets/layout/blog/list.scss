@@ -1,0 +1,43 @@
+@import "../../palette/palette.scss";
+
+.list {
+  @include themify($themes) {
+    color: themed("text");
+  }
+  &__header {
+    font-size: 2rem;
+    padding: 12px;
+    border-bottom: 1px solid;
+    @include themify($themes) {
+      border-color: themed("border-header");
+    }
+  }
+  &__item {
+    border-bottom: 1px solid;
+    padding: 8px;
+    cursor: pointer;
+    @include themify($themes) {
+      border-color: themed("border-header");
+    }
+    &:nth-child(odd) {
+      @include themify($themes) {
+        background-color: themed("bg-selected-select");
+      }
+    }
+    &:hover {
+      @include themify($themes) {
+        background-color: themed("border-header");
+      }
+    }
+    &__like {
+      @include themify($themes) {
+        color: themed("success");
+      }
+    }
+    &__dislike {
+      @include themify($themes) {
+        color: themed("error");
+      }
+    }
+  }
+}

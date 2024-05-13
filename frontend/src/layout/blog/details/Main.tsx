@@ -16,8 +16,6 @@ const Main: React.FC = (props: any) => {
     try {
       const body = { uuid };
       let res = await BlogService.blogDetails(body, token);
-      console.log(res);
-
       setData(res.data);
     } catch (err) {
       console.log(err);
@@ -25,8 +23,6 @@ const Main: React.FC = (props: any) => {
   };
 
   useEffect(() => {
-    console.log(props.uuid);
-
     asyncHelper(props.uuid);
   }, [props.uuid]);
   if (data)

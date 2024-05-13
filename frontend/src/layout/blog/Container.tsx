@@ -3,8 +3,8 @@ import { useLocation } from "react-router-dom";
 
 import { Outlet } from "react-router-dom";
 import { Grid, ButtonGroup, Button } from "@mui/material";
-import TopLike from "./toplists/TopLike";
-import TopWiew from "./toplists/TopWiew";
+import RightBox from "./right/Main";
+import LeftBox from "./left/Main";
 import { routeToUrl } from "../../routers/utils";
 import "../../assets/pages/blog/blog.scss";
 import { MyDialog } from "../../components";
@@ -12,7 +12,6 @@ import MainDetail from "./details/Main";
 const Main: React.FC = () => {
   const location = useLocation();
 
-  console.log(location.pathname.split("/"));
   return (
     <Grid container className={"blog-container"}>
       <Grid
@@ -20,7 +19,7 @@ const Main: React.FC = () => {
         lg={2}
         className={"blog-container__border-right blog-container__top-list"}
       >
-        <TopLike />
+        <LeftBox />
       </Grid>
       <Grid item xs={12} lg={8} className={"blog-container__border-right"}>
         <Grid
@@ -60,7 +59,7 @@ const Main: React.FC = () => {
         </Grid>
       </Grid>
       <Grid item lg={2} className={"blog-container__top-list"}>
-        <TopWiew />
+        <RightBox />
       </Grid>
       <MyDialog
         Element={MainDetail}

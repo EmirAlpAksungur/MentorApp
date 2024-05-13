@@ -7,7 +7,9 @@ from .views import (
     BlogLikesWiew,
     BlogViewsWiew,
     BlogHomeWiew,
-    BlogDetailsWiew
+    BlogDetailsWiew,
+    BlogTopViewsWiew,
+    BlogTopLikesWiew
 )
 
 from django.urls.resolvers import URLPattern
@@ -21,4 +23,6 @@ urlpatterns = [
     path("add-view/", BlogViewsWiew.as_view(), name="blog-view"),
     path("get-home/<int:page>/", BlogHomeWiew.as_view(), name="blog-home"),
     path("get-details/", BlogDetailsWiew.as_view(), name="blog-details"),
+    path("get-top-views/", BlogTopViewsWiew.as_view(), name="blog-top-views"),
+    path("get-top-likes/", BlogTopLikesWiew.as_view(), name="blog-top-likes"),
 ]
