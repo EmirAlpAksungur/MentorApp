@@ -19,6 +19,6 @@ urlpatterns = [
     path('delete/<uuid:uuid>/', BlogDeleteView.as_view(), name='blog-delete'),
     path("like/", BlogLikesWiew.as_view(), name="blog-like"),
     path("add-view/", BlogViewsWiew.as_view(), name="blog-view"),
-    path("get-home/", BlogHomeWiew.as_view(), name="blog-home"),
+    path("get-home/<int:page>/", BlogHomeWiew.as_view(), name="blog-home"),
     path("get-details/", BlogDetailsWiew.as_view(), name="blog-details"),
 ]

@@ -8,22 +8,27 @@ const getBlogList = (token: string) => {
   return instance.get("/blog/get/", config(token));
 };
 
-const getBlogHomeList = (
-  body: {
-    follows: number[];
-  },
-  token: string
-) => {
-  return instance.post("/blog/get-home/", body, config(token));
-};
-
 const blogAddView = (body: { uuid: string }, token: string) => {
   return instance.post("/blog/add-view/", body, config(token));
 };
 
-// const getBlogProfileList = (token: string) => {
-//   return instance.get("/blog/get-profiler/", config(token));
-// };
+let cancelTokenHome: null | CancelTokenSource;
+const getBlogHomeList = (
+  body: {
+    follows: number[];
+  },
+  token: string,
+  pageNumber: number
+) => {
+  if (cancelTokenHome) {
+    cancelTokenHome.cancel();
+  }
+  cancelTokenHome = axios.CancelToken.source();
+  return instance.post(`/blog/get-home/${pageNumber}/`, body, {
+    ...config(token),
+    cancelToken: cancelTokenHome.token,
+  });
+};
 
 let cancelToken: null | CancelTokenSource;
 const getBlogProfileList = (token: string, pageNumber: number) => {
