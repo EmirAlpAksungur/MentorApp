@@ -5,7 +5,7 @@ import { RootState } from "../../../store/configureStore";
 
 import AutoFixNormalIcon from "@mui/icons-material/AutoFixNormal";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import { BlogType } from "../BlogBody";
+import { BlogType } from "../../../layout/blog/details/BlogBody";
 import {
   handleBlogUpdate,
   handleBlogDelete,
@@ -15,19 +15,19 @@ const Main: React.FC<BlogType> = (params) => {
   const userId = useAppSelector((state: RootState) => state?.auth?.user?.user);
 
   return (
-    userId === params.user.id && (
+    userId === params?.user?.id && (
       <>
         <IconButton
-          className="blog-container__body__accordion__header__details__container__update-icon"
+          className="blog-container__body__header__details__container__update-icon"
           onClick={(event) => {
             event.stopPropagation();
             dispatch(
               handleBlogUpdate({
-                uuid: params.uuid,
-                photo: params.photo,
-                blog: params.blog,
-                title: params.title,
-                summary: params.summary,
+                uuid: params?.uuid,
+                photo: params?.photo,
+                blog: params?.blog,
+                title: params?.title,
+                summary: params?.summary,
               })
             );
           }}
@@ -35,7 +35,7 @@ const Main: React.FC<BlogType> = (params) => {
           <AutoFixNormalIcon />
         </IconButton>
         <IconButton
-          className="blog-container__body__accordion__header__details__container__update-icon"
+          className="blog-container__body__header__details__container__update-icon"
           onClick={(event) => {
             event.stopPropagation();
             dispatch(handleBlogDelete(params.uuid));

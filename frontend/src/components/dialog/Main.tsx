@@ -4,7 +4,7 @@ import Paper from "@mui/material/Paper";
 import Draggable from "react-draggable";
 import { ResizableBox, ResizeCallbackData } from "react-resizable";
 import "react-resizable/css/styles.css";
-
+import "../../assets/components/dialog/dialog.scss";
 export interface ElementProps {
   handleClose: Function;
   height: number;
@@ -24,6 +24,8 @@ export interface SimpleDialogProps {
 
 function PaperComponent(props: any) {
   const nodeRef = React.useRef(null);
+  console.log(props);
+
   return (
     <Draggable
       handle="#draggable-dialog-title"
@@ -65,6 +67,19 @@ export default function SimpleDialog(props: SimpleDialogProps) {
     setHeight(size.height);
   };
 
+  const backgroundClick = () => {
+    if (hideBackdrop)
+      return {
+        height: "0px",
+        "& .MuiDialog-container": {
+          top: window.innerHeight / 2,
+          left: window.innerWidth / 2 - width / 2,
+          position: " absolute !important",
+        },
+      };
+    return {};
+  };
+
   React.useEffect(() => {
     setOpen(defaultOpen);
   }, [defaultOpen]);
@@ -90,14 +105,17 @@ export default function SimpleDialog(props: SimpleDialogProps) {
             overflow: "hidden",
             maxWidth: window.innerWidth - 200,
             maxHeight: window.innerHeight - 200,
+            margin: "0px",
           },
+          ...backgroundClick(),
         }}
+        className="my-dialog"
       >
         <ResizableBox
           width={width}
           height={height}
           resizeHandles={["n", "e", "s", "w", "ne", "sw", "se", "nw"]}
-          minConstraints={[50, 50]}
+          minConstraints={[250, 250]}
           maxConstraints={[window.innerWidth - 200, window.innerHeight - 200]}
           onResize={handleResize}
         >

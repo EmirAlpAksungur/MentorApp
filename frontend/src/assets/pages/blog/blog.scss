@@ -44,63 +44,126 @@
         }
       }
     }
-    &__accordion {
+    @include themify($themes) {
+      background-color: themed("bg-header");
+      color: themed("text");
+    }
+    &__dialog {
+      height: 100%;
+      overflow: auto;
+      @include scroll;
       @include themify($themes) {
         background-color: themed("bg-header");
         color: themed("text");
       }
-      &__header {
-        &__img-blog {
-          position: relative;
-          height: 300px;
-          max-width: 75% !important;
-          overflow: hidden;
-          background-size: cover;
-          background-position: cover;
-          border-top-left-radius: 50px;
-          border-top-right-radius: 50px;
-          &__gradiant {
-            height: 300px;
-            @include themify($themes) {
-              background: linear-gradient(
-                to bottom,
-                transparent,
-                rgba(themed("bg-header"), 0.6) 50%,
-                rgba(themed("bg-header"), 0.85) 75%,
-                rgba(themed("bg-header"), 1) 100%
-              );
-            }
-          }
-          &__header {
-            position: absolute;
-            bottom: 0;
-            left: 12px;
-            font-size: 2.2rem;
-            font-weight: bold;
+    }
+    &__btn-close {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 5px;
+      width: 100%;
+      z-index: 5;
+      cursor: pointer;
+      height: 36px;
+      text-align: right;
+      &__btn {
+        margin-right: 6px;
+        margin-top: 6px;
+        @include btnOutlined;
+        @include themify($themes) {
+          color: themed("error");
+        }
+        &:hover {
+          @include themify($themes) {
+            color: themed("error");
           }
         }
-        &__details {
+      }
+    }
+    &__header {
+      padding: 12px 12px 11px;
+      border-bottom: 1px solid;
+      container-type: inline-size;
+      @include themify($themes) {
+        border-color: themed("border-header");
+      }
+      cursor: pointer;
+      &__img-blog {
+        position: relative;
+        height: 300px;
+        // max-width: 75% !important;
+        min-width: 75%;
+        overflow: hidden;
+        background-size: cover;
+        background-position: cover;
+        border-top-left-radius: 50px;
+        border-top-right-radius: 50px;
+        &__gradiant {
           height: 300px;
-          &__container {
-            height: 300px;
-            padding: 8px;
-            &__icon-group {
-              &__btn {
-                @include btnOutlined;
-              }
-            }
-            &__user-name {
-              font-size: 1.4rem;
-            }
-            &__update-icon {
+          @include themify($themes) {
+            background: linear-gradient(
+              to bottom,
+              transparent,
+              rgba(themed("bg-header"), 0.6) 50%,
+              rgba(themed("bg-header"), 0.85) 75%,
+              rgba(themed("bg-header"), 1) 100%
+            );
+          }
+        }
+        &__header {
+          position: absolute;
+          bottom: 0;
+          left: 12px;
+          font-size: 2.2rem;
+          font-weight: bold;
+        }
+      }
+      &__details {
+        height: 300px;
+        width: 25%;
+        &__container {
+          height: 300px;
+          padding: 8px;
+          &__icon-group {
+            &__btn {
               @include btnOutlined;
             }
+          }
+          &__user-name {
+            font-size: 1.4rem;
+          }
+          &__update-icon {
+            @include btnOutlined;
+          }
+          &__summary {
+            height: calc(300px - 16px - 15px - 44.5px);
+          }
+        }
+      }
+      @container (inline-size < 800px) {
+        &__img-blog {
+          width: 100%;
+          min-width: 100%;
+          flex: 1;
+        }
+        &__details {
+          width: 100%;
+          height: auto;
+          &__container {
+            &__icon-group {
+              width: 20%;
+              min-width: 200px;
+            }
+            height: auto;
             &__summary {
-              height: calc(300px - 16px - 15px - 44.5px);
+              height: auto;
             }
           }
         }
       }
+    }
+    &__content {
+      padding: 16px;
     }
   }
 }

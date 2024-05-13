@@ -1,0 +1,56 @@
+@import "../../palette/palette.scss";
+
+.my-dialog {
+  .MuiPaper-root {
+    background-color: transparent;
+  }
+  .react-resizable-handle {
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+    @include themify($themes) {
+      border-color: themed("text");
+    }
+    content: "";
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background-image: none;
+    &-nw {
+      top: 5px;
+      left: 5px;
+    }
+    &-n {
+      top: 5px;
+    }
+    &-ne {
+      top: 5px;
+      right: 5px;
+    }
+    &-w {
+      left: 5px;
+    }
+    &-e {
+      right: 5px;
+    }
+    &-sw {
+      bottom: 5px;
+      left: 5px;
+    }
+    &-s {
+      bottom: 5px;
+    }
+    &-se {
+      bottom: 5px;
+      right: 5px;
+    }
+  }
+  .react-resizable-handle:before {
+    position: absolute;
+    content: "";
+    top: -5px;
+    right: -5px;
+    left: -5px;
+    bottom: -5px;
+    z-index: 40;
+  }
+}

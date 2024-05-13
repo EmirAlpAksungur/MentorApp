@@ -8,6 +8,8 @@ from django.http.multipartparser import MultiPartParser
 from .serializers import BlogSerializer,BlogGetSerializer,BlogDeleteSerializer
 from django.shortcuts import get_object_or_404
 from apps.profile.models import Profile
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 class BlogListWiew(generics.ListAPIView):
     def get_queryset(self):
         return Blog.objects.all()
@@ -18,11 +20,22 @@ class BlogListWiew(generics.ListAPIView):
 
 class BlogProfileListWiew(generics.ListAPIView):
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request,page, *args, **kwargs):
         user = request.user.id
         queryset =  Blog.objects.filter(user=user)
-        serializer = BlogGetSerializer(queryset, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        paginator = Paginator(queryset, 10)
+        try:
+            items = paginator.page(page)
+        except PageNotAnInteger:
+            items = paginator.page(1)
+        except EmptyPage:
+            items = paginator.page(paginator.num_pages)
+
+        serializer = BlogGetSerializer(items, many=True)
+        return Response({
+            "length":queryset.count(),
+            "data":serializer.data
+        }, status=status.HTTP_200_OK)
 
 
 class BlogCreateWiew(generics.CreateAPIView):
@@ -109,3 +122,11 @@ class BlogHomeWiew(APIView):
         queryset = self.get_queryset()
         serializer = self.serializer_class(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+class BlogDetailsWiew(generics.CreateAPIView):
+
+    def post(self, request):
+        uuid = request.data.get('uuid')
+        blog_instance = get_object_or_404(Blog, uuid=uuid)
+        serializer = BlogGetSerializer(blog_instance)
+        return Response(serializer.data)

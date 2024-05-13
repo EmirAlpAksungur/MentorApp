@@ -31,10 +31,9 @@ const AppRouter: React.FC = () => {
             <Route path="community" element={<Community />} />
             <Route path="chat" element={<Chat />} />
             <Route path="blog" element={<BlogContainer />}>
-              <Route path="home" element={<BlogHome />} />
-              <Route path="explore" element={<BlogExplore />} />
-              <Route path="profile" element={<BlogProfile />} />
-              <Route path=":blog-id" element={<BlogHome />} />
+              <Route path="home/*" element={<BlogHome />} />
+              <Route path="explore/*" element={<BlogExplore />} />
+              <Route path="profile/*" element={<BlogProfile />} />
             </Route>
 
             <Route path="download" element={<Download />} />

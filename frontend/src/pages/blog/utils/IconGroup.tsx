@@ -22,19 +22,19 @@ const Main: React.FC<ElementType> = ({ likes, dislikes, views, uuid }) => {
   const token = useAppSelector((state: RootState) => state?.auth?.token);
 
   const isLiked = async () => {
-    if (likes.includes(userId)) {
-      setLikeCount(likes.length - 1);
+    if (likes?.includes(userId)) {
+      setLikeCount(likes?.length - 1);
       setLike(1);
     } else {
-      setLikeCount(likes.length);
+      setLikeCount(likes?.length);
     }
   };
   const isDisliked = async () => {
-    if (dislikes.includes(userId)) {
-      setDislikeCount(dislikes.length - 1);
+    if (dislikes?.includes(userId)) {
+      setDislikeCount(dislikes?.length - 1);
       setLike(-1);
     } else {
-      setDislikeCount(dislikes.length);
+      setDislikeCount(dislikes?.length);
     }
   };
 
@@ -45,11 +45,11 @@ const Main: React.FC<ElementType> = ({ likes, dislikes, views, uuid }) => {
   return (
     <Grid
       container
-      className="blog-container__body__accordion__header__details__container__icon-group"
+      className="blog-container__body__header__details__container__icon-group"
     >
       <Grid item xs={4}>
         <IconButton
-          className="blog-container__body__accordion__header__details__container__icon-group__btn"
+          className="blog-container__body__header__details__container__icon-group__btn"
           onClick={(event) => {
             event.stopPropagation();
             setLike((prev) => {
@@ -87,7 +87,7 @@ const Main: React.FC<ElementType> = ({ likes, dislikes, views, uuid }) => {
       </Grid>
       <Grid item xs={4}>
         <IconButton
-          className="blog-container__body__accordion__header__details__container__icon-group__btn"
+          className="blog-container__body__header__details__container__icon-group__btn"
           onClick={(event) => {
             event.stopPropagation();
             setLike((prev) => {
@@ -126,11 +126,11 @@ const Main: React.FC<ElementType> = ({ likes, dislikes, views, uuid }) => {
       <Grid item xs={4}>
         <IconButton
           disabled
-          className="blog-container__body__accordion__header__details__container__icon-group__btn"
+          className="blog-container__body__header__details__container__icon-group__btn"
         >
           <RemoveRedEyeIcon fontSize="small" />
         </IconButton>
-        {views.length}
+        {views?.length}
       </Grid>
     </Grid>
   );

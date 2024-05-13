@@ -3,9 +3,9 @@ import { Grid } from "@mui/material";
 import { useAppSelector } from "../../hooks/redux";
 import { RootState } from "../../store/configureStore";
 
-import BlogBody from "./BlogBody";
+import BlogBody from "../../layout/blog/details/BlogBody";
 import BlogService from "../../services/api/blog";
-import { BlogType } from "./BlogBody";
+import { BlogType } from "../../layout/blog/details/BlogBody";
 const Main: React.FC = () => {
   const token = useAppSelector((state: RootState) => state.auth.token);
   const follows = useAppSelector(
@@ -31,7 +31,7 @@ const Main: React.FC = () => {
   }, []);
   return (
     <Grid container className="blog-container__body__home">
-      <BlogBody blogList={blogList} />
+      <BlogBody blogList={blogList} length={0} />
     </Grid>
   );
 };

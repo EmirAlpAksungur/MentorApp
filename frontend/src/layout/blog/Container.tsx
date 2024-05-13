@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+
 import { Outlet } from "react-router-dom";
 import { Grid, ButtonGroup, Button } from "@mui/material";
 import TopLike from "./toplists/TopLike";
 import TopWiew from "./toplists/TopWiew";
 import { routeToUrl } from "../../routers/utils";
 import "../../assets/pages/blog/blog.scss";
-
+import { MyDialog } from "../../components";
+import MainDetail from "./details/Main";
 const Main: React.FC = () => {
+  const location = useLocation();
+
+  console.log(location.pathname.split("/"));
   return (
     <Grid container className={"blog-container"}>
       <Grid
@@ -21,6 +27,7 @@ const Main: React.FC = () => {
           container
           justifyContent={"center"}
           className="blog-container__body"
+          id={"blog-container-scroll"}
         >
           <Grid item xs={9} className="blog-container__body__btn-group">
             <ButtonGroup
@@ -55,6 +62,15 @@ const Main: React.FC = () => {
       <Grid item lg={2} className={"blog-container__top-list"}>
         <TopWiew />
       </Grid>
+      <MyDialog
+        Element={MainDetail}
+        closeProtection={true}
+        Button={() => <></>}
+        defaultWH={[750, 600]}
+        defaultOpen={location.pathname.split("/").length > 3}
+        hideBackdrop={true}
+        uuid={location.pathname.split("/")?.[3]}
+      />
     </Grid>
   );
 };
