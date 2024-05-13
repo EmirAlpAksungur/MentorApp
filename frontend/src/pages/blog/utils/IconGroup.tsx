@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Grid, IconButton } from "@mui/material";
+import { Grid, IconButton, Tooltip } from "@mui/material";
 import { useAppSelector } from "../../../hooks/redux";
 import { RootState } from "../../../store/configureStore";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import BlogService from "../../../services/api/blog";
-
+import SendIcon from "@mui/icons-material/Send";
+import SaveIcon from "@mui/icons-material/Save";
 interface ElementType {
   likes: number[];
   dislikes: number[];
@@ -15,6 +16,7 @@ interface ElementType {
 }
 
 const Main: React.FC<ElementType> = ({ likes, dislikes, views, uuid }) => {
+  const [copy, setCopy] = useState<boolean>(false);
   const [like, setLike] = useState<number>(0);
   const [likeCount, setLikeCount] = useState<number>(0);
   const [dislikeCount, setDislikeCount] = useState<number>(0);
@@ -51,6 +53,7 @@ const Main: React.FC<ElementType> = ({ likes, dislikes, views, uuid }) => {
     <Grid
       container
       className="blog-container__body__header__details__container__icon-group"
+      columns={18}
     >
       <Grid item xs={4}>
         <IconButton
@@ -136,6 +139,42 @@ const Main: React.FC<ElementType> = ({ likes, dislikes, views, uuid }) => {
           <RemoveRedEyeIcon fontSize="small" />
         </IconButton>
         {views?.length}
+      </Grid>
+      <Grid item xs={3}>
+        <IconButton
+          className="blog-container__body__header__details__container__icon-group__btn"
+          onClick={() => {
+            //handle save
+          }}
+        >
+          <SaveIcon fontSize="small" />
+        </IconButton>
+      </Grid>
+      <Grid item xs={3}>
+        <Tooltip open={copy} title="coppied">
+          <IconButton
+            className="blog-container__body__header__details__container__icon-group__btn"
+            onClick={(event) => {
+              setCopy(true);
+              event.stopPropagation();
+              let path = window.location.pathname.split("/");
+              path[3] = uuid;
+              let urlStr = path.join("/");
+              const text = process.env.path + urlStr;
+              var textarea = document.createElement("textarea");
+              textarea.value = text;
+              document.body.appendChild(textarea);
+              textarea.select();
+              document.execCommand("copy");
+              document.body.removeChild(textarea);
+              setTimeout(() => {
+                setCopy(false);
+              }, 1000);
+            }}
+          >
+            <SendIcon fontSize="small" />
+          </IconButton>
+        </Tooltip>
       </Grid>
     </Grid>
   );

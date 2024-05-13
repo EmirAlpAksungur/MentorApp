@@ -6,6 +6,7 @@ module.exports = {
     plugins: [
         new webpack.DefinePlugin({
             'process.env.name': JSON.stringify('Prod'),
+            'process.env.path': JSON.stringify('http://localhost:3000')
         }),
     ],
 }

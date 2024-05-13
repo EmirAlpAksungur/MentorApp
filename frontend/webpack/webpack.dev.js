@@ -13,6 +13,7 @@ module.exports = {
         new ReactRefreshWebpackPlugin(),
         new webpack.DefinePlugin({
             'process.env.name': JSON.stringify('Dev'),
+            'process.env.path': JSON.stringify('http://localhost:8080'),
         }),
     ],
 }
