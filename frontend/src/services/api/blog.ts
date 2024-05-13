@@ -4,10 +4,6 @@ const create = (body: FormData, token: string) => {
   return instance.post("/blog/post/", body, configForm(token));
 };
 
-const getBlogList = (token: string) => {
-  return instance.get("/blog/get/", config(token));
-};
-
 const blogAddView = (body: { uuid: string }, token: string) => {
   return instance.post("/blog/add-view/", body, config(token));
 };
@@ -39,6 +35,18 @@ const getBlogProfileList = (token: string, pageNumber: number) => {
   return instance.get(`/blog/get-profiler/${pageNumber}/`, {
     ...config(token),
     cancelToken: cancelToken.token,
+  });
+};
+
+let cancelTokenGet: null | CancelTokenSource;
+const getBlogList = (token: string, pageNumber: number) => {
+  if (cancelTokenGet) {
+    cancelTokenGet.cancel();
+  }
+  cancelTokenGet = axios.CancelToken.source();
+  return instance.get(`/blog/get/${pageNumber}/`, {
+    ...config(token),
+    cancelToken: cancelTokenGet.token,
   });
 };
 

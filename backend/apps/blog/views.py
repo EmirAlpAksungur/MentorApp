@@ -13,10 +13,21 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 class BlogListWiew(generics.ListAPIView):
     def get_queryset(self):
         return Blog.objects.all()
-    def get(self, request, *args, **kwargs):
+    def get(self, request,page, *args, **kwargs):
         queryset = self.get_queryset()
-        serializer = BlogGetSerializer(queryset, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        paginator = Paginator(queryset, 10)
+        try:
+            items = paginator.page(page)
+        except PageNotAnInteger:
+            items = paginator.page(1)
+        except EmptyPage:
+            items = paginator.page(paginator.num_pages)
+
+        serializer = BlogGetSerializer(items, many=True)
+        return Response({
+            "length":queryset.count(),
+            "data":serializer.data
+        }, status=status.HTTP_200_OK)
 
 class BlogCreateWiew(generics.CreateAPIView):
 

@@ -13,7 +13,7 @@ from .views import (
 from django.urls.resolvers import URLPattern
 
 urlpatterns = [
-    path("get/", BlogListWiew.as_view(), name="blog-list"),
+    path("get/<int:page>/", BlogListWiew.as_view(), name="blog-list"),
     path("get-profiler/<int:page>/", BlogProfileListWiew.as_view(), name="blog-list-profile"),
     path("post/", BlogCreateWiew.as_view(), name="blog-create"),
     path('delete/<uuid:uuid>/', BlogDeleteView.as_view(), name='blog-delete'),
