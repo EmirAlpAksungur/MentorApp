@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from apps.location.models import City
 from apps.university.models import University
 from apps.skill.models import Skill
+from apps.blog.models import Blog
 from django.core.validators import MaxValueValidator, MinValueValidator ,FileExtensionValidator
 # Create your models here.
 
@@ -44,5 +45,5 @@ class Profile(models.Model):
     references =  models.ManyToManyField(References)
     likes = models.IntegerField(default = 0)
     dislikes = models.IntegerField(default = 0)
-    
+    savedBlog = models.ManyToManyField(Blog)
     

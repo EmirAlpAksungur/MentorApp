@@ -127,6 +127,16 @@
           &__icon-group {
             &__btn {
               @include btnOutlined;
+              &__saved {
+                @include themify($themes) {
+                  color: themed("success");
+                }
+                &:hover {
+                  @include themify($themes) {
+                    color: themed("success");
+                  }
+                }
+              }
             }
           }
           &__user-name {

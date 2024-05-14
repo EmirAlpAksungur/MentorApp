@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Grid, IconButton, Tooltip } from "@mui/material";
-import { useAppSelector } from "../../../hooks/redux";
+import { useAppSelector, useAppDispatch } from "../../../hooks/redux";
 import { RootState } from "../../../store/configureStore";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
@@ -8,21 +8,32 @@ import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import BlogService from "../../../services/api/blog";
 import SendIcon from "@mui/icons-material/Send";
 import SaveIcon from "@mui/icons-material/Save";
+import { saveBlog } from "../../../services/actions/profile";
 interface ElementType {
   likes: number[];
   dislikes: number[];
   views: number[];
   uuid: string;
+  title: string;
 }
 
-const Main: React.FC<ElementType> = ({ likes, dislikes, views, uuid }) => {
+const Main: React.FC<ElementType> = ({
+  likes,
+  dislikes,
+  views,
+  uuid,
+  title,
+}) => {
+  const dispatch = useAppDispatch();
   const [copy, setCopy] = useState<boolean>(false);
   const [like, setLike] = useState<number>(0);
   const [likeCount, setLikeCount] = useState<number>(0);
   const [dislikeCount, setDislikeCount] = useState<number>(0);
   const userId = useAppSelector((state: RootState) => state?.auth?.user?.user);
   const token = useAppSelector((state: RootState) => state?.auth?.token);
-
+  const saved = useAppSelector(
+    (state: RootState) => state.auth?.user?.savedBlog
+  );
   const isLiked = async () => {
     if (likes?.includes(userId)) {
       setLikeCount(likes?.length - 1);
@@ -95,7 +106,7 @@ const Main: React.FC<ElementType> = ({ likes, dislikes, views, uuid }) => {
       </Grid>
       <Grid item xs={4}>
         <IconButton
-          className="blog-container__body__header__details__container__icon-group__btn"
+          className={`blog-container__body__header__details__container__icon-group__btn`}
           onClick={(event) => {
             event.stopPropagation();
             setLike((prev) => {
@@ -142,9 +153,16 @@ const Main: React.FC<ElementType> = ({ likes, dislikes, views, uuid }) => {
       </Grid>
       <Grid item xs={3}>
         <IconButton
-          className="blog-container__body__header__details__container__icon-group__btn"
-          onClick={() => {
-            //handle save
+          className={`blog-container__body__header__details__container__icon-group__btn
+                    blog-container__body__header__details__container__icon-group__btn__${
+                      saved.find((e: any) => e.uuid === uuid) === undefined
+                        ? ""
+                        : "saved"
+                    }
+                    `}
+          onClick={(event) => {
+            event.stopPropagation();
+            dispatch(saveBlog(likes, dislikes, views, uuid, title));
           }}
         >
           <SaveIcon fontSize="small" />
@@ -155,8 +173,8 @@ const Main: React.FC<ElementType> = ({ likes, dislikes, views, uuid }) => {
           <IconButton
             className="blog-container__body__header__details__container__icon-group__btn"
             onClick={(event) => {
-              setCopy(true);
               event.stopPropagation();
+              setCopy(true);
               let path = window.location.pathname.split("/");
               path[3] = uuid;
               let urlStr = path.join("/");

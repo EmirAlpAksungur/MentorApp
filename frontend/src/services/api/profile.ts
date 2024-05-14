@@ -58,6 +58,10 @@ const follow = (body: { user_id: number }, token: string) => {
   return instance.post("/profile/follow/", body, configForm(token));
 };
 
+const saveBlog = (body: { uuid: string }, token: string) => {
+  return instance.post("/profile/save-blog/", body, configForm(token));
+};
+
 const ProfileService = {
   register,
   login,
@@ -68,6 +72,7 @@ const ProfileService = {
   isAuth,
   oneUnKnownSkillContent,
   follow,
+  saveBlog,
 };
 
 export default ProfileService;

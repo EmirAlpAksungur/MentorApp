@@ -173,3 +173,18 @@ class FollowView(APIView):
             profile.follows.add(receiver)
         
         return Response("Ok", status=status.HTTP_200_OK)
+
+
+class SaveBlogView(APIView):
+    def post(self, request):
+        sender = request.user.id
+        profile = Profile.objects.filter(user=sender).first()
+        blog_id = request.data.get('uuid')
+        saved_blog = list(profile.savedBlog.all()) if profile.savedBlog.exists() else []
+        blog_ids = [blog.uuid for blog in saved_blog]
+        if blog_id in blog_ids:
+            profile.savedBlog.remove(blog_id)
+        else:
+            profile.savedBlog.add(blog_id)
+        
+        return Response("Ok", status=status.HTTP_200_OK)

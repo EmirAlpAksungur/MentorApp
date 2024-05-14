@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.backends import ModelBackend
 from rest_framework.authtoken.models import Token
 from .models import Profile, UnKnownSkills
-
+from apps.blog.serializers import BlogTopSerializer
 class CustomRegisterSerializer(RegisterSerializer, serializers.ModelSerializer):
     class Meta:
         model = User  
@@ -36,6 +36,7 @@ class CustomLoginSerializer(serializers.Serializer):
         return data
 
 class UserDetailSerializer(serializers.ModelSerializer):
+    savedBlog = BlogTopSerializer(many=True, read_only=True)
     class Meta:
         model = Profile
         fields = "__all__"  

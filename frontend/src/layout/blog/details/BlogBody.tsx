@@ -97,6 +97,7 @@ const Main: React.FC<BlogBodyType> = ({ data }) => {
               dislikes={data?.dislikes}
               views={data?.views}
               uuid={data?.uuid}
+              title={data?.title}
             />
           </Grid>
         </Grid>
