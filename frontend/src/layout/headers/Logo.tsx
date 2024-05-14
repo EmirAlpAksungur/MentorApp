@@ -1,5 +1,5 @@
 import React from "react";
-import applogo from "../../assets/Img/applogo.png";
+import applogo from "../../assets/Img/Icon.png";
 import { routeToUrl } from "../../routers/utils";
 const Logo: React.FC = () => {
   return (
@@ -8,6 +8,8 @@ const Logo: React.FC = () => {
       onClick={() => routeToUrl("/")}
       style={{
         cursor: "pointer",
+        height: "40px",
+        marginRight: "12px",
       }}
     ></img>
   );
