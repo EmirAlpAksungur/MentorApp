@@ -1,5 +1,11 @@
 .unknownskill {
   &__text {
     font-size: 1.4rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  &__tooltip {
+    font-size: 1.1rem;
   }
 }

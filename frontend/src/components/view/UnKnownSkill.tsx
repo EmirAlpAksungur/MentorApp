@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Grid, Chip } from "@mui/material";
+import { Grid, Chip, Tooltip } from "@mui/material";
 import { useAppSelector, useAppDispatch } from "../../hooks/redux";
 import { RootState } from "../../store/configureStore";
 import ProfileService from "../../services/api/profile";
@@ -39,14 +39,21 @@ const Item: React.FC<ItemType> = React.memo(({ id }) => {
 
   return (
     text !== "" && (
-      <Grid container justifyContent={"space-between"} alignItems={"center"}>
-        <Grid item className={"unknownskill__text"}>
-          {text}
+      <Tooltip title={<span className="unknownskill__tooltip">{text}</span>}>
+        <Grid
+          container
+          justifyContent={"space-between"}
+          alignItems={"center"}
+          wrap="nowrap"
+        >
+          <Grid item xs className={"unknownskill__text"}>
+            {text}
+          </Grid>
+          <Grid item>
+            <ConnectionBar connection={level} />
+          </Grid>
         </Grid>
-        <Grid item>
-          <ConnectionBar connection={level} />
-        </Grid>
-      </Grid>
+      </Tooltip>
     )
   );
 });
