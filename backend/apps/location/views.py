@@ -3,7 +3,7 @@ from rest_framework.response import Response
 
 from .models import Country,City
 from apps.translations.models import Translations
-from .serializers import GetCountriesSerializer,GetCitySerializer
+from .serializers import GetCountriesSerializer,GetCitySerializer,GetCityDetailsSerializer
 
 class GetCountriesView(generics.ListAPIView):
     def post(self, request):
@@ -27,3 +27,14 @@ class GetCityView(generics.ListAPIView):
         cities = City.objects.filter(CountryId=request.data.get('CountryId'))
         serializer = GetCitySerializer(cities, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+
+class GetCityDetailsView(generics.ListAPIView):
+    def get(self,request,CityId,language_id):
+        queryset = City.objects.filter(CityId=CityId)
+        serializer = GetCityDetailsSerializer(queryset, many=True)
+        translation = Translations.objects.filter(TextContentId=serializer.data[0]["CountryId"]["TextContentId"]["TextContentId"], LanguageId=language_id).first()
+        print(translation.Translations)
+        serializer.data[0]["CountryId"]["TextContentId"]["translation"] = translation.Translations
+        return Response(serializer.data[0], status=status.HTTP_200_OK)

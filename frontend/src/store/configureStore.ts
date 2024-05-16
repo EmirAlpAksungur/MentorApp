@@ -56,7 +56,6 @@ const rootReducer = combineReducers<RootState>({
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-// Store
 export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
@@ -67,6 +66,5 @@ export const store = configureStore({
     }).concat(middleware),
 });
 
-// Persistor
 export const persistor = persistStore(store);
 export type AppDispatch = typeof store.dispatch;

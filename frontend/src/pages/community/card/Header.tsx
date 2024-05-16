@@ -4,6 +4,8 @@ import MainDetails from "./details/MainDetails";
 import { CardPropType } from "./Card";
 
 const Main: React.FC<CardPropType> = (props) => {
+  console.log(props);
+
   return (
     <div className="community-container__main-box__item__body__header">
       <Grid

@@ -15,6 +15,7 @@ const Main: React.FC<ElementProps> = (props) => {
         last_name={props?.user?.last_name}
         profession={props?.profession}
         receiver={props?.user?.id}
+        location={props?.location}
       />
       <Divider className="user-details-container__divider" />
       <DialogBody
