@@ -23,12 +23,6 @@
     @include themify($themes) {
       background: themed("bg-header");
     }
-    padding: 50px;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .sign-up-container {
-    padding: 15px;
+    justify-content: center;
   }
 }

@@ -20,8 +20,10 @@ import MyMenu from "./menu/Menu";
 import Form from "./form/Main";
 import Notification from "./notifications/Notification"
 import MyDialog from "./dialog/Main"
+import University from "./view/University";
+import Card from "./card/Card"
 export {
   ConnectionBar, ErrorComponent, NetworkCheck, Loadable, LoadingComponent, MySelect, MySlide, LocationSelect, UniversitySelect, LanguageSelect, CertificateSelect,
-  SkillSelect, UniversityContainer, LanguageContainer, CertificateContainer, MyMenu, MyTextField, ImageSelect, Form, Notification, MyDialog
-  , MyLongTextField
+  SkillSelect, UniversityContainer, University, LanguageContainer, CertificateContainer, MyMenu, MyTextField, ImageSelect, Form, Notification, MyDialog
+  , MyLongTextField, Card
 }

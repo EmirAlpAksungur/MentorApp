@@ -15,6 +15,7 @@ const Community = Loadable(lazy(() => import("../pages/community/Main")));
 const BlogHome = Loadable(lazy(() => import("../pages/blog/Home")));
 const BlogExplore = Loadable(lazy(() => import("../pages/blog/Explore")));
 const BlogProfile = Loadable(lazy(() => import("../pages/blog/Profile")));
+const Profile = Loadable(lazy(() => import("../pages/profile/main")));
 
 const BlogContainer = Loadable(lazy(() => import("../layout/blog/Container")));
 
@@ -35,7 +36,7 @@ const AppRouter: React.FC = () => {
               <Route path="explore/*" element={<BlogExplore />} />
               <Route path="profile/*" element={<BlogProfile />} />
             </Route>
-
+            <Route path="profile" element={<Profile />} />
             <Route path="download" element={<Download />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>

@@ -4,7 +4,12 @@ import { RootState } from "../../../store/configureStore";
 import { asyncLoadText } from "../../../services/actions/translations";
 import { TranslatedTextType } from "../../../services/types/translations";
 import { Divider, Button } from "@mui/material";
-import { ErrorComponent, Form, LoadingComponent } from "../../../components";
+import {
+  ErrorComponent,
+  Form,
+  Card,
+  LoadingComponent,
+} from "../../../components";
 import { SignUpFormType } from "../../../services/types/signUp";
 import {
   cleanSignUpForm,
@@ -19,6 +24,7 @@ const Main: React.FC = () => {
   const LanguageId = useAppSelector(
     (state: RootState) => state.languages.LanguageId
   );
+  const errors = useAppSelector((state: RootState) => state.signup.errors);
 
   const helperAsync = async () => {
     const result = await asyncLoadText(LanguageId, [5]);
@@ -32,39 +38,44 @@ const Main: React.FC = () => {
       dispatch(cleanSignUpForm());
     };
   }, [LanguageId]);
-
   return (
     <div className="sign-up-container">
-      <div className="authentication-box">
-        <ErrorComponent errMsg="error">
-          {text ? (
-            <>
-              <div className="authentication-box__header">
-                {text?.find((e) => e?.TextContentId === 5)?.Translations}
-              </div>
-              <Divider className="authentication-box__divider" />
-              <div className="authentication-box__body">
-                <Form
-                  reduxConnectionString={"signup"}
-                  formElements={SignUpFormType}
-                />
-
-                <Button
-                  variant="contained"
-                  className="authentication-box__body__btn"
-                  onClick={() => {
-                    dispatch(handleSubmit());
-                  }}
-                >
+      <Card
+        isError={Object.values(errors).some(
+          (value) => typeof value === "number"
+        )}
+      >
+        <div className="authentication-box">
+          <ErrorComponent errMsg="error">
+            {text ? (
+              <>
+                <div className="authentication-box__header">
                   {text?.find((e) => e?.TextContentId === 5)?.Translations}
-                </Button>
-              </div>
-            </>
-          ) : (
-            <LoadingComponent />
-          )}
-        </ErrorComponent>
-      </div>
+                </div>
+                <Divider className="authentication-box__divider" />
+                <div className="authentication-box__body">
+                  <Form
+                    reduxConnectionString={"signup"}
+                    formElements={SignUpFormType}
+                  />
+
+                  <Button
+                    variant="contained"
+                    className="authentication-box__body__btn"
+                    onClick={() => {
+                      dispatch(handleSubmit());
+                    }}
+                  >
+                    {text?.find((e) => e?.TextContentId === 5)?.Translations}
+                  </Button>
+                </div>
+              </>
+            ) : (
+              <LoadingComponent />
+            )}
+          </ErrorComponent>
+        </div>
+      </Card>
     </div>
   );
 };

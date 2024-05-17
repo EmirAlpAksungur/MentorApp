@@ -22,7 +22,6 @@
       }
       &__body {
         height: 100%;
-        @include boxBorder;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -34,6 +33,9 @@
           }
           &__btn {
             @include btnOutlined;
+            @include themify($themes) {
+              background-color: themed("card-bg");
+            }
           }
         }
         &__title {

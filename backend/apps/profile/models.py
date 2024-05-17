@@ -46,4 +46,5 @@ class Profile(models.Model):
     likes = models.IntegerField(default = 0)
     dislikes = models.IntegerField(default = 0)
     savedBlog = models.ManyToManyField(Blog)
+    #add date of birth
     

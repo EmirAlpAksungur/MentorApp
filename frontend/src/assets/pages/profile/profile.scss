@@ -1,0 +1,10 @@
+@import "../../palette/palette.scss";
+
+.profile-container {
+  width: 100%;
+  min-height: calc(100vh - 73px);
+  overflow: hidden !important;
+  @include themify($themes) {
+    background-color: themed("bg-header");
+  }
+}

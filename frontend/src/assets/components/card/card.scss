@@ -1,0 +1,15 @@
+@import "../../palette/palette.scss";
+.card-container {
+  border: 1px solid;
+  border-radius: 10px;
+  @include themify($themes) {
+    border-color: themed("border-header");
+    background-color: themed("card-bg");
+  }
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+.card-container-error {
+  @include themify($themes) {
+    border-color: themed("error");
+  }
+}

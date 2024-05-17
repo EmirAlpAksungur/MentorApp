@@ -1,8 +1,11 @@
-$light-bg: #ffffff;
+$light-bg: #f8f9fa;
 $dark-bg: #101418;
 
-$light-bg-header: #ffffff;
+$light-bg-header: #f8f9fa;
 $dark-bg-header: #101418;
+
+$light-card: #ffffff;
+$dark-card: #101418;
 
 $light-text: #000000;
 $dark-text: #ffffff;
@@ -71,6 +74,9 @@ $themes: (
     info: #4fc3f7,
     success: #81c784,
     grays: #adb5bd,
+
+    //card
+    card-bg: $light-card,
   ),
   dark: (
     //text
@@ -121,6 +127,9 @@ $themes: (
     info: #0288d1,
     success: #388e3c,
     grays: #6c757d,
+
+    //card
+    card-bg: lighten($dark-card, 3),
   ),
 ) !default;
 
