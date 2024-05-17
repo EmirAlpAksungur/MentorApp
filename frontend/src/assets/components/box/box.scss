@@ -1,9 +1,0 @@
-@import "../../palette/palette.scss";
-
-@mixin boxBorder() {
-  border: 1px solid;
-  border-radius: 10px;
-  @include themify($themes) {
-    border-color: themed("border-header");
-  }
-}
