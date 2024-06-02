@@ -21,7 +21,7 @@ const PrivateRouter: React.FC = () => {
       <FirstLogin />
     </Start>
   ) : (
-    <Navigate to="/home" />
+    <Navigate to="/login" />
   );
 };
 

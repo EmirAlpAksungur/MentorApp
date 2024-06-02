@@ -1,0 +1,30 @@
+$breakpoints: (
+  "xs": 0,
+  "sm": 576px,
+  "md": 768px,
+  "lg": 992px,
+  "xl": 1200px,
+  "xxl": 1400px,
+);
+
+$container-widths: (
+  "xs": 100%,
+  "sm": 540px,
+  "md": 720px,
+  "lg": 960px,
+  "xl": 1140px,
+  "xxl": 1320px,
+);
+
+@mixin container-widths {
+  @each $breakpoint, $width in $container-widths {
+    @if map-has-key($breakpoints, $breakpoint) {
+      @media (min-width: map-get($breakpoints, $breakpoint)) {
+        width: $width;
+        max-width: 100%;
+      }
+    } @else {
+      @warn "No value found for breakpoint: #{$breakpoint}";
+    }
+  }
+}

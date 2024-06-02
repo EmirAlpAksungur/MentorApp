@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Button, Grid } from "@mui/material";
 import { useAppSelector } from "../../../hooks/redux";
-import ThemeSelect from "../unauth/ThemeSelect";
-import LangSelect from "../unauth/LangSelect";
+import ThemeSelect from "./ThemeSelect";
+import LangSelect from "./LangSelect";
 import { routeToUrl } from "../../../routers/utils";
 import { RootState } from "../../../store/configureStore";
 import { asyncLoadText } from "../../../services/actions/translations";

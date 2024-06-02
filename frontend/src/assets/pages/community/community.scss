@@ -8,7 +8,7 @@
   min-height: calc(100vh - 73px);
   overflow: hidden !important;
   @include themify($themes) {
-    background-color: themed("bg-header");
+    background-color: themed("bg");
   }
   &__main-box {
     max-width: 1440px;
@@ -44,7 +44,7 @@
         }
         &__divider {
           @include themify($themes) {
-            background-color: themed("border-header");
+            background-color: themed("border");
           }
         }
         &__content {

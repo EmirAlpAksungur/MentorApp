@@ -1,18 +1,34 @@
-$light-bg: #f8f9fa;
-$dark-bg: #101418;
+//bg
+$light-bg: #fafafb;
+$dark-bg: #121212;
+$light-bg-secondary: #ffffff;
+$dark-bg-secondary: #1e1e1e;
+$dark-bg-warning: rgb(210, 100, 21);
+$light-bg-warning: rgb(242, 112, 19);
 
-$light-bg-header: #f8f9fa;
-$dark-bg-header: #101418;
-
-$light-card: #ffffff;
-$dark-card: #101418;
-
+//text
 $light-text: #000000;
 $dark-text: #ffffff;
 $light-reverse-text: #ffffff;
 $dark-reverse-text: #000000;
+$light-text-secondary: rgb(89, 89, 89);
+$dark-text-secondary: rgb(240, 240, 240);
+$dark-text-warning: rgb(210, 100, 21);
+$light-text-warning: rgb(242, 112, 19);
+$dark-text-error: rgb(209, 60, 49);
+$light-text-error: rgb(240, 65, 52);
 
-$dark-bg-pop-up: #3f3f3f;
+//border
+$light-border: #f0f0f0;
+$dark-border: #101418;
+$light-border-secondary: rgb(217, 217, 217);
+$dark-border-secondary: rgb(89, 89, 89);
+$light-border-warning: rgb(255, 176, 102);
+$dark-border-warning: rgb(125, 67, 25);
+
+//hover
+$light-bg-warning-hover: rgb(204, 82, 6);
+$dark-bg-warning-hover: rgb(233, 136, 58);
 
 $dark-selected: rgba(63, 81, 181, 0.16);
 $light-selected: rgba(63, 81, 181, 0.08);
@@ -22,38 +38,50 @@ $notification-warning: yellow;
 $notification-success: green;
 
 $msg-self: #248bf5;
+$dark-bg-pop-up: #3f3f3f;
 
 $themes: (
   light: (
     //text
     text: $light-text,
+    text-secondary: $light-text-secondary,
+    text-warning: $light-text-warning,
+    text-error: $light-text-error,
     // header
-    bg-header: $light-bg-header,
-    border-header: darken($light-bg-header, 20),
+    border: $light-border,
+    border-secondary: $light-border-secondary,
+    border-warning: $light-border-warning,
+    //  background
+    bg: $light-bg,
+    bg-secondary: $light-bg-secondary,
+    bg-warning: $light-bg-warning,
+
+    //hover
+    bg-warning-hover: $light-bg-warning-hover,
+    //selected Item
     // button
-    bg-btn-outlined: $light-bg-header,
-    text-btn-outlined: lighten($dark-bg-header, 20),
-    border-btn-outlined: lighten($dark-bg-header, 20),
-    bg-btn-hover-outlined: darken($light-bg-header, 10),
-    text-btn-hover-outlined: lighten($dark-bg-header, 10),
-    border-btn-hover-outlined: lighten($dark-bg-header, 10),
-    bg-btn-contained: lighten($dark-bg-header, 20),
-    text-btn-contained: $light-bg-header,
-    border-btn-contained: $light-bg-header,
-    bg-btn-hover-contained: lighten($dark-bg-header, 10),
-    text-btn-hover-contained: darken($light-bg-header, 10),
-    border-btn-hover-contained: darken($light-bg-header, 10),
-    bg-btn-text: $light-bg-header,
-    text-btn-text: lighten($dark-bg-header, 20),
-    bg-btn-hover-text: darken($light-bg-header, 10),
-    text-btn-hover-text: lighten($dark-bg-header, 10),
+    bg-btn-outlined: $light-bg-secondary,
+    text-btn-outlined: lighten($dark-bg-secondary, 20),
+    border-btn-outlined: lighten($dark-bg-secondary, 20),
+    bg-btn-hover-outlined: darken($light-bg-secondary, 10),
+    text-btn-hover-outlined: lighten($dark-bg-secondary, 10),
+    border-btn-hover-outlined: lighten($dark-bg-secondary, 10),
+    bg-btn-contained: lighten($dark-bg-secondary, 20),
+    text-btn-contained: $light-bg-secondary,
+    border-btn-contained: $light-bg-secondary,
+    bg-btn-hover-contained: lighten($dark-bg-secondary, 10),
+    text-btn-hover-contained: darken($light-bg-secondary, 10),
+    border-btn-hover-contained: darken($light-bg-secondary, 10),
+    bg-btn-text: $light-bg-secondary,
+    text-btn-text: lighten($dark-bg-secondary, 20),
+    bg-btn-hover-text: darken($light-bg-secondary, 10),
+    text-btn-hover-text: lighten($dark-bg-secondary, 10),
     //select
-    border-select: lighten($dark-bg-header, 20),
     text-select: $light-text,
-    icon-select: lighten($dark-bg-header, 20),
-    border-hover-select: $dark-bg-header,
+    icon-select: lighten($dark-bg-secondary, 20),
+    border-hover-select: $dark-bg-secondary,
     text-hover-select: $light-text,
-    icon-hover-select: $dark-bg-header,
+    icon-hover-select: $dark-bg-secondary,
     bg-item-hover-select: darken($light-bg, 4),
     bg-selected-select: $light-selected,
     bg-selected-hover-select: darken($light-selected, 4),
@@ -74,40 +102,50 @@ $themes: (
     info: #4fc3f7,
     success: #81c784,
     grays: #adb5bd,
-
-    //card
-    card-bg: $light-card,
   ),
   dark: (
     //text
     text: $dark-text,
+    text-secondary: $dark-text-secondary,
+    text-warning: $dark-text-warning,
+    text-error: $dark-text-error,
     // header
-    bg-header: $dark-bg-header,
-    border-header: lighten($dark-bg-header, 20),
+    border: $dark-border,
+    border-secondary: $dark-border-secondary,
+    border-warning: $dark-border-warning,
+    // main background
+    bg: $dark-bg,
+    bg-secondary: $dark-bg-secondary,
+    bg-warning: $dark-bg-warning,
+
+    //hover
+    bg-warning-hover: $dark-bg-warning-hover,
+
+    //selected Item
     // button
-    bg-btn-outlined: $dark-bg-header,
-    text-btn-outlined: darken($light-bg-header, 20),
-    border-btn-outlined: darken($light-bg-header, 20),
-    bg-btn-hover-outlined: lighten($dark-bg-header, 10),
-    text-btn-hover-outlined: darken($light-bg-header, 10),
-    border-btn-hover-outlined: darken($light-bg-header, 10),
-    bg-btn-contained: darken($light-bg-header, 20),
-    text-btn-contained: $dark-bg-header,
-    border-btn-contained: $dark-bg-header,
-    bg-btn-hover-contained: darken($light-bg-header, 10),
-    text-btn-hover-contained: lighten($dark-bg-header, 10),
-    border-btn-hover-contained: lighten($dark-bg-header, 10),
-    bg-btn-text: $dark-bg-header,
-    text-btn-text: darken($light-bg-header, 20),
-    bg-btn-hover-text: lighten($dark-bg-header, 10),
-    text-btn-hover-text: darken($light-bg-header, 10),
+    bg-btn-outlined: $dark-bg-secondary,
+    text-btn-outlined: darken($light-bg-secondary, 20),
+    border-btn-outlined: darken($light-bg-secondary, 20),
+    bg-btn-hover-outlined: lighten($dark-bg-secondary, 10),
+    text-btn-hover-outlined: darken($light-bg-secondary, 10),
+    border-btn-hover-outlined: darken($light-bg-secondary, 10),
+    bg-btn-contained: darken($light-bg-secondary, 20),
+    text-btn-contained: $dark-bg-secondary,
+    border-btn-contained: $dark-bg-secondary,
+    bg-btn-hover-contained: darken($light-bg-secondary, 10),
+    text-btn-hover-contained: lighten($dark-bg-secondary, 10),
+    border-btn-hover-contained: lighten($dark-bg-secondary, 10),
+    bg-btn-text: $dark-bg-secondary,
+    text-btn-text: darken($light-bg-secondary, 20),
+    bg-btn-hover-text: lighten($dark-bg-secondary, 10),
+    text-btn-hover-text: darken($light-bg-secondary, 10),
     //select
-    border-select: darken($light-bg-header, 20),
+    border-select: darken($light-bg-secondary, 20),
     text-select: $dark-text,
-    icon-select: darken($light-bg-header, 20),
-    border-hover-select: $light-bg-header,
+    icon-select: darken($light-bg-secondary, 20),
+    border-hover-select: $light-bg-secondary,
     text-hover-select: $dark-text,
-    icon-hover-select: $light-bg-header,
+    icon-hover-select: $light-bg-secondary,
     bg-item-hover-select: lighten($dark-bg-pop-up, 4),
     bg-selected-select: $dark-selected,
     bg-selected-hover-select: lighten($dark-selected, 4),
@@ -127,9 +165,6 @@ $themes: (
     info: #0288d1,
     success: #388e3c,
     grays: #6c757d,
-
-    //card
-    card-bg: lighten($dark-card, 3),
   ),
 ) !default;
 

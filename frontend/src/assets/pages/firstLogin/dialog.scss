@@ -2,7 +2,7 @@
 @import "../../components/button/btn.scss";
 .first-login-dialog {
   @include themify($themes) {
-    background: themed("bg-header");
+    background: themed("bg-secondary");
   }
   padding: 24px;
   display: flex;

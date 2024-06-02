@@ -25,18 +25,20 @@
 }
 
 @mixin btnContained {
+  transform: none;
   @include themify($themes) {
-    background-color: themed("bg-btn-contained");
-    border-color: themed("border-btn-contained");
-    color: themed("text-btn-contained");
+    background-color: themed("bg-warning");
+    border-color: themed("bg-warning");
+    color: $dark-text;
     @include textOptions();
   }
   &:hover {
     @include themify($themes) {
-      background-color: themed("bg-btn-hover-contained");
-      border-color: themed("border-btn-hover-contained");
-      color: themed("text-btn-hover-contained");
+      background-color: themed("bg-warning-hover");
+      border-color: themed("bg-warning-hover");
     }
+    transform: scale(1.05);
+    translate: 0px;
   }
 }
 

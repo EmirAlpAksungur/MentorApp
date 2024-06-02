@@ -5,7 +5,7 @@ import InputsBody from "./InputsBody";
 
 const Form: React.FC<FormType> = ({ reduxConnectionString, formElements }) => {
   return (
-    <Grid container columnSpacing={2} rowSpacing={2} className="form-container">
+    <Grid container columnSpacing={3} rowSpacing={3} className="form-container">
       {Object.values(formElements).map((element, index) => {
         return (
           <InputsBody

@@ -5,7 +5,7 @@
   width: 100%;
   min-height: calc(100vh - 73px);
   @include themify($themes) {
-    background-color: themed("bg-header");
+    background-color: themed("bg");
   }
   &__chat-list {
     display: inline-block;
@@ -13,14 +13,14 @@
     border-right: 1px solid;
     width: 100%;
     @include themify($themes) {
-      border-color: themed("border-header");
+      border-color: themed("border");
     }
     &__search {
       padding: 16px 32px;
     }
     &__divider {
       @include themify($themes) {
-        background-color: themed("border-header");
+        background-color: themed("border");
       }
       width: calc(100% - 32px);
       margin: auto;
@@ -29,12 +29,12 @@
       padding: 16px;
       @include themify($themes) {
         border-bottom: 1px solid;
-        border-color: themed("border-header");
+        border-color: themed("border");
       }
       cursor: pointer;
       &:hover {
         @include themify($themes) {
-          background-color: darken(themed("bg-header"), 2);
+          background-color: darken(themed("bg-secondary"), 2);
         }
       }
       &__name {
@@ -52,7 +52,7 @@
     width: 100%;
     &__divider {
       @include themify($themes) {
-        background-color: themed("border-header");
+        background-color: themed("border");
       }
     }
     &__msg-box {
@@ -82,7 +82,7 @@
           color: themed("text");
         }
         @include themify($themes) {
-          background-color: lighten(themed("border-header"), 7);
+          background-color: lighten(themed("border"), 7);
           color: themed(text);
         }
       }

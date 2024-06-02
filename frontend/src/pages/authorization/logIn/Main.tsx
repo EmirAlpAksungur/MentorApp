@@ -2,31 +2,38 @@ import React, { useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "../../../hooks/redux";
 import { RootState } from "../../../store/configureStore";
 import { asyncLoadText } from "../../../services/actions/translations";
-import { TranslatedTextType } from "../../../services/types/translations";
-import { Divider, Button } from "@mui/material";
+import { Button } from "@mui/material";
 import {
   Form,
   Card,
   LoadingComponent,
   ErrorComponent,
+  MyCheckbox,
 } from "../../../components";
 import { LoginFormType } from "../../../services/types/login";
 import { handleSubmit, cleanLoginForm } from "../../../services/actions/login";
-import "../../../assets/pages/authentication/signUp.scss";
+import "../../../assets/pages/authentication/authentication.scss";
 import "../../../assets/components/box/authentication.scss";
-
+import { TextListClass } from "../../../utils/textContent";
+import history from "../../../routers/history";
 const Main: React.FC = () => {
   const dispatch = useAppDispatch();
-  const [text, setText] = useState<TranslatedTextType[] | null>(null);
+  const [text, setText] = useState<TextListClass | null>(null);
+  const [value, setValue] = useState<boolean>(false);
   const LanguageId = useAppSelector(
     (state: RootState) => state.languages.LanguageId
   );
   const errors = useAppSelector((state: RootState) => state.login.errors);
 
-  const helperAsync = async () => {
-    const result = await asyncLoadText(LanguageId, [4]);
-    Array.isArray(result) && setText(result);
+  const handleKeepSignIn = (val: boolean) => {
+    setValue(val);
   };
+
+  const helperAsync = async () => {
+    const result = await asyncLoadText(LanguageId, [4, 1519, 1520, 1521]);
+    Array.isArray(result) && setText(new TextListClass(result));
+  };
+
   useEffect(() => {
     helperAsync();
     return () => {
@@ -35,44 +42,60 @@ const Main: React.FC = () => {
   }, [LanguageId]);
 
   return (
-    <div className="sign-up-container">
-      <Card
-        isError={Object.values(errors).some(
-          (value) => typeof value === "number"
-        )}
-      >
-        <div className="authentication-box">
-          <ErrorComponent errMsg="error">
-            {text ? (
-              <>
-                <div className="authentication-box__header">
-                  {text.find((e) => e?.TextContentId === 4)?.Translations}
+    <Card
+      isError={Object.values(errors).some((value) => typeof value === "number")}
+    >
+      <div className="authentication-box">
+        <ErrorComponent errMsg="error">
+          {text ? (
+            <>
+              <div className="authentication-box__header">
+                <div className="authentication-box__header__left">
+                  {text?.getText(4)}
                 </div>
-                <Divider className="authentication-box__divider" />
-                <div className="authentication-box__body">
-                  <Form
-                    reduxConnectionString={"login"}
-                    formElements={LoginFormType}
-                  />
-
-                  <Button
-                    variant="contained"
-                    className="authentication-box__body__btn"
-                    onClick={() => {
-                      dispatch(handleSubmit());
-                    }}
-                  >
-                    {text.find((e) => e?.TextContentId === 4)?.Translations}
-                  </Button>
+                <div
+                  className="authentication-box__header__right"
+                  onClick={() => {
+                    history.push("/sign-up");
+                  }}
+                >
+                  {text?.getText(1519)}
                 </div>
-              </>
-            ) : (
-              <LoadingComponent />
-            )}
-          </ErrorComponent>
-        </div>
-      </Card>
-    </div>
+              </div>
+              <div className="authentication-box__body">
+                <Form
+                  reduxConnectionString={"login"}
+                  formElements={LoginFormType}
+                />
+                <div className="authentication-box__body__details">
+                  <div className="authentication-box__body__details__left">
+                    <MyCheckbox
+                      label={text?.getText(1520)}
+                      value={value}
+                      handleChangeFunc={handleKeepSignIn}
+                    />
+                  </div>
+                  <div className="authentication-box__body__details__right">
+                    {text?.getText(1521)}
+                  </div>
+                </div>
+                <Button
+                  variant="contained"
+                  className="authentication-box__body__btn"
+                  onClick={() => {
+                    dispatch(handleSubmit());
+                  }}
+                >
+                  {text?.getText(4)}
+                </Button>
+              </div>
+            </>
+          ) : (
+            <LoadingComponent />
+          )}
+        </ErrorComponent>
+      </div>
+    </Card>
   );
 };
 

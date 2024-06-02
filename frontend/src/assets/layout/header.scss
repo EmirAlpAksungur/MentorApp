@@ -6,8 +6,8 @@
   border-bottom: 1px solid;
   overflow: hidden;
   @include themify($themes) {
-    background-color: themed("bg-header");
-    border-color: themed("border-header");
+    background-color: themed("bg-secondary");
+    border-color: themed("border");
   }
   &__left {
     display: flex;

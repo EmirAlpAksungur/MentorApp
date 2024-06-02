@@ -12,7 +12,6 @@ export const config = (token: string) => {
   return {
     headers: {
       "Content-Type": "application/json",
-
       Authorization: `Token ${token}`,
     },
   };

@@ -1,12 +1,12 @@
 @import "../../palette/palette.scss";
 .card-container {
   border: 1px solid;
-  border-radius: 10px;
+  border-radius: 4px;
   @include themify($themes) {
-    border-color: themed("border-header");
-    background-color: themed("card-bg");
+    border-color: themed("border");
+    background-color: themed("bg-secondary");
   }
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 4px;
 }
 .card-container-error {
   @include themify($themes) {

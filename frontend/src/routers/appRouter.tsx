@@ -3,10 +3,11 @@ import { Routes, Route, Outlet } from "react-router-dom";
 import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
 import { Loadable } from "../components";
 import PrivateRouter from "./privateRouter";
-import Start from "../layout/Main";
 import history from "./history";
+const AuthLayout = Loadable(
+  lazy(() => import("../layout/authentication/Main"))
+);
 
-const Home = Loadable(lazy(() => import("../pages/Main")));
 const LogIn = Loadable(lazy(() => import("../pages/authorization/logIn/Main")));
 const SignUp = Loadable(
   lazy(() => import("../pages/authorization/signUp/Main"))
@@ -43,15 +44,13 @@ const AppRouter: React.FC = () => {
           <Route
             path="/"
             element={
-              <Start>
+              <AuthLayout>
                 <Outlet />
-              </Start>
+              </AuthLayout>
             }
           >
-            <Route path="home" element={<Home />} />
-            <Route path="log-in" element={<LogIn />} />
+            <Route path="login" element={<LogIn />} />
             <Route path="sign-up" element={<SignUp />} />
-            <Route path="download" element={<Download />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>
         </Routes>

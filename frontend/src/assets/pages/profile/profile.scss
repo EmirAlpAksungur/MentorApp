@@ -5,6 +5,6 @@
   min-height: calc(100vh - 73px);
   overflow: hidden !important;
   @include themify($themes) {
-    background-color: themed("bg-header");
+    background-color: themed("bg-secondary");
   }
 }

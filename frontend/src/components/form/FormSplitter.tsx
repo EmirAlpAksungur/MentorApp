@@ -10,6 +10,7 @@ import {
   LanguageContainer,
   CertificateContainer,
   SkillSelect,
+  Password,
 } from "../index";
 import { LanguageElementType } from "../inputs/containers/LanguageContainer";
 import { CertificateElementType } from "../inputs/containers/CertificateContainer";
@@ -20,6 +21,7 @@ const FormSplitter: React.FC<FormSplitterType> = ({
   reduxConnectionString,
   reduxKey,
   type,
+  error,
 }) => {
   const dispatch = useAppDispatch();
   const value = useAppSelector(
@@ -37,6 +39,7 @@ const FormSplitter: React.FC<FormSplitterType> = ({
           handleChangeFunc={(val: string) => {
             helperUpdateValue(val);
           }}
+          error={error}
         />
       );
     case "long-string":
@@ -50,12 +53,12 @@ const FormSplitter: React.FC<FormSplitterType> = ({
       );
     case "password":
       return (
-        <MyTextField
+        <Password
           value={value}
           handleChangeFunc={(val: string) => {
             helperUpdateValue(val);
           }}
-          type="password"
+          error={error}
         />
       );
     case "image":

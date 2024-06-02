@@ -4,27 +4,59 @@
   .MuiInputBase-root {
     padding-right: 0px;
   }
+  .Mui-focused {
+    & fieldset {
+      @include themify($themes) {
+        box-shadow: 0px 0px 0px 2px
+          rgba($color: themed("border-warning"), $alpha: 0.2);
+        border: 1px solid themed("border-warning") !important;
+      }
+    }
+  }
   & fieldset {
     @include themify($themes) {
-      border-color: themed("border-select");
+      border-color: themed("border-secondary");
     }
   }
   &:hover {
     & fieldset {
       @include themify($themes) {
-        border-color: themed("border-hover-select");
+        border-color: themed("border-warning");
       }
     }
   }
   input {
     @include themify($themes) {
-      color: themed("text-select");
+      color: themed("text-secondary");
       font-size: 1.2rem;
     }
   }
   .end-adorment {
     @include themify($themes) {
-      color: themed("border-header");
+      color: themed("text-secondary");
+    }
+  }
+}
+.my-text-field-error {
+  & fieldset {
+    @include themify($themes) {
+      border-color: themed("text-error") !important;
+    }
+  }
+  &:hover {
+    & fieldset {
+      @include themify($themes) {
+        border-color: themed("error") !important;
+      }
+    }
+  }
+  .Mui-focused {
+    & fieldset {
+      @include themify($themes) {
+        box-shadow: 0px 0px 0px 2px
+          rgba($color: themed("text-error"), $alpha: 0.2) !important;
+        border: 1px solid themed("text-error") !important;
+      }
     }
   }
 }

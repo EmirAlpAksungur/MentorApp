@@ -1,0 +1,83 @@
+@import "../../palette/palette.scss";
+@import "../../components/container.scss";
+@mixin background-img() {
+  transform: inherit;
+  position: absolute;
+  bottom: 0;
+  filter: blur(18px);
+}
+.authentication-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  @include themify($themes) {
+    color: themed("text");
+    background-color: themed("bg");
+  }
+  &__header {
+    padding: 24px;
+    padding-left: 24px;
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  &__left-img {
+    @include background-img;
+  }
+  &__right-img {
+    @include background-img;
+    right: 0;
+  }
+  &__body {
+    z-index: 1;
+    flex: 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 15%;
+    flex-direction: row-reverse;
+  }
+
+  &__footer {
+    @include container-widths;
+    position: fixed;
+    z-index: 1;
+    bottom: 0;
+    padding: 12px;
+    display: flex;
+    align-self: center;
+    justify-content: space-between;
+    &__left {
+      .regex-1517 {
+        cursor: pointer;
+        @include themify($themes) {
+          color: themed("text-warning");
+        }
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+    &__right {
+      display: flex;
+      gap: 24px;
+      &__item {
+        cursor: pointer;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .authentication-container {
+    @include themify($themes) {
+      background: themed("bg-secondary");
+    }
+    justify-content: center;
+  }
+}

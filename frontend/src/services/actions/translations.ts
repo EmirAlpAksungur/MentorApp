@@ -10,6 +10,8 @@ export const asyncLoadText = async (
       LanguageId,
       TextContentIds,
     });
+    console.log(res);
+
     return Promise.resolve(res.data);
   } catch (err) {
     console.log(err);

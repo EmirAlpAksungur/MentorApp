@@ -49,6 +49,7 @@ const InputsBody: React.FC<InputsBodyType> = ({
         reduxConnectionString={reduxConnectionString}
         reduxKey={formElement.reduxKey}
         type={formElement.type}
+        error={text.find((e) => e?.TextContentId === errorMsg) ? true : false}
       />
       <InputLabel className="form-container__error">
         {text.find((e) => e?.TextContentId === errorMsg)?.Translations}

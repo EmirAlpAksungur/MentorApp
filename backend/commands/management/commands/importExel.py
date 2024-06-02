@@ -18,9 +18,10 @@ class ExcelImporter:
 
     def import_data(self):
         excel_data = pd.read_excel(self.excel_file)
-
+        excel_data = excel_data.loc[:, ~excel_data.columns.str.contains('^Unnamed')]
         for index, row in excel_data.iterrows():
             model_instance = self.model_class()
+
             for column in excel_data.columns:
                 if isinstance(self.model_class._meta.get_field(column), ForeignKey):
                     related_model = self.model_class._meta.get_field(column).remote_field.model

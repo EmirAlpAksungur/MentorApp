@@ -3,15 +3,17 @@
 .form-container {
   &__label {
     @include themify($themes) {
-      color: themed("text");
+      color: themed("text-secondary");
     }
-    margin-bottom: 4px;
+    margin-bottom: 8px;
     font-size: 1.4rem !important;
-    min-height: 2.1rem;
+    font-weight: 400;
   }
   &__error {
-    font-size: 0.8rem !important;
-    color: red !important;
-    position: absolute !important;
+    margin-top: 4px;
+    font-size: 1.2rem !important;
+    @include themify($themes) {
+      color: themed("text-error");
+    }
   }
 }

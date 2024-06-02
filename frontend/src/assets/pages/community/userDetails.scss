@@ -4,12 +4,12 @@
   width: 100%;
   height: 100%;
   @include themify($themes) {
-    background-color: themed("bg-header");
+    background-color: themed("bg-secondary");
     color: themed("text");
   }
   &__divider {
     @include themify($themes) {
-      background-color: themed("border-header");
+      background-color: themed("border");
     }
   }
   &__header {

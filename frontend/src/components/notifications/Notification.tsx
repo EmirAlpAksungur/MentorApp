@@ -5,7 +5,6 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useAppSelector, useAppDispatch } from "../../hooks/redux";
 import { RootState } from "../../store/configureStore";
 import { changeNotification } from "../../services/actions/notification";
-import { TranslatedTextType } from "../../services/types/translations";
 import { asyncLoadText } from "../../services/actions/translations";
 
 import "../../assets/components/notification/notification.scss";
@@ -24,10 +23,8 @@ export default function SimpleSnackbar() {
   const LanguageId = useAppSelector(
     (state: RootState) => state.languages.LanguageId
   );
-  console.log(text);
 
   const helperAsync = async () => {
-    console.log(NotificationText);
     if (typeof NotificationText === "number" && !isNaN(NotificationText)) {
       const result = await asyncLoadText(LanguageId, [NotificationText]);
       Array.isArray(result) && setText(result?.[0]?.Translations);

@@ -8,13 +8,13 @@ export interface SignUpType {
 export const SignUpFormType = [
   {
     reduxKey: "first_name",
-    size: 6,
+    size: 12,
     type: "string",
     labelId: 10,
   },
   {
     reduxKey: "last_name",
-    size: 6,
+    size: 12,
     type: "string",
     labelId: 11,
   },

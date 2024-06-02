@@ -9,7 +9,7 @@
     padding: 12px;
     border-bottom: 1px solid;
     @include themify($themes) {
-      border-color: themed("border-header");
+      border-color: themed("border");
     }
   }
   &__item {
@@ -17,7 +17,7 @@
     padding: 8px;
     cursor: pointer;
     @include themify($themes) {
-      border-color: themed("border-header");
+      border-color: themed("border");
     }
     &:nth-child(odd) {
       @include themify($themes) {
@@ -26,7 +26,7 @@
     }
     &:hover {
       @include themify($themes) {
-        background-color: themed("border-header");
+        background-color: themed("border");
       }
     }
     &__like {

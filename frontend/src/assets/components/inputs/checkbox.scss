@@ -1,0 +1,32 @@
+@import "../../palette/palette.scss";
+.check-box {
+  .MuiCheckbox-root {
+    border-radius: 0px;
+    @include themify($themes) {
+      color: themed("text-secondary");
+    }
+    &:hover {
+      @include themify($themes) {
+        background-color: rgba(themed("text-warning"), 0.2) !important;
+      }
+    }
+  }
+  svg {
+    width: 18.5px;
+    height: 18.5px;
+  }
+  .MuiTypography-root {
+    font-size: 1.4rem;
+    @include themify($themes) {
+      color: themed("text-secondary");
+    }
+  }
+}
+
+.check-box-checked {
+  .MuiCheckbox-root {
+    @include themify($themes) {
+      color: themed("text-warning");
+    }
+  }
+}
