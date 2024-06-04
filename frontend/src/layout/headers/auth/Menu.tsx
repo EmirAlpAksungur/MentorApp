@@ -107,7 +107,6 @@ const Main: React.FC = () => {
         className={"app-header__mobile-menu__menu-item"}
         onClick={() => {
           dispatch(logOut());
-          routeToUrl("/home");
         }}
       >
         {text.find((e) => e?.TextContentId === 26)?.Translations}

@@ -86,7 +86,7 @@ const Main: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                     variant="contained"
                     className="authentication-box__body__btn"
                     onClick={() => {
-                      dispatch(handleSubmit());
+                      dispatch(handleSubmit(value));
                     }}
                   >
                     {text?.getText(4)}

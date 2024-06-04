@@ -40,7 +40,7 @@ const middleware: Middleware[] = [thunk, logger];
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["auth"],
+  whitelist: ["languages"],
 };
 
 const rootReducer = combineReducers<RootState>({

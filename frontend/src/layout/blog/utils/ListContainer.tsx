@@ -21,7 +21,7 @@ const ListContainer: React.FC<ListContainerProps> = (props) => {
       <Grid item xs={12} className="list__header">
         {props.title}
       </Grid>
-      {props.data.map((e: ListItemProps) => (
+      {props?.data?.map((e: ListItemProps) => (
         <ListItem {...e} />
       ))}
     </Grid>

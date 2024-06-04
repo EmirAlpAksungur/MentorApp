@@ -1,6 +1,7 @@
 import { LOG_OUT } from "../types/redux";
 import { RootState, AppDispatch } from "../../store/configureStore";
 import ProfileService from "../api/profile";
+import { routeToUrl } from "../../routers/utils";
 export const logOut =
   () => async (dispatch: AppDispatch, getState: () => RootState) => {
     try {
@@ -9,6 +10,8 @@ export const logOut =
       dispatch({
         type: LOG_OUT,
       });
+      localStorage.removeItem("token");
+      routeToUrl("/");
     } catch (err) {
       console.log(err);
     }

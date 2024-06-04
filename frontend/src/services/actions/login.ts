@@ -33,15 +33,22 @@ export const loadUser =
     }
   };
 
+export const addToken =
+  (payload: string) =>
+  async (dispatch: AppDispatch, getState: () => RootState) => {
+    dispatch({
+      type: LOGIN_SUCCESS,
+      payload,
+    });
+    return true;
+  };
 export const logIn = (values: LoginType) => async (dispatch: AppDispatch) => {
   try {
     let res = await ProfileService.login(values);
     dispatch(loadUser(res.data.key));
-    dispatch({
-      type: LOGIN_SUCCESS,
-      payload: res.data.key,
-    });
+    dispatch(addToken(res.data.key));
     history.push("/");
+    return Promise.resolve(res.data.key);
   } catch (err: any) {
     dispatch(
       changeNotification({
@@ -49,15 +56,16 @@ export const logIn = (values: LoginType) => async (dispatch: AppDispatch) => {
         NotificationText: parseInt(err.response.data.msg_code[0]),
       })
     );
+    return Promise.resolve(null);
   }
 };
+
 export const checkIsAuth =
-  () => async (dispatch: AppDispatch, getState: () => RootState) => {
+  (token: string) =>
+  async (dispatch: AppDispatch, getState: () => RootState) => {
     try {
-      const token = getState().auth.token;
-      if (token) {
-        await ProfileService.isAuth(token);
-      }
+      await ProfileService.isAuth(token);
+      return true;
     } catch (err: any) {
       dispatch(
         changeNotification({
@@ -68,18 +76,22 @@ export const checkIsAuth =
       dispatch({
         type: CLEAN_AUTH,
       });
+      localStorage.removeItem("token");
+      return Promise.reject(false);
     }
   };
 
 export const handleSubmit =
-  () => async (dispatch: AppDispatch, getState: () => RootState) => {
+  (keepLoggedIn: boolean) =>
+  async (dispatch: AppDispatch, getState: () => RootState) => {
     const values = getState().login.values;
     try {
       await validationSchema.validate(values, {
         abortEarly: false,
         strict: false,
       });
-      dispatch(logIn(values));
+      let token = await dispatch(logIn(values));
+      token && keepLoggedIn && localStorage.setItem("token", token);
     } catch (err: any) {
       err.inner.forEach((error: any) => {
         dispatch({
