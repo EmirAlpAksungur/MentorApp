@@ -2,7 +2,7 @@
 
 @mixin popUpBackGroundColor() {
   @include themify($themes) {
-    background-color: themed("bg-pop-up");
-    color: themed("text");
+    background-color: themed("bg-secondary");
+    color: themed("text-secondary");
   }
 }

@@ -20,7 +20,11 @@ const Profile = Loadable(lazy(() => import("../pages/profile/main")));
 
 const BlogContainer = Loadable(lazy(() => import("../layout/blog/Container")));
 
-const PageNotFound = Loadable(lazy(() => import("../pages/errors/NotFound")));
+const PageNotFound = Loadable(lazy(() => import("../pages/utils/NotFound")));
+const PrivacyPolicy = Loadable(
+  lazy(() => import("../pages/utils/PrivacyPolicy"))
+);
+
 const Chat = Loadable(lazy(() => import("../pages/chat/Main")));
 const Download = Loadable(lazy(() => import("../pages/download/Main")));
 const AppRouter: React.FC = () => {
@@ -28,6 +32,45 @@ const AppRouter: React.FC = () => {
     <HistoryRouter history={history}>
       <Suspense fallback={<Outlet />}>
         <Routes>
+          <Route
+            path="/auth"
+            element={
+              <AuthLayout>
+                <Outlet />
+              </AuthLayout>
+            }
+          >
+            <Route
+              path=""
+              element={
+                <LogIn>
+                  <Outlet />
+                </LogIn>
+              }
+            >
+              <Route path="privacy-policy" element={<PrivacyPolicy />} />
+            </Route>
+            <Route
+              path="login"
+              element={
+                <LogIn>
+                  <Outlet />
+                </LogIn>
+              }
+            >
+              <Route path="privacy-policy" element={<PrivacyPolicy />} />
+            </Route>
+            <Route
+              path="sign-up"
+              element={
+                <SignUp>
+                  <Outlet />
+                </SignUp>
+              }
+            >
+              <Route path="privacy-policy" element={<PrivacyPolicy />} />
+            </Route>
+          </Route>
           <Route path="/" element={<PrivateRouter />}>
             <Route path="" element={<Community />} />
             <Route path="community" element={<Community />} />
@@ -39,18 +82,6 @@ const AppRouter: React.FC = () => {
             </Route>
             <Route path="profile" element={<Profile />} />
             <Route path="download" element={<Download />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Route>
-          <Route
-            path="/"
-            element={
-              <AuthLayout>
-                <Outlet />
-              </AuthLayout>
-            }
-          >
-            <Route path="login" element={<LogIn />} />
-            <Route path="sign-up" element={<SignUp />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>
         </Routes>

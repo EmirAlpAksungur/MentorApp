@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import $ from "jquery";
 import { useAppSelector } from "../../hooks/redux";
 import { RootState } from "../../store/configureStore";
 import { asyncLoadText } from "../../services/actions/translations";
 import { TextListClass } from "../../utils/textContent";
+import { routeToUrl } from "../../routers/utils";
 
 const Footer: React.FC = () => {
-  const [text, setText] = useState<TextListClass | null>(null);
-  const nestedTextElement: string | undefined = text?.getNestedText(1516);
-
+  const location = useLocation();
   const LanguageId = useAppSelector(
     (state: RootState) => state.languages.LanguageId
   );
+
+  const [text, setText] = useState<TextListClass | null>(null);
+  const nestedTextElement: string | undefined = text?.getNestedText(1516);
 
   const helperAsync = async () => {
     const result = await asyncLoadText(LanguageId, [1516, 1517, 1518]);
@@ -19,6 +22,7 @@ const Footer: React.FC = () => {
   };
 
   const handlePrivacyClick = () => {
+    routeToUrl(location.pathname + "/privacy-policy");
     console.log("handlePrivacyClick");
   };
   const handleTermsClick = () => {
@@ -41,7 +45,7 @@ const Footer: React.FC = () => {
     return () => {
       cleanOnClick();
     };
-  }, [nestedTextElement]);
+  }, [nestedTextElement, location]);
 
   if (nestedTextElement) {
     return (

@@ -1,7 +1,7 @@
 import React, { ReactNode, useEffect, useState } from "react";
 import HealtStatusService from "../../services/api/healtStatus";
 import Loader from "../loading/Loader";
-import NetworkError from "../../pages/errors/NetworkError";
+import NetworkError from "../../pages/utils/NetworkError";
 
 export interface NetworkCheckProps {
   children: ReactNode;

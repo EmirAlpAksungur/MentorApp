@@ -8,4 +8,4 @@ class Translations(models.Model):
     TranslationsId = models.IntegerField(primary_key = True)
     TextContentId = models.ForeignKey(TextContent, on_delete=models.CASCADE)
     LanguageId = models.ForeignKey(Languages, on_delete=models.CASCADE)
-    Translations = models.CharField(max_length = 200)
+    Translations = models.CharField(max_length = 400)

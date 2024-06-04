@@ -20,7 +20,7 @@ import history from "../../../routers/history";
 import "../../../assets/pages/authentication/authentication.scss";
 import "../../../assets/components/box/authentication.scss";
 import { TextListClass } from "../../../utils/textContent";
-const Main: React.FC = () => {
+const Main: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const dispatch = useAppDispatch();
   const [text, setText] = useState<TextListClass | null>(null);
   const LanguageId = useAppSelector(
@@ -67,47 +67,52 @@ const Main: React.FC = () => {
 
   if (nestedTextElement)
     return (
-      <Card
-        isError={Object.values(errors).some(
-          (value) => typeof value === "number"
-        )}
-      >
-        <div className="authentication-box">
-          <ErrorComponent errMsg="error">
-            <div className="authentication-box__header">
-              <div className="authentication-box__header__left">
-                {text?.getText(5)}
+      <>
+        <Card
+          isError={Object.values(errors).some(
+            (value) => typeof value === "number"
+          )}
+        >
+          <div className="authentication-box">
+            <ErrorComponent errMsg="error">
+              <div className="authentication-box__header">
+                <div className="authentication-box__header__left">
+                  {text?.getText(5)}
+                </div>
+                <div
+                  className="authentication-box__header__right"
+                  onClick={() => {
+                    history.push("/auth/login");
+                  }}
+                >
+                  {text?.getText(1522)}
+                </div>
               </div>
-              <div
-                className="authentication-box__header__right"
-                onClick={() => {
-                  history.push("/login");
-                }}
-              >
-                {text?.getText(1522)}
+              <div className="authentication-box__body">
+                <Form
+                  reduxConnectionString={"signup"}
+                  formElements={SignUpFormType}
+                />
+                <div className="authentication-box__body__details__sign-up">
+                  <span
+                    dangerouslySetInnerHTML={{ __html: nestedTextElement }}
+                  />
+                </div>
+                <Button
+                  variant="contained"
+                  className="authentication-box__body__btn"
+                  onClick={() => {
+                    dispatch(handleSubmit());
+                  }}
+                >
+                  {text?.getText(1524)}
+                </Button>
               </div>
-            </div>
-            <div className="authentication-box__body">
-              <Form
-                reduxConnectionString={"signup"}
-                formElements={SignUpFormType}
-              />
-              <div className="authentication-box__body__details__sign-up">
-                <span dangerouslySetInnerHTML={{ __html: nestedTextElement }} />
-              </div>
-              <Button
-                variant="contained"
-                className="authentication-box__body__btn"
-                onClick={() => {
-                  dispatch(handleSubmit());
-                }}
-              >
-                {text?.getText(1524)}
-              </Button>
-            </div>
-          </ErrorComponent>
-        </div>
-      </Card>
+            </ErrorComponent>
+          </div>
+        </Card>
+        {children}
+      </>
     );
   return <LoadingComponent />;
 };

@@ -7,9 +7,9 @@ export interface LanguagesStateType {
 }
 
 const initialState: LanguagesStateType = {
-  LanguageCode: "en-US",
-  LanguageId: 1,
-  LanguageName: "English",
+  LanguageCode: "tr-TR",
+  LanguageId: 2,
+  LanguageName: "Turkish",
 };
 
 export interface LanguageAction {
