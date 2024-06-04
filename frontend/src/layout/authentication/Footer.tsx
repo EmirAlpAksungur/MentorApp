@@ -23,10 +23,9 @@ const Footer: React.FC = () => {
 
   const handlePrivacyClick = () => {
     routeToUrl(location.pathname + "/privacy-policy");
-    console.log("handlePrivacyClick");
   };
   const handleTermsClick = () => {
-    console.log("handleTermsClick");
+    routeToUrl(location.pathname + "/terms-conditions");
   };
 
   const addOnClick = () => {

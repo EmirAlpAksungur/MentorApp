@@ -20,6 +20,7 @@ import history from "../../../routers/history";
 import "../../../assets/pages/authentication/authentication.scss";
 import "../../../assets/components/box/authentication.scss";
 import { TextListClass } from "../../../utils/textContent";
+import { routeToUrl } from "../../../routers/utils";
 const Main: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const dispatch = useAppDispatch();
   const [text, setText] = useState<TextListClass | null>(null);
@@ -42,17 +43,17 @@ const Main: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       dispatch(cleanSignUpForm());
     };
   }, [LanguageId]);
+
   const addOnClick = () => {
     $(`.regex-1517`).on("click", () => {
-      // handlePrivacyClick();
+      routeToUrl(location.pathname + "/privacy-policy");
     });
     $(`.regex-1523`).on("click", () => {
-      // handlePrivacyClick();
+      routeToUrl(location.pathname + "/terms-conditions");
     });
   };
 
   const cleanOnClick = () => {
-    $(`.regex-1517`).off("click");
     $(`.regex-1523`).off("click");
   };
   useEffect(() => {

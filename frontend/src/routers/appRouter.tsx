@@ -24,6 +24,7 @@ const PageNotFound = Loadable(lazy(() => import("../pages/utils/NotFound")));
 const PrivacyPolicy = Loadable(
   lazy(() => import("../pages/utils/PrivacyPolicy"))
 );
+const Terms = Loadable(lazy(() => import("../pages/utils/TermsAndConditions")));
 
 const Chat = Loadable(lazy(() => import("../pages/chat/Main")));
 const Download = Loadable(lazy(() => import("../pages/download/Main")));
@@ -49,6 +50,7 @@ const AppRouter: React.FC = () => {
               }
             >
               <Route path="privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="terms-conditions" element={<Terms />} />
             </Route>
             <Route
               path="login"
@@ -59,6 +61,7 @@ const AppRouter: React.FC = () => {
               }
             >
               <Route path="privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="terms-conditions" element={<Terms />} />
             </Route>
             <Route
               path="sign-up"
@@ -69,6 +72,7 @@ const AppRouter: React.FC = () => {
               }
             >
               <Route path="privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="terms-conditions" element={<Terms />} />
             </Route>
           </Route>
           <Route path="/" element={<PrivateRouter />}>
