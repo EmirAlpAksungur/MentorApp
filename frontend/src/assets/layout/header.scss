@@ -34,6 +34,12 @@
     &__unauth-profile__btn {
       @include btnText;
       @include btnRounded;
+      &__active {
+        @include themify($themes) {
+          background-color: transparent;
+          color: themed("text-warning");
+        }
+      }
     }
   }
   &__unauth-profile__btn-log-in {
@@ -46,6 +52,21 @@
   }
   &__mobile-menu {
     display: none;
+    &__menu-item {
+      width: 100px;
+      &__active {
+        @include themify($themes) {
+          background-color: themed("bg-warning-active");
+          color: themed("text-warning");
+        }
+        &:hover {
+          @include themify($themes) {
+            background-color: themed("bg-warning-active-hover") !important;
+            color: themed("text-warning") !important;
+          }
+        }
+      }
+    }
   }
 }
 

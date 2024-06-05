@@ -9,8 +9,6 @@ $light-bg-warning: rgb(242, 112, 19);
 //text
 $light-text: #000000;
 $dark-text: #ffffff;
-$light-reverse-text: #ffffff;
-$dark-reverse-text: #000000;
 $light-text-secondary: rgb(89, 89, 89);
 $dark-text-secondary: rgb(240, 240, 240);
 $dark-text-warning: rgb(210, 100, 21);
@@ -29,6 +27,11 @@ $dark-border-warning: rgb(125, 67, 25);
 //hover
 $light-bg-warning-hover: rgb(204, 82, 6);
 $dark-bg-warning-hover: rgb(233, 136, 58);
+
+$light-bg-warning-active: rgba(242, 112, 19, 0.08);
+$light-bg-warning-active-hover: rgba(210, 100, 21, 0.16);
+$dark-bg-warning-active: rgba(210, 100, 21, 0.16);
+$dark-bg-warning-active-hover: rgba(210, 100, 21, 0.25);
 
 $dark-selected: rgba(63, 81, 181, 0.16);
 $light-selected: rgba(63, 81, 181, 0.08);
@@ -66,6 +69,13 @@ $themes: (
       ),
     //hover
     bg-warning-hover: $light-bg-warning-hover,
+    //activ
+    bg-warning-active: $light-bg-warning-active,
+    //activ-hover
+    bg-warning-active-hover: $light-bg-warning-active-hover,
+    //shadow
+    box-shadow: inherit,
+    //-----------------
     //selected Item
     // button
     bg-btn-outlined: $light-bg-secondary,
@@ -136,7 +146,18 @@ $themes: (
       ),
     //hover
     bg-warning-hover: $dark-bg-warning-hover,
-
+    //activ
+    bg-warning-active: $dark-bg-warning-active,
+    //activ-hover
+    bg-warning-active-hover: $dark-bg-warning-active-hover,
+    //shadow
+    box-shadow:
+      (
+        rgba(0, 0, 0, 0.14) 0px 1px 1px,
+        rgba(0, 0, 0, 0.12) 0px 2px 1px,
+        rgba(0, 0, 0, 0.2) 0px 1px 3px
+      ),
+    //-----------------
     //selected Item
     // button
     bg-btn-outlined: $dark-bg-secondary,

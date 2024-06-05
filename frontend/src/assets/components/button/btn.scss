@@ -44,7 +44,7 @@
 
 @mixin btnText {
   @include themify($themes) {
-    background-color: themed("bg-btn-text");
+    background-color: transparent;
     color: themed("text-btn-text");
     @include textOptions();
   }
@@ -52,6 +52,18 @@
     @include themify($themes) {
       background-color: themed("bg-btn-hover-text");
       color: themed("text-btn-hover-text");
+    }
+  }
+  &__active {
+    @include themify($themes) {
+      background-color: themed("bg-warning-active");
+      color: themed("text-warning");
+    }
+    &:hover {
+      @include themify($themes) {
+        background-color: themed("bg-warning-active-hover") !important;
+        color: themed("text-warning") !important;
+      }
     }
   }
 }

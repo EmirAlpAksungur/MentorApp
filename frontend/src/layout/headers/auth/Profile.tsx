@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import MenuItem from "@mui/material/MenuItem";
 import { Avatar } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
@@ -53,6 +54,7 @@ const Element: React.FC = () => {
 };
 
 const Main: React.FC = () => {
+  const location = useLocation();
   const dispatch = useAppDispatch();
   const [text, setText] = useState<TranslatedTextType[]>([]);
   const LanguageId = useAppSelector(
@@ -66,12 +68,16 @@ const Main: React.FC = () => {
   useEffect(() => {
     helperAsync();
   }, [LanguageId]);
-
+  const isActive = (path: string) => {
+    if (location.pathname.split("/")?.[1] === path)
+      return "app-header__mobile-menu__menu-item__active";
+    return "";
+  };
   return (
     <MyMenu Element={Element}>
       <MenuItem
-        className={"app-header__mobile-menu__menu-item"}
-        onClick={() => routeToUrl("/profile")}
+        className={"app-header__mobile-menu__menu-item " + isActive("profile")}
+        onClick={() => routeToUrl("/profile/personal-information")}
       >
         {text.find((e) => e?.TextContentId === 25)?.Translations}
       </MenuItem>

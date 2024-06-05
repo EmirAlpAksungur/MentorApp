@@ -5,8 +5,8 @@
   @include themify($themes) {
     border-color: themed("border");
     background-color: themed("bg-secondary");
+    box-shadow: themed("box-shadow");
   }
-  box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 4px;
 }
 .card-container-error {
   @include themify($themes) {

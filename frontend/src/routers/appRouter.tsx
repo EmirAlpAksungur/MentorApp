@@ -12,11 +12,19 @@ const LogIn = Loadable(lazy(() => import("../pages/authorization/logIn/Main")));
 const SignUp = Loadable(
   lazy(() => import("../pages/authorization/signUp/Main"))
 );
+const Profile = Loadable(lazy(() => import("../layout/profile/main")));
+const PersonalInformation = Loadable(
+  lazy(() => import("../pages/profile/personalInformation/Main"))
+);
+const ChangePassword = Loadable(
+  lazy(() => import("../pages/profile/changePassword/Main"))
+);
+const Settings = Loadable(lazy(() => import("../pages/profile/settings/Main")));
+
 const Community = Loadable(lazy(() => import("../pages/community/Main")));
 const BlogHome = Loadable(lazy(() => import("../pages/blog/Home")));
 const BlogExplore = Loadable(lazy(() => import("../pages/blog/Explore")));
 const BlogProfile = Loadable(lazy(() => import("../pages/blog/Profile")));
-const Profile = Loadable(lazy(() => import("../pages/profile/main")));
 
 const BlogContainer = Loadable(lazy(() => import("../layout/blog/Container")));
 
@@ -84,7 +92,22 @@ const AppRouter: React.FC = () => {
               <Route path="explore/*" element={<BlogExplore />} />
               <Route path="profile/*" element={<BlogProfile />} />
             </Route>
-            <Route path="profile" element={<Profile />} />
+            <Route
+              path="profile"
+              element={
+                <Profile>
+                  <Outlet />
+                </Profile>
+              }
+            >
+              <Route
+                path="personal-information"
+                element={<PersonalInformation />}
+              />
+              <Route path="change-password" element={<ChangePassword />} />
+              <Route path="settings" element={<Settings />} />
+            </Route>
+
             <Route path="download" element={<Download />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>

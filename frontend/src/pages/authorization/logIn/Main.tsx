@@ -78,9 +78,9 @@ const Main: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                         handleChangeFunc={handleKeepSignIn}
                       />
                     </div>
-                    <div className="authentication-box__body__details__right">
+                    {/* <div className="authentication-box__body__details__right">
                       {text?.getText(1521)}
-                    </div>
+                    </div> */}
                   </div>
                   <Button
                     variant="contained"

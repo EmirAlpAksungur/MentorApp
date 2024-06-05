@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Button, Grid } from "@mui/material";
 import { useAppSelector } from "../../../hooks/redux";
 import ThemeSelect from "./ThemeSelect";
@@ -10,6 +11,7 @@ import { TranslatedTextType } from "../../../services/types/translations";
 import "../../../assets/layout/header.scss";
 
 const Main: React.FC = () => {
+  const location = useLocation();
   const [text, setText] = useState<TranslatedTextType[]>([]);
   const LanguageId = useAppSelector(
     (state: RootState) => state.languages.LanguageId
@@ -22,7 +24,11 @@ const Main: React.FC = () => {
   useEffect(() => {
     helperAsync();
   }, [LanguageId]);
-
+  const isActive = (path: string) => {
+    if (location.pathname.split("/")?.[1] === path)
+      return "app-header__left__unauth-profile__btn__active";
+    return "";
+  };
   return (
     <Grid
       container
@@ -34,7 +40,9 @@ const Main: React.FC = () => {
           <Grid item>
             <Button
               variant="text"
-              className="app-header__left__unauth-profile__btn"
+              className={
+                "app-header__left__unauth-profile__btn " + isActive("community")
+              }
               onClick={() => routeToUrl("/community")}
             >
               {text.find((e) => e?.TextContentId === 27)?.Translations}
@@ -43,7 +51,9 @@ const Main: React.FC = () => {
           <Grid item>
             <Button
               variant="text"
-              className="app-header__left__unauth-profile__btn"
+              className={
+                "app-header__left__unauth-profile__btn " + isActive("chat")
+              }
               onClick={() => routeToUrl("/chat")}
             >
               {text.find((e) => e?.TextContentId === 28)?.Translations}
@@ -52,7 +62,9 @@ const Main: React.FC = () => {
           <Grid item>
             <Button
               variant="text"
-              className="app-header__left__unauth-profile__btn"
+              className={
+                "app-header__left__unauth-profile__btn " + isActive("blog")
+              }
               onClick={() => routeToUrl("/blog/home")}
             >
               {text.find((e) => e?.TextContentId === 2)?.Translations}
@@ -61,7 +73,9 @@ const Main: React.FC = () => {
           <Grid item>
             <Button
               variant="text"
-              className="app-header__left__unauth-profile__btn"
+              className={
+                "app-header__left__unauth-profile__btn " + isActive("download")
+              }
               onClick={() => routeToUrl("download")}
             >
               {text.find((e) => e?.TextContentId === 3)?.Translations}
