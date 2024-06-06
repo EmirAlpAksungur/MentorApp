@@ -10,7 +10,8 @@ from .views import (
     IsAuthView,
     GetUnKnownSkillView,
     FollowView,
-    SaveBlogView
+    SaveBlogView,
+    DeleteView
 )
 urlpatterns = [
     path("register/", CustomRegisterView.as_view(), name="rest_register"),
@@ -22,7 +23,8 @@ urlpatterns = [
     path("is-auth/", IsAuthView.as_view(), name="rest_user_details"),
     path("get-un-known-skill-content/", GetUnKnownSkillView.as_view(), name="get_un_known_skill_content"),
     path("follow/", FollowView.as_view(), name="follow"),
-    path("save-blog/", SaveBlogView.as_view(), name="save-blog")
+    path("save-blog/", SaveBlogView.as_view(), name="save-blog"),
+    path("delete/", DeleteView.as_view(), name="delete")
 ]
 
 

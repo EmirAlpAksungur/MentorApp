@@ -88,6 +88,13 @@ const LeftBox = () => {
   const profession = useAppSelector(
     (state: RootState) => state.auth.user?.profession
   );
+  const twitter = useAppSelector(
+    (state: RootState) => state.auth.user?.twitter
+  );
+  const github = useAppSelector((state: RootState) => state.auth.user?.github);
+  const linkedin = useAppSelector(
+    (state: RootState) => state.auth.user?.linkedin
+  );
 
   return (
     <>
@@ -106,15 +113,36 @@ const LeftBox = () => {
         {profession}
       </div>
       <div className="profile-container__box__body__left__social">
-        <IconButton className="profile-container__box__body__left__social__btn">
-          <XIcon />
-        </IconButton>
-        <IconButton className="profile-container__box__body__left__social__btn">
-          <GitHubIcon />
-        </IconButton>
-        <IconButton className="profile-container__box__body__left__social__btn">
-          <LinkedInIcon />
-        </IconButton>
+        {twitter && (
+          <IconButton
+            className="profile-container__box__body__left__social__btn"
+            onClick={() => {
+              window.open(twitter, "_blank");
+            }}
+          >
+            <XIcon />
+          </IconButton>
+        )}
+        {github && (
+          <IconButton
+            className="profile-container__box__body__left__social__btn"
+            onClick={() => {
+              window.open(github, "_blank");
+            }}
+          >
+            <GitHubIcon />
+          </IconButton>
+        )}
+        {linkedin && (
+          <IconButton
+            className="profile-container__box__body__left__social__btn"
+            onClick={() => {
+              window.open(linkedin, "_blank");
+            }}
+          >
+            <LinkedInIcon />
+          </IconButton>
+        )}
       </div>
       <ButtonGroup />
     </>

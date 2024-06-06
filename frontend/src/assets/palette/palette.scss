@@ -11,14 +11,16 @@ $light-text: #000000;
 $dark-text: #ffffff;
 $light-text-secondary: rgb(89, 89, 89);
 $dark-text-secondary: rgb(240, 240, 240);
+$light-text-secondary-darker: rgb(140, 140, 140);
+$dark-text-secondary-darker: rgba(255, 255, 255, 0.45);
 $dark-text-warning: rgb(210, 100, 21);
 $light-text-warning: rgb(242, 112, 19);
 $dark-text-error: rgb(209, 60, 49);
 $light-text-error: rgb(240, 65, 52);
 
 //border
-$light-border: #f0f0f0;
-$dark-border: #101418;
+$light-border: rgb(230, 235, 241);
+$dark-border: rgba(255, 255, 255, 0.05);
 $light-border-secondary: rgb(217, 217, 217);
 $dark-border-secondary: rgb(89, 89, 89);
 $light-border-warning: rgb(255, 176, 102);
@@ -48,6 +50,7 @@ $themes: (
     //text
     text: $light-text,
     text-secondary: $light-text-secondary,
+    text-secondary-darker: $light-text-secondary-darker,
     text-warning: $light-text-warning,
     text-error: $light-text-error,
     // header
@@ -125,6 +128,7 @@ $themes: (
     //text
     text: $dark-text,
     text-secondary: $dark-text-secondary,
+    text-secondary-darker: $dark-text-secondary-darker,
     text-warning: $dark-text-warning,
     text-error: $dark-text-error,
     // header

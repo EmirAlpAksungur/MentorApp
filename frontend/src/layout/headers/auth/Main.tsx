@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Button, Grid } from "@mui/material";
 import { useAppSelector } from "../../../hooks/redux";
-import ThemeSelect from "./ThemeSelect";
-import LangSelect from "./LangSelect";
 import { routeToUrl } from "../../../routers/utils";
 import { RootState } from "../../../store/configureStore";
 import { asyncLoadText } from "../../../services/actions/translations";
@@ -35,62 +33,50 @@ const Main: React.FC = () => {
       justifyContent={"space-between"}
       className="app-header__left__unauth-profile"
     >
-      <Grid item>
-        <Grid container columnGap={2}>
-          <Grid item>
-            <Button
-              variant="text"
-              className={
-                "app-header__left__unauth-profile__btn " + isActive("community")
-              }
-              onClick={() => routeToUrl("/community")}
-            >
-              {text.find((e) => e?.TextContentId === 27)?.Translations}
-            </Button>
-          </Grid>
-          <Grid item>
-            <Button
-              variant="text"
-              className={
-                "app-header__left__unauth-profile__btn " + isActive("chat")
-              }
-              onClick={() => routeToUrl("/chat")}
-            >
-              {text.find((e) => e?.TextContentId === 28)?.Translations}
-            </Button>
-          </Grid>
-          <Grid item>
-            <Button
-              variant="text"
-              className={
-                "app-header__left__unauth-profile__btn " + isActive("blog")
-              }
-              onClick={() => routeToUrl("/blog/home")}
-            >
-              {text.find((e) => e?.TextContentId === 2)?.Translations}
-            </Button>
-          </Grid>
-          <Grid item>
-            <Button
-              variant="text"
-              className={
-                "app-header__left__unauth-profile__btn " + isActive("download")
-              }
-              onClick={() => routeToUrl("download")}
-            >
-              {text.find((e) => e?.TextContentId === 3)?.Translations}
-            </Button>
-          </Grid>
+      <Grid container columnGap={2}>
+        <Grid item>
+          <Button
+            variant="text"
+            className={
+              "app-header__left__unauth-profile__btn " + isActive("community")
+            }
+            onClick={() => routeToUrl("/community")}
+          >
+            {text.find((e) => e?.TextContentId === 27)?.Translations}
+          </Button>
         </Grid>
-      </Grid>
-      <Grid item>
-        <Grid container columnGap={2} alignItems={"center"}>
-          <Grid item>
-            <LangSelect />
-          </Grid>
-          <Grid item>
-            <ThemeSelect />
-          </Grid>
+        <Grid item>
+          <Button
+            variant="text"
+            className={
+              "app-header__left__unauth-profile__btn " + isActive("chat")
+            }
+            onClick={() => routeToUrl("/chat")}
+          >
+            {text.find((e) => e?.TextContentId === 28)?.Translations}
+          </Button>
+        </Grid>
+        <Grid item>
+          <Button
+            variant="text"
+            className={
+              "app-header__left__unauth-profile__btn " + isActive("blog")
+            }
+            onClick={() => routeToUrl("/blog/home")}
+          >
+            {text.find((e) => e?.TextContentId === 2)?.Translations}
+          </Button>
+        </Grid>
+        <Grid item>
+          <Button
+            variant="text"
+            className={
+              "app-header__left__unauth-profile__btn " + isActive("download")
+            }
+            onClick={() => routeToUrl("download")}
+          >
+            {text.find((e) => e?.TextContentId === 3)?.Translations}
+          </Button>
         </Grid>
       </Grid>
     </Grid>

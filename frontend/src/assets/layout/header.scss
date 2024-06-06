@@ -13,21 +13,6 @@
     display: flex;
     align-items: center;
     width: max-content;
-    &__btn-theme {
-      @include btnText;
-      width: 31px;
-      height: 31px;
-      &__dark-mode {
-        position: relative;
-        right: -7.5px;
-        color: white;
-      }
-      &__light-mode {
-        position: relative;
-        right: 7.5px;
-        color: black;
-      }
-    }
     &__lang-select {
       width: 100px;
     }

@@ -35,3 +35,6 @@ export const REFRESH_CHAT = "REFRESH_CHAT";
 export const BLOG_UPDATE_VALUE = "BLOG_UPDATE_VALUE";
 export const BLOG_SET_ERROR = "BLOG_SET_ERROR";
 export const CHANGE_BLOG_PAGE = "CHANGE_BLOG_PAGE";
+
+//------THEME
+export const CHANGE_THEME = "CHANGE_THEME";

@@ -21,6 +21,7 @@ import {
   notification,
   firstLogin,
   chat,
+  theme,
 } from "../services/reducers";
 const { logger } = require(`redux-logger`);
 export interface RootState {
@@ -32,6 +33,7 @@ export interface RootState {
   notification: any;
   firstLogin: any;
   chat: any;
+  theme: any;
   [key: string]: any;
 }
 
@@ -40,7 +42,7 @@ const middleware: Middleware[] = [thunk, logger];
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["languages"],
+  whitelist: ["languages", "theme"],
 };
 
 const rootReducer = combineReducers<RootState>({
@@ -52,6 +54,7 @@ const rootReducer = combineReducers<RootState>({
   notification: notification,
   firstLogin: firstLogin,
   chat: chat,
+  theme: theme,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

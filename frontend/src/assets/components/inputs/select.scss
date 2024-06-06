@@ -4,34 +4,39 @@
 .my-select-box {
   width: 100%;
   display: inline-block;
+  .Mui-focused {
+    & fieldset {
+      @include themify($themes) {
+        box-shadow: 0px 0px 0px 2px
+          rgba($color: themed("border-warning"), $alpha: 0.2);
+        border: 1px solid themed("border-warning") !important;
+      }
+    }
+  }
+
   &__select {
     font-size: 1rem;
     @include themify($themes) {
-      color: themed("text-select");
+      color: themed("text-secondary");
     }
     & .MuiOutlinedInput-input {
       padding: 4px 8px;
     }
     & fieldset {
       @include themify($themes) {
-        border-color: themed("border-select");
-      }
-    }
-    & svg {
-      @include themify($themes) {
-        color: themed("icon-select");
+        border-color: themed("border-secondary");
       }
     }
     &:hover {
       & fieldset {
         @include themify($themes) {
-          border-color: themed("border-hover-select");
+          border-color: themed("border-warning");
         }
       }
-      & svg {
-        @include themify($themes) {
-          color: themed("icon-hover-select");
-        }
+    }
+    & svg {
+      @include themify($themes) {
+        color: themed("text-secondary");
       }
     }
   }
@@ -43,17 +48,20 @@
     text-transform: capitalize;
     &:hover {
       @include themify($themes) {
-        background-color: themed("bg-item-hover-select");
+        background-color: themed("bg-btn-hover-text");
+        color: themed("text-btn-hover-text");
       }
     }
   }
   &__selected {
     @include themify($themes) {
-      background-color: themed("bg-selected-select");
+      background-color: themed("bg-warning-active") !important;
+      color: themed("text-warning");
     }
     &:hover {
       @include themify($themes) {
-        background-color: themed("bg-selected-hover-select");
+        background-color: themed("bg-warning-active-hover") !important;
+        color: themed("text-warning") !important;
       }
     }
   }

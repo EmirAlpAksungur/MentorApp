@@ -24,7 +24,10 @@ import Notification from "./notifications/Notification";
 import MyDialog from "./dialog/Main";
 import University from "./view/University";
 import Card from "./card/Card";
+import ThemeSwitch from "./settings/ThemeSwitch";
+import Language from "./settings/LangSelect";
 export {
+  Language,
   ConnectionBar,
   ErrorComponent,
   NetworkCheck,
@@ -51,4 +54,5 @@ export {
   MyDialog,
   MyLongTextField,
   Card,
+  ThemeSwitch,
 };

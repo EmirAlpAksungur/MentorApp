@@ -1,4 +1,5 @@
 from dj_rest_auth.registration.views import RegisterView
+from rest_framework.permissions import IsAuthenticated
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from dj_rest_auth.views import LoginView
 from .serializers import CustomRegisterSerializer,CustomLoginSerializer
@@ -188,3 +189,15 @@ class SaveBlogView(APIView):
             profile.savedBlog.add(blog_id)
         
         return Response("Ok", status=status.HTTP_200_OK)
+
+class DeleteView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request, *args, **kwargs):
+        try:
+            user = request.user
+            user.delete()
+            
+            return Response({"detail": "User account deleted successfully"}, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({"detail": str(e)}, status=status.HTTP_400_BAD_REQUEST)

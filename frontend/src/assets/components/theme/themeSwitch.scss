@@ -1,0 +1,49 @@
+@import "../../palette/palette.scss";
+.theme-switch {
+  width: 44px !important;
+  height: 22px !important;
+  padding: 0px !important;
+  & .MuiSwitch-switchBase {
+    padding: 0px;
+    margin: 2px;
+    width: 18px;
+    background-color: #fff;
+    height: 18px;
+    &:hover {
+      background-color: #fff;
+    }
+    transition-duration: 300ms;
+    &.Mui-checked {
+      transform: translateX(22px);
+      color: #fff;
+      &:hover {
+        background-color: #fff;
+      }
+      & + .MuiSwitch-track {
+        @include themify($themes) {
+          background-color: themed("bg-warning");
+        }
+        opacity: 1;
+        border: 0;
+      }
+    }
+  }
+  & .MuiSwitch-thumb {
+    box-sizing: border-box;
+    width: 22px;
+    height: 22px;
+    background-color: #fff;
+  }
+  & .MuiSwitch-track {
+    border-radius: 13px;
+    @include themify($themes) {
+      background-color: themed("bg-warning");
+    }
+    opacity: 1;
+  }
+  &__icon {
+    @include themify($themes) {
+      color: themed("bg-warning");
+    }
+  }
+}

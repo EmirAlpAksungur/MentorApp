@@ -132,3 +132,89 @@
     }
   }
 }
+
+@mixin divider {
+  @include themify($themes) {
+    background-color: themed("border");
+  }
+  border-width: 1px;
+}
+
+.profile-card {
+  padding-bottom: 20px;
+  &__header {
+    padding: 20px;
+    @include themify($themes) {
+      color: themed("text-secondary");
+    }
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  &__divider {
+    @include divider();
+  }
+  &__body {
+    padding: 24px 24px 4px;
+  }
+  &__danger-divider {
+    border-width: 1px;
+    @include themify($themes) {
+      background-color: themed("text-error");
+    }
+  }
+}
+
+.profile-settings {
+  &__body {
+    &__item {
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      &__comment {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        &__icon {
+          @include themify($themes) {
+            color: themed("text-warning");
+          }
+          width: 30px;
+          height: 30px;
+        }
+        &__icon-danger {
+          @include themify($themes) {
+            color: themed("text-error");
+          }
+          width: 30px;
+          height: 30px;
+        }
+        &__text {
+          &__header {
+            font-size: 1.6rem;
+            @include themify($themes) {
+              color: themed("text-secondary");
+            }
+            padding-bottom: 4px;
+          }
+          &__body {
+            font-size: 1.2rem;
+            @include themify($themes) {
+              color: themed("text-secondary-darker");
+            }
+          }
+        }
+      }
+      &__danger-btn {
+        @include themify($themes) {
+          border-color: themed("text-error");
+          color: themed("text-error");
+          @include textOptions();
+        }
+      }
+    }
+    &__divider {
+      @include divider();
+    }
+  }
+}

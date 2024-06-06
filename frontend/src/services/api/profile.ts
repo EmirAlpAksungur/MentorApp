@@ -61,6 +61,9 @@ const follow = (body: { user_id: number }, token: string) => {
 const saveBlog = (body: { uuid: string }, token: string) => {
   return instance.post("/profile/save-blog/", body, configForm(token));
 };
+const removeAcc = (token: string) => {
+  return instance.delete("/profile/delete/", config(token));
+};
 
 const ProfileService = {
   register,
@@ -73,6 +76,7 @@ const ProfileService = {
   oneUnKnownSkillContent,
   follow,
   saveBlog,
+  removeAcc,
 };
 
 export default ProfileService;
