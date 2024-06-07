@@ -73,7 +73,7 @@ const Main: React.FC = () => {
             className={
               "app-header__left__unauth-profile__btn " + isActive("download")
             }
-            onClick={() => routeToUrl("download")}
+            onClick={() => routeToUrl("/download")}
           >
             {text.find((e) => e?.TextContentId === 3)?.Translations}
           </Button>
