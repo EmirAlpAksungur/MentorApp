@@ -7,6 +7,7 @@ from django.contrib.auth.backends import ModelBackend
 from rest_framework.authtoken.models import Token
 from .models import Profile, UnKnownSkills
 from apps.blog.serializers import BlogTopSerializer
+from rest_framework.serializers import Serializer, CharField, ValidationError
 class CustomRegisterSerializer(RegisterSerializer, serializers.ModelSerializer):
     class Meta:
         model = User  
@@ -72,3 +73,8 @@ class TokenSerializer(serializers.Serializer):
     class Meta:
         model = Token
         fields = "__all__"  
+
+class ChangePasswordSerializer(serializers.Serializer):
+    oldPassword = CharField(required=True)
+    newPassword = CharField(required=True)
+    confirmPassword = CharField(required=False)

@@ -11,7 +11,8 @@ from .views import (
     GetUnKnownSkillView,
     FollowView,
     SaveBlogView,
-    DeleteView
+    DeleteView,
+    ChangePassword
 )
 urlpatterns = [
     path("register/", CustomRegisterView.as_view(), name="rest_register"),
@@ -24,7 +25,8 @@ urlpatterns = [
     path("get-un-known-skill-content/", GetUnKnownSkillView.as_view(), name="get_un_known_skill_content"),
     path("follow/", FollowView.as_view(), name="follow"),
     path("save-blog/", SaveBlogView.as_view(), name="save-blog"),
-    path("delete/", DeleteView.as_view(), name="delete")
+    path("delete/", DeleteView.as_view(), name="delete"),
+    path("change-password/", ChangePassword.as_view(), name="change_password")
 ]
 
 

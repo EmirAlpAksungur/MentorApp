@@ -81,7 +81,7 @@
               width: 125px;
               &__img {
                 width: 125px;
-                height: auto;
+                height: 125px;
               }
             }
           }
@@ -215,6 +215,50 @@
     }
     &__divider {
       @include divider();
+    }
+  }
+}
+
+.profile-change-pass {
+  &__body {
+    &__left {
+      .form-container {
+        height: 100%;
+        align-items: center;
+      }
+    }
+    &__right {
+      padding: 40px;
+      &__header {
+        font-size: 1.6rem;
+        font-weight: 600;
+        @include themify($themes) {
+          color: themed("text");
+        }
+      }
+      &__body {
+        margin-top: 8px;
+        &__item {
+          display: flex;
+          align-items: center;
+          font-size: 1.4rem;
+          padding: 16px;
+          @include themify($themes) {
+            color: themed("text-secondary-darker");
+          }
+          &__icon {
+            font-size: 2rem !important;
+          }
+        }
+      }
+    }
+    &__footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      &__save {
+        @include btnContained;
+      }
     }
   }
 }

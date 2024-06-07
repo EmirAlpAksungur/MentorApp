@@ -6,13 +6,20 @@ from .serializers import CustomRegisterSerializer,CustomLoginSerializer
 from rest_framework import status, generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import UserDetailSerializer,FillProfileSerializer,GetProfileSerializer,TokenSerializer
+from .serializers import (
+    UserDetailSerializer,
+    FillProfileSerializer,
+    GetProfileSerializer,
+    TokenSerializer,
+    ChangePasswordSerializer
+)
 from rest_framework.authtoken.models import Token
 from .models import Profile,UnKnownSkills,Languages
 from django.http.multipartparser import MultiPartParser
 from apps.skill.models import Skill
 import json
 import uuid
+from rest_framework.authentication import TokenAuthentication
 from apps.translations.models import Translations
 
 class CustomRegisterView(RegisterView):
@@ -201,3 +208,25 @@ class DeleteView(APIView):
             return Response({"detail": "User account deleted successfully"}, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({"detail": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ChangePassword(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def put(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        serializer = ChangePasswordSerializer(data=request.data)
+
+        if serializer.is_valid():
+            if not self.object.check_password(serializer.data.get("oldPassword")):
+                return Response({"oldPassword": [1653]}, status=status.HTTP_400_BAD_REQUEST)
+            
+            self.object.set_password(serializer.data.get("newPassword"))
+            self.object.save()
+            return Response({"detail": "Password has been changed successfully."}, status=status.HTTP_200_OK)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

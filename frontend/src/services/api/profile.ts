@@ -3,7 +3,6 @@ import { instance, unAuthConfig, config, configForm } from "./baseUnit";
 
 import { SignUpType } from "../types/signUp";
 import { LoginType } from "../types/login";
-
 const register = (body: SignUpType) => {
   return instance.post("/profile/register/", body, unAuthConfig);
 };
@@ -65,6 +64,16 @@ const removeAcc = (token: string) => {
   return instance.delete("/profile/delete/", config(token));
 };
 
+const changePass = (
+  body: {
+    oldPassword: string | undefined;
+    newPassword: string | undefined;
+    confirmPassword: string | undefined;
+  },
+  token: string
+) => {
+  return instance.put("/profile/change-password/", body, config(token));
+};
 const ProfileService = {
   register,
   login,
@@ -77,6 +86,7 @@ const ProfileService = {
   follow,
   saveBlog,
   removeAcc,
+  changePass,
 };
 
 export default ProfileService;
