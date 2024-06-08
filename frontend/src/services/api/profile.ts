@@ -74,6 +74,14 @@ const changePass = (
 ) => {
   return instance.put("/profile/change-password/", body, config(token));
 };
+
+const getAboutMe = (body: { user_id: number }, token: string) => {
+  return instance.post("/profile/about-me/", body, config(token));
+};
+
+const aboutUpdate = (body: { about: string }, token: string) => {
+  return instance.post("/profile/about-me-update/", body, config(token));
+};
 const ProfileService = {
   register,
   login,
@@ -87,6 +95,8 @@ const ProfileService = {
   saveBlog,
   removeAcc,
   changePass,
+  getAboutMe,
+  aboutUpdate,
 };
 
 export default ProfileService;

@@ -36,7 +36,8 @@ class Profile(models.Model):
     profession = models.CharField(max_length = 100, blank = True ,null = True)
     photo = models.BinaryField(null=True, editable=True)
     about = models.TextField(default = "", blank = True)
-    location =  models.ForeignKey(City, on_delete=models.CASCADE, null= True)
+    location =  models.ForeignKey(City, on_delete=models.CASCADE, null= True,related_name='location')
+    nationality =  models.ForeignKey(City, on_delete=models.CASCADE, null= True,related_name='nationality')
     university =  models.ManyToManyField(University, blank= False)
     languages = models.ManyToManyField(Languages)
     certificate = models.ManyToManyField(Certificate)
@@ -50,4 +51,3 @@ class Profile(models.Model):
     twitter = models.CharField(max_length = 100, blank = True ,null = True)
     github = models.CharField(max_length = 100, blank = True ,null = True)
     linkedin = models.CharField(max_length = 100, blank = True ,null = True)
-    

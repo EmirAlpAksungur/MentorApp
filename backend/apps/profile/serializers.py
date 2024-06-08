@@ -78,3 +78,8 @@ class ChangePasswordSerializer(serializers.Serializer):
     oldPassword = CharField(required=True)
     newPassword = CharField(required=True)
     confirmPassword = CharField(required=False)
+
+class AboutMeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ["about"]

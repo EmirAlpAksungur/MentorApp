@@ -149,6 +149,19 @@
     }
     font-size: 1.2rem;
     font-weight: 600;
+    position: relative;
+    &__btn {
+      position: absolute;
+      right: 0;
+      margin-right: 20px;
+      @include btnOutlined;
+      top: calc(50% - 15.5px);
+      &:hover {
+        @include themify($themes) {
+          color: themed("text-warning");
+        }
+      }
+    }
   }
   &__divider {
     @include divider();

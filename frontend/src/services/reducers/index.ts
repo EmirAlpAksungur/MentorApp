@@ -8,6 +8,7 @@ import firstLogin from "./firstLogin";
 import chat from "./chat";
 import theme from "./theme";
 import changePassword from "./changePassword";
+import about from "./about";
 export {
   auth,
   blog,
@@ -19,4 +20,5 @@ export {
   chat,
   theme,
   changePassword,
+  about,
 };

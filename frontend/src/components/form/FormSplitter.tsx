@@ -22,6 +22,7 @@ const FormSplitter: React.FC<FormSplitterType> = ({
   reduxKey,
   type,
   error,
+  ...rest
 }) => {
   const dispatch = useAppDispatch();
   const value = useAppSelector(
@@ -49,6 +50,8 @@ const FormSplitter: React.FC<FormSplitterType> = ({
           handleChangeFunc={(val: string) => {
             helperUpdateValue(val);
           }}
+          error={error}
+          {...rest}
         />
       );
     case "password":

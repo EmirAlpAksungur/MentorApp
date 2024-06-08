@@ -12,7 +12,9 @@ from .views import (
     FollowView,
     SaveBlogView,
     DeleteView,
-    ChangePassword
+    ChangePassword,
+    AboutmeView,
+    AboutmeUpdateView
 )
 urlpatterns = [
     path("register/", CustomRegisterView.as_view(), name="rest_register"),
@@ -26,7 +28,10 @@ urlpatterns = [
     path("follow/", FollowView.as_view(), name="follow"),
     path("save-blog/", SaveBlogView.as_view(), name="save-blog"),
     path("delete/", DeleteView.as_view(), name="delete"),
-    path("change-password/", ChangePassword.as_view(), name="change_password")
+    path("change-password/", ChangePassword.as_view(), name="change_password"),
+    path("about-me/", AboutmeView.as_view(), name="about_me"),
+    path("about-me-update/", AboutmeUpdateView.as_view(), name="about_me__update")
+
 ]
 
 

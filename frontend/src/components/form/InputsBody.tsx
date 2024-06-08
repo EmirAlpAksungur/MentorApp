@@ -12,9 +12,9 @@ const InputsBody: React.FC<InputsBodyType> = ({
   formElement,
   reduxConnectionString,
 }) => {
+  const { reduxKey, labelId, size, type, ...rest } = formElement;
   const errorMsg = useAppSelector(
-    (state: RootState) =>
-      state[reduxConnectionString]?.errors?.[formElement.reduxKey]
+    (state: RootState) => state[reduxConnectionString]?.errors?.[reduxKey]
   );
   const [text, setText] = useState<TranslatedTextType[]>([]);
   const LanguageId = useAppSelector(
@@ -22,7 +22,7 @@ const InputsBody: React.FC<InputsBodyType> = ({
   );
 
   const helperAsync = async () => {
-    let body = [formElement.labelId];
+    let body = [labelId];
     if (parseInt(errorMsg)) {
       body.push(parseInt(errorMsg));
     }
@@ -34,22 +34,16 @@ const InputsBody: React.FC<InputsBodyType> = ({
   }, [LanguageId, errorMsg]);
 
   return (
-    <Grid
-      item
-      xs={formElement.size}
-      key={`${formElement.reduxKey}_${formElement.labelId}`}
-    >
+    <Grid item xs={size} key={`${reduxKey}_${labelId}`}>
       <InputLabel className="form-container__label">
-        {
-          text.find((e) => e?.TextContentId === formElement.labelId)
-            ?.Translations
-        }
+        {text.find((e) => e?.TextContentId === labelId)?.Translations}
       </InputLabel>
       <FormSplitter
         reduxConnectionString={reduxConnectionString}
-        reduxKey={formElement.reduxKey}
-        type={formElement.type}
+        reduxKey={reduxKey}
+        type={type}
         error={text.find((e) => e?.TextContentId === errorMsg) ? true : false}
+        {...rest}
       />
       <InputLabel className="form-container__error">
         {text.find((e) => e?.TextContentId === errorMsg)?.Translations}

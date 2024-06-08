@@ -1,0 +1,38 @@
+@import "../../palette/palette.scss";
+@import "../../components/button/btn.scss";
+
+.about-me {
+  @include themify($themes) {
+    color: themed("text-secondary-darker");
+  }
+  .long-text-view__text-container__content {
+    font-size: 1.2rem;
+  }
+}
+.about-me-update {
+  .card-container {
+    height: 100%;
+  }
+}
+
+.update-body {
+  padding: 40px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  &__btn-group {
+    text-align: right;
+    margin-top: 20px;
+    &__cancel {
+      @include btnOutlined;
+      margin-right: 8px;
+    }
+    &__save {
+      @include btnContained;
+      &:hover {
+        transform: none;
+      }
+    }
+  }
+}

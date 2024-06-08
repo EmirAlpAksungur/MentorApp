@@ -41,8 +41,6 @@ const _changePass: any =
       dispatch(logOut());
       dispatch(cleanChangepass());
     } catch (err: any) {
-      console.log(err);
-
       dispatch(
         changeNotification({
           NotificationCode: "error",

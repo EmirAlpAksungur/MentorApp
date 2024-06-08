@@ -13,6 +13,7 @@ export interface FormSplitterType {
   reduxKey: string;
   type: string;
   error: boolean;
+  [key: string]: any;
 }
 
 export interface FormElementType {

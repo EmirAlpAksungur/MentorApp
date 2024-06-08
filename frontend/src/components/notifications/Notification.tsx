@@ -61,7 +61,7 @@ export default function SimpleSnackbar() {
   return (
     <div className="notification-container">
       <Snackbar
-        open={NotificationCode}
+        open={NotificationCode && true}
         autoHideDuration={12000}
         onClose={handleClose}
         message={text}

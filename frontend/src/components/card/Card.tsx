@@ -7,8 +7,6 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ children, isError }) => {
-  console.log(isError);
-
   return (
     <div className={`card-container ${isError ? "card-container-error" : ""}`}>
       {children}

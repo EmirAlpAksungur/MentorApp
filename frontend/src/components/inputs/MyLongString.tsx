@@ -8,7 +8,12 @@ interface MyLongTextfieldType {
 }
 
 const MylongTextfield: React.FC<MyLongTextfieldType> = (props) => {
-  const { handleChangeFunc = () => {}, value = "", ...rest } = props;
+  const {
+    handleChangeFunc = () => {},
+    value = "",
+    error = false,
+    ...rest
+  } = props;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     handleChangeFunc(e.target.value);
@@ -16,15 +21,15 @@ const MylongTextfield: React.FC<MyLongTextfieldType> = (props) => {
 
   return (
     <TextField
-      {...rest}
       size="small"
       variant="outlined"
       value={value}
       onChange={handleChange}
-      className="my-long-text-field"
+      className={`my-long-text-field ${error && "my-text-field-error"}`}
       multiline
       minRows={4}
       maxRows={6}
+      {...rest}
     />
   );
 };
