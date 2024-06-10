@@ -7,7 +7,7 @@ import { MySelect } from "../index";
 import "../../assets/components/inputs/textField.scss";
 interface MyTextfieldType {
   handleChangeFunc?: (value: any) => void;
-  value?: string;
+  value?: number | undefined;
   [key: string]: any;
 }
 
@@ -21,65 +21,90 @@ interface CityType {
 }
 
 const MyTextfield: React.FC<MyTextfieldType> = (props) => {
-  const { handleChangeFunc = () => {}, value = "", ...rest } = props;
-  const [country, setCountry] = useState<string>("");
+  const { handleChangeFunc = () => {}, value = undefined, ...rest } = props;
+  const [country, setCountry] = useState<number | null>(null);
   const [countries, setCountries] = useState<CountryType[]>([]);
-  const [city, setCity] = useState<string>("");
+  const [city, setCity] = useState<number | undefined>(undefined);
   const [cities, setCities] = useState<CityType[]>([]);
   const token = useAppSelector((state: RootState) => state.auth.token);
   const LanguageId = useAppSelector(
     (state: RootState) => state.languages.LanguageId
   );
 
-  const helperAsync = async () => {
-    try {
-      const result = await LocationService.getCountryList(
-        { LanguageId },
-        token
-      );
-      setCountries(result.data);
-      console.log(result);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  const handleChange = (e: string) => {
+  const handleChange = (e: number | undefined) => {
     setCity(e);
     handleChangeFunc(e);
   };
 
-  const handleChangeCountry = async (CountryId: string) => {
+  const handleChangeCountry = async (CountryId: number) => {
     setCountry(CountryId);
+    handleChange(undefined);
+    setCities([]);
+  };
+  const handleFirstOpen = async () => {
     try {
-      const result = await LocationService.getCityList({ CountryId }, token);
-      setCities(result.data);
-      console.log(result);
+      if (value && !country) {
+        const res = await LocationService.getCityDetailList(
+          value,
+          LanguageId,
+          token
+        );
+
+        setCountries([
+          {
+            CountryId: res.data.CountryId.CountryId,
+            name: res.data.CountryId.TextContentId.translation,
+          },
+        ]);
+        setCountry(res.data.CountryId.CountryId);
+        setCities([{ CityId: res.data.CityId, name: res.data.name }]);
+        setCity(props?.value);
+      }
     } catch (err) {
       console.log(err);
     }
   };
-
   useEffect(() => {
-    helperAsync();
-  }, [LanguageId]);
+    handleFirstOpen();
+  }, [LanguageId, value]);
 
   return (
     <Grid container columnSpacing={2}>
       <Grid item xs={6}>
         <MySelect
           values={countries}
-          defaultValue={country}
+          defaultValue={country ? country : undefined}
           valuesPath={"CountryId"}
           dataTextPath={"name"}
+          onMouseDown={async () => {
+            const result = await LocationService.getCountryList(
+              { LanguageId },
+              token
+            );
+            setCountries(result.data);
+          }}
           handleChangeFunc={handleChangeCountry}
         />
       </Grid>
       <Grid item xs={6}>
         <MySelect
           values={cities}
-          defaultValue={city}
+          defaultValue={city ? city : undefined}
           valuesPath={"CityId"}
           dataTextPath={"name"}
+          onMouseDown={async () => {
+            try {
+              if (country) {
+                const result = await LocationService.getCityList(
+                  { CountryId: country },
+                  token
+                );
+                setCities(result.data);
+              }
+            } catch (err) {
+              console.log(err);
+            }
+          }}
           handleChangeFunc={handleChange}
         />
       </Grid>

@@ -9,6 +9,7 @@ import chat from "./chat";
 import theme from "./theme";
 import changePassword from "./changePassword";
 import about from "./about";
+import personalInfo from "./personalInfo";
 export {
   auth,
   blog,
@@ -21,4 +22,5 @@ export {
   theme,
   changePassword,
   about,
+  personalInfo,
 };

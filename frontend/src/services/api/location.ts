@@ -9,7 +9,7 @@ const getCountryList = (body: CountryListBodyType, token: string) => {
 };
 
 interface CityListBodyType {
-  CountryId: string;
+  CountryId: number;
 }
 
 const getCityList = (body: CityListBodyType, token: string) => {

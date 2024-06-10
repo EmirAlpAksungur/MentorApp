@@ -3,6 +3,7 @@ import { instance, unAuthConfig, config, configForm } from "./baseUnit";
 
 import { SignUpType } from "../types/signUp";
 import { LoginType } from "../types/login";
+import { PersonalInfoType } from "../types/personalInfo";
 const register = (body: SignUpType) => {
   return instance.post("/profile/register/", body, unAuthConfig);
 };
@@ -82,6 +83,14 @@ const getAboutMe = (body: { user_id: number }, token: string) => {
 const aboutUpdate = (body: { about: string }, token: string) => {
   return instance.post("/profile/about-me-update/", body, config(token));
 };
+
+const getPersonalInfo = (body: { user_id: number }, token: string) => {
+  return instance.post("/profile/personal-info/", body, config(token));
+};
+
+const updatePersonalInfo = (body: PersonalInfoType, token: string) => {
+  return instance.post("/profile/personal-info-update/", body, config(token));
+};
 const ProfileService = {
   register,
   login,
@@ -97,6 +106,8 @@ const ProfileService = {
   changePass,
   getAboutMe,
   aboutUpdate,
+  getPersonalInfo,
+  updatePersonalInfo,
 };
 
 export default ProfileService;

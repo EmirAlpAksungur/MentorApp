@@ -8,6 +8,7 @@ from rest_framework.authtoken.models import Token
 from .models import Profile, UnKnownSkills
 from apps.blog.serializers import BlogTopSerializer
 from rest_framework.serializers import Serializer, CharField, ValidationError
+from datetime import datetime
 class CustomRegisterSerializer(RegisterSerializer, serializers.ModelSerializer):
     class Meta:
         model = User  
@@ -83,3 +84,45 @@ class AboutMeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = ["about"]
+
+class PersonalInfoSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(source='user.email')
+    first_name = serializers.CharField(source='user.first_name')
+    last_name = serializers.CharField(source='user.last_name')
+    dateOfBirth = serializers.IntegerField()
+    class Meta:
+        model = Profile
+        fields = ["dateOfBirth","profession","location","nationality","github","linkedin","twitter","email","first_name","last_name"]
+    
+    def validate_dateOfBirth(self, value):
+        try:
+            datetime.fromtimestamp(value / 1000)
+        except ValueError:
+            raise serializers.ValidationError("Invalid timestamp format")
+        return value
+        
+    def update(self, instance, validated_data):
+        user_data = validated_data.pop('user', {})
+        email = user_data.get('email')
+        first_name = user_data.get('first_name')
+        last_name = user_data.get('last_name')
+
+        if email:
+            instance.user.email = email
+        if first_name:
+            instance.user.first_name = first_name
+        if last_name:
+            instance.user.last_name = last_name
+
+        instance.user.save()
+
+        instance.dateOfBirth = validated_data.get('dateOfBirth', instance.dateOfBirth)
+        instance.profession = validated_data.get('profession', instance.profession)
+        instance.location = validated_data.get('location', instance.location)
+        instance.nationality = validated_data.get('nationality', instance.nationality)
+        instance.github = validated_data.get('github', instance.github)
+        instance.linkedin = validated_data.get('linkedin', instance.linkedin)
+        instance.twitter = validated_data.get('twitter', instance.twitter)
+
+        instance.save()
+        return instance

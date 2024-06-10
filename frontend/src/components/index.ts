@@ -26,6 +26,7 @@ import University from "./view/University";
 import Card from "./card/Card";
 import ThemeSwitch from "./settings/ThemeSwitch";
 import Language from "./settings/LangSelect";
+import DatePicker from "./inputs/DatePicker";
 export {
   Language,
   ConnectionBar,
@@ -55,4 +56,5 @@ export {
   MyLongTextField,
   Card,
   ThemeSwitch,
+  DatePicker,
 };

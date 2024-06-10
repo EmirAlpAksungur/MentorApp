@@ -11,6 +11,7 @@ import {
   CertificateContainer,
   SkillSelect,
   Password,
+  DatePicker,
 } from "../index";
 import { LanguageElementType } from "../inputs/containers/LanguageContainer";
 import { CertificateElementType } from "../inputs/containers/CertificateContainer";
@@ -127,6 +128,15 @@ const FormSplitter: React.FC<FormSplitterType> = ({
             helperUpdateValue(val);
           }}
         ></MyUnKnownSkillSelect>
+      );
+    case "datepicker":
+      return (
+        <DatePicker
+          value={value}
+          handleChangeFunc={(value: number) => {
+            helperUpdateValue(value);
+          }}
+        />
       );
     default:
       return <></>;

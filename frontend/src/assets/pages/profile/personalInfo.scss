@@ -1,20 +1,6 @@
 @import "../../palette/palette.scss";
 @import "../../components/button/btn.scss";
-
-.about-me {
-  @include themify($themes) {
-    color: themed("text-secondary-darker");
-  }
-  .long-text-view__text-container__content {
-    font-size: 1.2rem;
-  }
-}
-.about-me-update {
-  .card-container {
-    height: 100%;
-  }
-}
-
+@import "./profile.scss";
 .update-body {
   padding: 40px;
   overflow: auto;
@@ -34,5 +20,49 @@
         transform: none;
       }
     }
+  }
+}
+
+.about-me {
+  @include themify($themes) {
+    color: themed("text-secondary-darker");
+  }
+  .long-text-view__text-container__content {
+    font-size: 1.2rem;
+  }
+}
+.about-me-update {
+  .card-container {
+    height: 100%;
+  }
+}
+
+.general {
+  width: 100%;
+  &__box {
+    display: flex;
+    padding: 8px 16px;
+
+    &__item {
+      flex: 1;
+      &__header {
+        font-size: 1.4rem;
+        line-height: 1.57;
+        @include themify($themes) {
+          color: themed("text-secondary-darker");
+        }
+      }
+      &__content {
+        font-size: 1.4rem;
+        margin-top: 4px;
+        line-height: 1.57;
+        @include themify($themes) {
+          color: themed("text-secondary");
+        }
+      }
+    }
+  }
+  &__divider {
+    @include divider();
   }
 }

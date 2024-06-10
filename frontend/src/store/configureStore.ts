@@ -24,6 +24,7 @@ import {
   theme,
   changePassword,
   about,
+  personalInfo,
 } from "../services/reducers";
 const { logger } = require(`redux-logger`);
 export interface RootState {
@@ -38,6 +39,7 @@ export interface RootState {
   theme: any;
   changePassword: any;
   about: any;
+  personalInfo: any;
   [key: string]: any;
 }
 
@@ -61,6 +63,7 @@ const rootReducer = combineReducers<RootState>({
   theme: theme,
   changePassword: changePassword,
   about: about,
+  personalInfo: personalInfo,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

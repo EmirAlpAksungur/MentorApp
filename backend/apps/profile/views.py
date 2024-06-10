@@ -12,7 +12,8 @@ from .serializers import (
     GetProfileSerializer,
     TokenSerializer,
     ChangePasswordSerializer,
-    AboutMeSerializer
+    AboutMeSerializer,
+    PersonalInfoSerializer
 )
 from rest_framework.authtoken.models import Token
 from .models import Profile,UnKnownSkills,Languages
@@ -241,13 +242,10 @@ class AboutmeView(APIView):
             profile = Profile.objects.get(
                 user=request.data.get('user_id')
             )
-            print(profile)
         except Profile.DoesNotExist:
             return Response({"error": "Profile not found."}, status=status.HTTP_404_NOT_FOUND)
 
         serializer = AboutMeSerializer(profile)
-        print(serializer)
-        print(serializer.data)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 class AboutmeUpdateView(APIView):
@@ -263,6 +261,39 @@ class AboutmeUpdateView(APIView):
             return Response({"error": "Profile not found."}, status=status.HTTP_404_NOT_FOUND)
 
         serializer = AboutMeSerializer(profile, data=request.data)
+        if serializer.is_valid():
+            serializer.save() 
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class PersonalInfoView(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    def post(self, request, *args, **kwargs):
+        try:
+            profile = Profile.objects.get(
+                user=request.data.get('user_id')
+            )
+        except Profile.DoesNotExist:
+            return Response({"error": "Profile not found."}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = PersonalInfoSerializer(profile)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+class PersonalInfoUpdateView(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    def post(self, request, *args, **kwargs):
+        try:
+            profile = Profile.objects.get(
+                user=request.user
+            )
+        except Profile.DoesNotExist:
+            return Response({"error": "Profile not found."}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = PersonalInfoSerializer(profile, data=request.data)
         if serializer.is_valid():
             serializer.save() 
             return Response(serializer.data, status=status.HTTP_200_OK)

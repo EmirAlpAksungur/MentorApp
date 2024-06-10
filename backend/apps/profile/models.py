@@ -47,7 +47,7 @@ class Profile(models.Model):
     likes = models.IntegerField(default = 0)
     dislikes = models.IntegerField(default = 0)
     savedBlog = models.ManyToManyField(Blog)
-    dateOfBirth = models.IntegerField(default = 0)
+    dateOfBirth = models.BigIntegerField(default = 0)
     twitter = models.CharField(max_length = 100, blank = True ,null = True)
     github = models.CharField(max_length = 100, blank = True ,null = True)
     linkedin = models.CharField(max_length = 100, blank = True ,null = True)

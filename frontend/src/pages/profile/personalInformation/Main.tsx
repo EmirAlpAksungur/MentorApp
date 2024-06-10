@@ -6,6 +6,7 @@ import { asyncLoadText } from "../../../services/actions/translations";
 import { TextListClass } from "../../../utils/textContent";
 import { Divider, Button, Grid } from "@mui/material";
 import AboutMe from "./utils/AboutMe";
+import General from "./utils/General";
 
 const Main = () => {
   const dispatch = useAppDispatch();
@@ -31,16 +32,7 @@ const Main = () => {
         <AboutMe user_id={user} />
       </Grid>
       <Grid item xs={12}>
-        <Card>
-          <div className="personal-information profile-card">
-            <div className=" profile-card__header">{text?.getText(1630)}</div>
-            <Divider className="profile-card__divider" />
-            <Grid
-              container
-              className="personal-information__body profile-card__body"
-            ></Grid>
-          </div>
-        </Card>
+        <General user_id={user} />
       </Grid>
     </Grid>
   );
