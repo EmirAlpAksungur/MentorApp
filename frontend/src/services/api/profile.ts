@@ -21,10 +21,6 @@ const getUser = (token: string) => {
   return instance.get("/profile/user-details/", config(token));
 };
 
-const fillProfile = (body: FormData, token: string) => {
-  return instance.post("/profile/fill-profile-data/", body, configForm(token));
-};
-
 let cancelToken: null | CancelTokenSource;
 const getProfile = (token: string, pageNumber: number) => {
   if (cancelToken) {
@@ -105,7 +101,6 @@ const ProfileService = {
   login,
   logout,
   getUser,
-  fillProfile,
   getProfile,
   isAuth,
   oneUnKnownSkillContent,

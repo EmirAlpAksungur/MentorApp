@@ -3,7 +3,6 @@ import { Outlet, Navigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import Start from "../layout/Main";
 import { RootState } from "../store/configureStore";
-import FirstLogin from "../pages/firstLogin/Main";
 import { checkIsAuth, addToken, loadUser } from "../services/actions/login";
 import LoadingComp from "../components/loading/LoadingComp";
 const PrivateRouter: React.FC = () => {
@@ -31,7 +30,6 @@ const PrivateRouter: React.FC = () => {
   return isAuth ? (
     <Start>
       <Outlet />
-      <FirstLogin />
     </Start>
   ) : token ? (
     <LoadingComp />

@@ -100,6 +100,10 @@ const SkillsCard: React.FC<{ user_id: number }> = ({ user_id }) => {
   };
   const fetchData = async () => {
     try {
+      console.log({ user_id });
+
+      console.log(token);
+
       const result = await ProfileService.getSkills({ user_id }, token);
       setContent(result.data?.knownSkills);
     } catch {}

@@ -8,19 +8,22 @@ import SkillsCard from "./utils/SkillsCard";
 
 const Main = () => {
   const user = useAppSelector((state: RootState) => state.auth?.user?.user);
+  console.log(user);
 
   return (
-    <Grid container rowGap={3}>
-      <Grid item xs={12}>
-        <AboutMe user_id={user} />
+    user && (
+      <Grid container rowGap={3}>
+        <Grid item xs={12}>
+          <AboutMe user_id={user} />
+        </Grid>
+        <Grid item xs={12}>
+          <General user_id={user} />
+        </Grid>
+        <Grid item xs={12}>
+          <SkillsCard user_id={user} />
+        </Grid>
       </Grid>
-      <Grid item xs={12}>
-        <General user_id={user} />
-      </Grid>
-      <Grid item xs={12}>
-        <SkillsCard user_id={user} />
-      </Grid>
-    </Grid>
+    )
   );
 };
 

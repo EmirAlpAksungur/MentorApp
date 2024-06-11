@@ -10,7 +10,7 @@ const validationSchema = yup.object({
   // studentInfo: yup.string().required("32").min(50, "33").max(300, "33"),
 });
 
-const _fillProfile: any =
+const _createBlog: any =
   () => async (dispatch: AppDispatch, getState: () => RootState) => {
     const values = getState().blog.values;
     const token = getState().auth.token;
@@ -30,13 +30,13 @@ const _fillProfile: any =
 
 export const handleSubmit =
   () => async (dispatch: AppDispatch, getState: () => RootState) => {
-    const values = getState().firstLogin.values;
+    const values = getState().blog.values;
     try {
       await validationSchema.validate(values, {
         abortEarly: false,
         strict: false,
       });
-      dispatch(_fillProfile());
+      dispatch(_createBlog());
     } catch (err: any) {
       err.inner.forEach((error: any) => {
         dispatch({

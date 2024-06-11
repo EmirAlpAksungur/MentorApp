@@ -19,7 +19,6 @@ import {
   signup,
   login,
   notification,
-  firstLogin,
   chat,
   theme,
   changePassword,
@@ -35,7 +34,6 @@ export interface RootState {
   signup: any;
   login: any;
   notification: any;
-  firstLogin: any;
   chat: any;
   theme: any;
   changePassword: any;
@@ -60,7 +58,6 @@ const rootReducer = combineReducers<RootState>({
   signup: signup,
   login: login,
   notification: notification,
-  firstLogin: firstLogin,
   chat: chat,
   theme: theme,
   changePassword: changePassword,

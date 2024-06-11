@@ -5,7 +5,6 @@ from .views import (
     CustomLoginView,
     CustomLogoutView,
     UserDetalisView,
-    FillProfileView,
     GetProfileView,
     IsAuthView,
     GetUnKnownSkillView,
@@ -25,7 +24,6 @@ urlpatterns = [
     path("login/", CustomLoginView.as_view(), name="rest_login"),
     path("logout/", CustomLogoutView.as_view(), name="rest_logout"),
     path("user-details/", UserDetalisView.as_view(), name="rest_user_details"),
-    path("fill-profile-data/", FillProfileView.as_view(), name="rest_user_details"),
     path("get-profile/<int:page>/", GetProfileView.as_view(), name="rest_user_details"),
     path("is-auth/", IsAuthView.as_view(), name="rest_user_details"),
     path("get-un-known-skill-content/", GetUnKnownSkillView.as_view(), name="get_un_known_skill_content"),
@@ -39,7 +37,6 @@ urlpatterns = [
     path("personal-info-update/", PersonalInfoUpdateView.as_view(), name="personal_info__update"),
     path("skills/", SkillsView.as_view(), name="skills"),
     path("skills-update/", SkillsUpdateView.as_view(), name="skills__update")
-
 ]
 
 
