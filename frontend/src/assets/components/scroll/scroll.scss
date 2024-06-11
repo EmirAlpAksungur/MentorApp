@@ -2,14 +2,14 @@
 
 @mixin scroll {
   &::-webkit-scrollbar {
-    width: 4px;
+    width: 3px;
     height: 100%;
   }
 
   &::-webkit-scrollbar-thumb {
     border-radius: 8px;
     @include themify($themes) {
-      background-color: themed("border");
+      background-color: themed("bg-warning");
     }
   }
 }

@@ -3,7 +3,8 @@
 
 .chat-container {
   width: 100%;
-  min-height: calc(100vh - 73px);
+  min-height: 100vh;
+  padding-top: 73px;
   @include themify($themes) {
     background-color: themed("bg");
   }

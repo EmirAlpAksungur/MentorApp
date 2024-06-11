@@ -16,7 +16,9 @@ from .views import (
     AboutmeView,
     AboutmeUpdateView,
     PersonalInfoView,
-    PersonalInfoUpdateView
+    PersonalInfoUpdateView,
+    SkillsView,
+    SkillsUpdateView
 )
 urlpatterns = [
     path("register/", CustomRegisterView.as_view(), name="rest_register"),
@@ -34,7 +36,9 @@ urlpatterns = [
     path("about-me/", AboutmeView.as_view(), name="about_me"),
     path("about-me-update/", AboutmeUpdateView.as_view(), name="about_me__update"),
     path("personal-info/", PersonalInfoView.as_view(), name="personal_info"),
-    path("personal-info-update/", PersonalInfoUpdateView.as_view(), name="personal_info__update")
+    path("personal-info-update/", PersonalInfoUpdateView.as_view(), name="personal_info__update"),
+    path("skills/", SkillsView.as_view(), name="skills"),
+    path("skills-update/", SkillsUpdateView.as_view(), name="skills__update")
 
 ]
 

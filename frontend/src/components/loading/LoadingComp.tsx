@@ -6,7 +6,7 @@ import "../../assets/components/loading.scss";
 const LoadingComponent: React.FC = () => {
   return (
     <Box className="loading-component-box">
-      <CircularProgress color="secondary" />
+      <CircularProgress className="loading-component-box__progress" />
     </Box>
   );
 };

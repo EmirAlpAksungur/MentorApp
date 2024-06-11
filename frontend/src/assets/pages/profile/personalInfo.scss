@@ -1,12 +1,14 @@
 @import "../../palette/palette.scss";
 @import "../../components/button/btn.scss";
 @import "./profile.scss";
+@import "../../components/scroll/scroll.scss";
 .update-body {
   padding: 40px;
   overflow: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  @include scroll;
   &__btn-group {
     text-align: right;
     margin-top: 20px;

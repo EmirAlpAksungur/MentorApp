@@ -6,22 +6,34 @@ from apps.translations.models import Translations
 from .models import Skill,SkillType
 from .serializers import GetSkillTypeSerializer,GetSkillSerializer
 class SkillTypeListView(generics.ListAPIView):
-    permission_classes = [
-        permissions.AllowAny,
-    ]
+    def post(self, request, *args, **kwargs):
+        language_id = request.data.get('LanguageId')
+        skillTypes = SkillType.objects.all()
+        skill_data = []
+        for skillType in skillTypes:
+            translation = Translations.objects.filter(TextContentId=skillType.TextContentId, LanguageId=language_id).first()
+            skillTypeSerializer = GetSkillTypeSerializer(skillType)
+            skill_data.append({
+                **skillTypeSerializer.data,
+                'name': translation.Translations if translation else None
+            })
 
-    def get_queryset(self):
-        return SkillType.objects.all()
-    def get(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        serializer = GetSkillTypeSerializer(queryset, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(skill_data, status=status.HTTP_200_OK)
 
 class SkillListView(generics.ListAPIView):
     def post(self, request):
-        queryset  = Skill.objects.filter(SkillTypeId=request.data.get('SkillTypeId'))
-        serializer = GetSkillSerializer(queryset , many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        language_id = request.data.get('LanguageId')
+        skills  = Skill.objects.filter(SkillTypeId=request.data.get('SkillTypeId'))
+        skill_data = []
+        for skill in skills:
+            translation = Translations.objects.filter(TextContentId=skill.TextContentId, LanguageId=language_id).first()
+            skillTypeSerializer = GetSkillSerializer(skill)
+            skill_data.append({
+                **skillTypeSerializer.data,
+                'name': translation.Translations if translation else None
+            })
+
+        return Response(skill_data, status=status.HTTP_200_OK)
 
 class SkillListAllView(generics.ListAPIView):
     queryset = Skill.objects.all()

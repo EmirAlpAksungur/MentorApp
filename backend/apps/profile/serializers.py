@@ -126,3 +126,9 @@ class PersonalInfoSerializer(serializers.ModelSerializer):
 
         instance.save()
         return instance
+
+class SkillsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ["knownSkills"]
+    

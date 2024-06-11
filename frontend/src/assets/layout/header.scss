@@ -5,6 +5,8 @@
   padding: 16px;
   border-bottom: 1px solid;
   overflow: hidden;
+  position: fixed;
+  z-index: 1;
   @include themify($themes) {
     background-color: themed("bg-secondary");
     border-color: themed("border");

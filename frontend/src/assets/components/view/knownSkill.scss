@@ -9,8 +9,11 @@ $colors: "primary", "secondary", "info", "success", "error", "warning";
           color: themed("text");
         }
       }
+      // @include themify($themes) {
+      //   border-color: themed("bg-warning");
+      // }
     }
-    @for $i from 1 through 7 {
+    @for $i from 1 through 25 {
       &:nth-child(#{$i}) {
         div {
           @include themify($themes) {

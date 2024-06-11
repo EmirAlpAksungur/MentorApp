@@ -6,7 +6,7 @@ import { RootState } from "../../store/configureStore";
 import "../../assets/components/view/knownSkill.scss";
 
 interface KnownSkillsType {
-  knownSkills: number[];
+  knownSkills: number[] | null;
 }
 
 interface ItemType {

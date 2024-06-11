@@ -4,6 +4,7 @@ import { instance, unAuthConfig, config, configForm } from "./baseUnit";
 import { SignUpType } from "../types/signUp";
 import { LoginType } from "../types/login";
 import { PersonalInfoType } from "../types/personalInfo";
+import { KnownSkillsType } from "../types/knownSkills";
 const register = (body: SignUpType) => {
   return instance.post("/profile/register/", body, unAuthConfig);
 };
@@ -91,6 +92,14 @@ const getPersonalInfo = (body: { user_id: number }, token: string) => {
 const updatePersonalInfo = (body: PersonalInfoType, token: string) => {
   return instance.post("/profile/personal-info-update/", body, config(token));
 };
+
+const getSkills = (body: { user_id: number }, token: string) => {
+  return instance.post("/profile/skills/", body, config(token));
+};
+
+const updateSklls = (body: KnownSkillsType, token: string) => {
+  return instance.post("/profile/skills-update/", body, config(token));
+};
 const ProfileService = {
   register,
   login,
@@ -108,6 +117,8 @@ const ProfileService = {
   aboutUpdate,
   getPersonalInfo,
   updatePersonalInfo,
+  getSkills,
+  updateSklls,
 };
 
 export default ProfileService;

@@ -1,0 +1,33 @@
+@import "../../palette/palette.scss";
+@import "../../components/button/btn.scss";
+.known-skills-input {
+  &__values {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+    &__item {
+      padding: 2px 2px 2px 8px;
+      border-radius: 4px;
+      font-size: 1.2rem;
+      @include themify($themes) {
+        color: themed("text-secondary-darker");
+        border: 1px solid themed("border-warning") !important;
+      }
+      &__btn {
+        @include btnOutlined;
+        margin-left: 4px !important;
+      }
+    }
+  }
+  &__select {
+    display: flex;
+    gap: 8px;
+    &__item {
+      flex: 1;
+    }
+    &__btn {
+      @include btnContained;
+    }
+  }
+}
