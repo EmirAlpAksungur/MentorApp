@@ -105,6 +105,10 @@ const updateUnknownSklls = (body: KnownSkillsType, token: string) => {
   return instance.post("/profile/unknown-skills-update/", body, config(token));
 };
 
+const updatePhoto = (body: { photo: string }, token: string) => {
+  return instance.post("/profile/profile-photo-update/", body, config(token));
+};
+
 const ProfileService = {
   register,
   login,
@@ -125,6 +129,7 @@ const ProfileService = {
   updateSklls,
   getUnknownSkills,
   updateUnknownSklls,
+  updatePhoto,
 };
 
 export default ProfileService;

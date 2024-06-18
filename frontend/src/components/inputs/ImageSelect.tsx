@@ -28,8 +28,6 @@ const MyTextfield: React.FC<MyImageSelectType> = (props) => {
     const selectedFile = e.target.files?.[0] || null;
 
     if (selectedFile) {
-      console.log(selectedFile);
-      console.log(selectedFile.type);
       fileToBase64(selectedFile, (e: string) => {
         handleChangeFunc(e);
       });

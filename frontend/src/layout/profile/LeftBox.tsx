@@ -8,13 +8,14 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import HttpsOutlinedIcon from "@mui/icons-material/HttpsOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import { useAppSelector } from "../../hooks/redux";
+import { useAppSelector, useAppDispatch } from "../../hooks/redux";
 import { RootState } from "../../store/configureStore";
 import { ImageSelect } from "../../components";
 import { routeToUrl } from "../../routers/utils";
 import { asyncLoadText } from "../../services/actions/translations";
-
+import { loadUser } from "../../services/actions/login";
 import { TextListClass } from "../../utils/textContent";
+import ProfileService from "../../services/api/profile";
 const ButtonGroup = () => {
   const location = useLocation();
   const [text, setText] = useState<TextListClass | null>(null);
@@ -78,7 +79,9 @@ const ButtonGroup = () => {
 };
 
 const LeftBox = () => {
+  const dispatch = useAppDispatch();
   const photo = useAppSelector((state: RootState) => state.auth.user?.photo);
+  const token = useAppSelector((state: RootState) => state.auth?.token);
   const first_name = useAppSelector(
     (state: RootState) => state.auth.user?.first_name
   );
@@ -95,7 +98,14 @@ const LeftBox = () => {
   const linkedin = useAppSelector(
     (state: RootState) => state.auth.user?.linkedin
   );
-
+  const handleChangeFunc = async (e: string | null) => {
+    try {
+      e && (await ProfileService.updatePhoto({ photo: e }, token));
+      dispatch(loadUser(token));
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <>
       <div className="profile-container__box__body__left__header">
@@ -104,7 +114,7 @@ const LeftBox = () => {
         </IconButton>
       </div>
       <div className="profile-container__box__body__left__img">
-        <ImageSelect value={photo} />
+        <ImageSelect value={photo} handleChangeFunc={handleChangeFunc} />
       </div>
       <div className="profile-container__box__body__left__name">
         {first_name} {last_name}

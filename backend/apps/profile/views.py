@@ -16,7 +16,8 @@ from .serializers import (
     PersonalInfoSerializer,
     SkillsSerializer,
     UnknownSkillsSerializer,
-    UnknownSkillsProfileSerializer
+    UnknownSkillsProfileSerializer,
+    PhotoSerializer
 )
 from rest_framework.authtoken.models import Token
 from .models import Profile,UnKnownSkills,Languages
@@ -319,3 +320,21 @@ class UnknownSkillsUpdateView(APIView):
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         return Response(response_data, status=status.HTTP_200_OK)
+
+class ProfilePhotoUpdateView(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    def post(self, request, *args, **kwargs):
+        try:
+            profile = Profile.objects.get(
+                user=request.user
+            )
+        except Profile.DoesNotExist:
+            return Response({"error": "Profile not found."}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = PhotoSerializer(profile, data=request.data)
+        if serializer.is_valid():
+            serializer.save() 
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

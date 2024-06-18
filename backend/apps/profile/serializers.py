@@ -147,7 +147,7 @@ class UnknownSkillsSerializer(serializers.ModelSerializer):
         instance.level = validated_data.get('level', instance.level)
         instance.save()
         return instance
-        
+
 class UnknownSkillsProfileSerializer(serializers.ModelSerializer):
     unKnownSkills = UnknownSkillsSerializer(many=True) 
 
@@ -156,3 +156,8 @@ class UnknownSkillsProfileSerializer(serializers.ModelSerializer):
         fields = ['id', 'user', 'unKnownSkills']
 
 
+class PhotoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ["photo"]
+    

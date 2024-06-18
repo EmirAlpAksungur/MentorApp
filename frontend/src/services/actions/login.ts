@@ -22,7 +22,6 @@ export const loadUser =
   (token: string) => async (dispatch: Dispatch, getState: () => RootState) => {
     try {
       let res = await ProfileService.getUser(token);
-      console.log(res);
 
       dispatch({
         type: LOAD_USER,
