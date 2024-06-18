@@ -5,6 +5,8 @@ import { SignUpType } from "../types/signUp";
 import { LoginType } from "../types/login";
 import { PersonalInfoType } from "../types/personalInfo";
 import { KnownSkillsType } from "../types/knownSkills";
+import { UnKnownSkillsType } from "../types/unKnownSkills";
+import { LanguagesTypes } from "../types/languages";
 const register = (body: SignUpType) => {
   return instance.post("/profile/register/", body, unAuthConfig);
 };
@@ -101,12 +103,20 @@ const getUnknownSkills = (body: { user_id: number }, token: string) => {
   return instance.post("/profile/unknown-skills/", body, config(token));
 };
 
-const updateUnknownSklls = (body: KnownSkillsType, token: string) => {
+const updateUnknownSklls = (body: UnKnownSkillsType, token: string) => {
   return instance.post("/profile/unknown-skills-update/", body, config(token));
 };
 
 const updatePhoto = (body: { photo: string }, token: string) => {
   return instance.post("/profile/profile-photo-update/", body, config(token));
+};
+
+const getProfileLanguages = (body: { user_id: number }, token: string) => {
+  return instance.post("/profile/languages/", body, config(token));
+};
+
+const updateProfileLanguages = (body: LanguagesTypes, token: string) => {
+  return instance.post("/profile/languages-update/", body, config(token));
 };
 
 const ProfileService = {
@@ -130,6 +140,8 @@ const ProfileService = {
   getUnknownSkills,
   updateUnknownSklls,
   updatePhoto,
+  getProfileLanguages,
+  updateProfileLanguages,
 };
 
 export default ProfileService;

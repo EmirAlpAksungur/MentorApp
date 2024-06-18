@@ -1,19 +1,19 @@
-import { UNKNOWNSKILLS_SET_ERROR } from "../types/redux";
+import { PROFILELANGUAGES_SET_ERROR } from "../types/redux";
 import * as yup from "yup";
 import { RootState, AppDispatch } from "../../store/configureStore";
 import { changeNotification } from "./notification";
 import ProfileService from "../api/profile";
-import { UnKnownSkillsType } from "../types/unKnownSkills";
+import { LanguagesTypes } from "../types/languages";
 const validationSchema = yup.object({
-  unKnownSkills: yup.array().required("1667"),
+  languages: yup.array().required("1667"),
 });
 
-export const unKnownSkillsUpdate =
-  (values: UnKnownSkillsType) =>
+export const languagesUpdate =
+  (values: LanguagesTypes) =>
   async (dispatch: AppDispatch, getState: () => RootState) => {
     try {
       const token = getState()?.auth?.token;
-      let res = await ProfileService.updateUnknownSklls(values, token);
+      let res = await ProfileService.updateProfileLanguages(values, token);
       dispatch(
         changeNotification({
           NotificationCode: "success",
@@ -36,17 +36,17 @@ export const unKnownSkillsUpdate =
 
 export const handleSubmit =
   () => async (dispatch: AppDispatch, getState: () => RootState) => {
-    const values = getState().unKnownSkills.values;
+    const values = getState().profileLanguages.values;
     try {
       await validationSchema.validate(values, {
         abortEarly: false,
         strict: false,
       });
-      return Promise.resolve(await dispatch(unKnownSkillsUpdate(values)));
+      return Promise.resolve(await dispatch(languagesUpdate(values)));
     } catch (err: any) {
       err.inner.forEach((error: any) => {
         dispatch({
-          type: UNKNOWNSKILLS_SET_ERROR,
+          type: PROFILELANGUAGES_SET_ERROR,
           payload: { key: error.path, value: parseInt(error.message) },
         });
       });

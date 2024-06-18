@@ -26,6 +26,7 @@ import {
   personalInfo,
   knownSkills,
   unKnownSkills,
+  profileLanguages,
 } from "../services/reducers";
 const { logger } = require(`redux-logger`);
 export interface RootState {
@@ -42,6 +43,7 @@ export interface RootState {
   personalInfo: any;
   knownSkills: any;
   unKnownSkills: any;
+  profileLanguages: any;
   [key: string]: any;
 }
 
@@ -67,6 +69,7 @@ const rootReducer = combineReducers<RootState>({
   personalInfo: personalInfo,
   knownSkills: knownSkills,
   unKnownSkills: unKnownSkills,
+  profileLanguages: profileLanguages,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

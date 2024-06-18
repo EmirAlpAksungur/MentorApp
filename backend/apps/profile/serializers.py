@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate
 from django.contrib.auth.backends import ModelBackend
 from rest_framework.authtoken.models import Token
-from .models import Profile, UnKnownSkills
+from .models import Profile, UnKnownSkills, Languages
 from apps.blog.serializers import BlogTopSerializer
 from rest_framework.serializers import Serializer, CharField, ValidationError
 from datetime import datetime
@@ -161,3 +161,30 @@ class PhotoSerializer(serializers.ModelSerializer):
         model = Profile
         fields = ["photo"]
     
+
+class LanguagesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Languages
+        fields = ['uuid', 'name', 'level']
+
+    def create(self, validated_data):
+        languages = Languages.objects.create(**validated_data)
+        return languages
+
+    def update(self, instance, validated_data):
+        instance.skill = validated_data.get('name', instance.name)
+        instance.level = validated_data.get('level', instance.level)
+        instance.save()
+        return instance
+
+
+class LanguagesProfileSerializer(serializers.ModelSerializer):
+    languages = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Profile
+        fields = ['languages']
+
+    def get_languages(self, obj):
+        languages = obj.languages.all().order_by('-level')
+        return LanguagesSerializer(languages, many=True).data

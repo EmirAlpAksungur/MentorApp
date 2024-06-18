@@ -1,72 +1,130 @@
-import React, { useEffect, useState } from "react";
-import { Grid, IconButton } from "@mui/material";
-import { MyTextField, MySlide } from "..";
-import RemoveIcon from "@mui/icons-material/Remove";
-import "../../assets/components/inputs/textField.scss";
-interface LanguageSelectType {
-  handleChangeFunc?: (uuid: string, name: string, level: number) => void;
-  removeElement?: (uuid: string) => void;
-  uuid: string;
-  name: string;
-  level: number;
+import React from "react";
+import { MyTextField, LoadingComponent, MySlide } from "..";
+
+import { Grid, IconButton, LinearProgress } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import AddIcon from "@mui/icons-material/Add";
+import "../../assets/components/inputs/unKnownSkills.scss";
+import { LanguageType } from "../../services/types/languages";
+import { uuidv4 } from "../../utils/uuidGenerator";
+
+interface UnSkillSelectProps {
+  value: LanguageType[];
+  handleChangeFunc: (value: LanguageType[]) => void;
   [key: string]: any;
 }
 
-const LanguageSelect: React.FC<LanguageSelectType> = (props) => {
-  const {
-    handleChangeFunc = () => {},
-    removeElement = () => {},
-    uuid,
-    name,
-    value,
-    level,
-    ...rest
-  } = props;
-
-  const handleLevelChange = async (e: number) => {
-    handleChangeFunc(uuid, name, e);
-  };
-
-  const handleNameChange = async (e: string) => {
-    handleChangeFunc(uuid, e, level);
-  };
-
+const Languages: React.FC<UnSkillSelectProps> = (props) => {
   return (
-    <Grid container alignItems={"center"}>
-      <Grid
-        item
-        sx={{
-          paddingRight: "8px",
-          display: "flex",
-        }}
-      >
-        <IconButton
-          onClick={() => {
-            removeElement(uuid);
-          }}
-        >
-          <RemoveIcon sx={{ color: "red" }} />
-        </IconButton>
+    <div className="un-known-skills-input__values">
+      <Grid container spacing={1} className={"unknownskill"}>
+        {props.value?.map((language) => {
+          return (
+            <Grid item xs={12} key={language.uuid}>
+              <Grid container alignItems={"center"}>
+                <Grid item xs={11}>
+                  <Grid
+                    container
+                    justifyContent={"space-between"}
+                    alignItems={"center"}
+                    wrap="nowrap"
+                  >
+                    <Grid item xs={6} className={"unknownskill__text"}>
+                      {language.name}
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Grid container alignItems={"center"} columnGap={2}>
+                        <Grid item xs>
+                          <LinearProgress
+                            variant="determinate"
+                            value={language.level}
+                            className="unknownskill__level-bar"
+                          />
+                        </Grid>
+                        <Grid item className="unknownskill__level-text">
+                          %{language.level}
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </Grid>
+                <Grid item xs={1}>
+                  <IconButton
+                    className="known-skills-input__values__item__btn"
+                    onClick={() => {
+                      props.handleChangeFunc(
+                        props.value.filter(
+                          (item: LanguageType) => item.uuid !== language.uuid
+                        )
+                      );
+                    }}
+                  >
+                    <CloseIcon />
+                  </IconButton>
+                </Grid>
+              </Grid>
+            </Grid>
+          );
+        })}
       </Grid>
-      <Grid item sx={{ flexGrow: 1 }}>
-        <Grid container columnSpacing={2}>
-          <Grid item xs={4}>
-            <MyTextField value={name} handleChangeFunc={handleNameChange} />
-          </Grid>
-          <Grid item xs={8} alignSelf={"center"}>
-            <MySlide
-              min={0}
-              max={5}
-              step={1}
-              value={level}
-              color="success"
-              handleChangeFunc={handleLevelChange}
-            />
-          </Grid>
-        </Grid>
-      </Grid>
-    </Grid>
+    </div>
   );
 };
 
-export default React.memo(LanguageSelect);
+const LanguageSelect: React.FC<UnSkillSelectProps> = (props) => {
+  const { value = [], handleChangeFunc, ...rest } = props;
+
+  const [name, setName] = React.useState<string>("");
+  const [level, setLevel] = React.useState<number>(0);
+  const handleNameChange = (value: string) => {
+    setName(value);
+  };
+  const handleLevelChange = (value: number) => {
+    setLevel(value);
+  };
+
+  return (
+    <div className="">
+      <Languages value={value} handleChangeFunc={handleChangeFunc} />
+      <Grid
+        container
+        justifyContent={"space-between"}
+        alignItems={"center"}
+        gap={2}
+      >
+        <Grid item xs={4}>
+          <MyTextField value={name} handleChangeFunc={handleNameChange} />
+        </Grid>
+        <Grid item xs={6}>
+          <MySlide
+            min={0}
+            max={100}
+            step={5}
+            value={level}
+            handleChangeFunc={handleLevelChange}
+            className="un-known-skills-input__slide"
+          />
+        </Grid>
+        <Grid item xs>
+          <IconButton
+            className="known-skills-input__select__btn"
+            onClick={() => {
+              handleChangeFunc([
+                ...value,
+                {
+                  uuid: uuidv4(),
+                  name: name,
+                  level: level,
+                },
+              ]);
+            }}
+          >
+            <AddIcon />
+          </IconButton>
+        </Grid>
+      </Grid>
+    </div>
+  );
+};
+
+export default LanguageSelect;

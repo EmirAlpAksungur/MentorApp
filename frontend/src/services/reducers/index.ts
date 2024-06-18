@@ -11,6 +11,7 @@ import about from "./about";
 import personalInfo from "./personalInfo";
 import knownSkills from "./knownSkills";
 import unKnownSkills from "./unKnownSkills";
+import profileLanguages from "./profileLanguages";
 export {
   auth,
   blog,
@@ -25,4 +26,5 @@ export {
   personalInfo,
   knownSkills,
   unKnownSkills,
+  profileLanguages,
 };

@@ -17,7 +17,9 @@ from .serializers import (
     SkillsSerializer,
     UnknownSkillsSerializer,
     UnknownSkillsProfileSerializer,
-    PhotoSerializer
+    PhotoSerializer,
+    LanguagesSerializer,
+    LanguagesProfileSerializer
 )
 from rest_framework.authtoken.models import Token
 from .models import Profile,UnKnownSkills,Languages
@@ -338,3 +340,51 @@ class ProfilePhotoUpdateView(APIView):
             serializer.save() 
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class LanguagesView(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    def post(self, request, *args, **kwargs):
+        try:
+            profile = Profile.objects.get(
+                user=request.data.get('user_id')
+            )
+        except Profile.DoesNotExist:
+            return Response({"error": "Profile not found."}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = LanguagesProfileSerializer(profile)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+class LanguagesUpdateView(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    def post(self, request, *args, **kwargs):
+        try:
+            profile = Profile.objects.get(user=request.user)
+        except Profile.DoesNotExist:
+            return Response({"error": "Profile not found."}, status=status.HTTP_404_NOT_FOUND)
+        response_data = []
+        request_uuids = [item["uuid"] for item in request.data.get("languages", [])]
+
+        for language in profile.languages.all():
+            if language.uuid not in request_uuids:
+                profile.languages.remove(language)
+
+        for item in request.data.get("languages", []):
+            try:
+                language = Languages.objects.get(uuid=item["uuid"])
+                serializer = LanguagesSerializer(language, data=item)
+            except Languages.DoesNotExist:
+                serializer = LanguagesSerializer(data=item)
+
+            if serializer.is_valid():
+                language = serializer.save()
+                profile.languages.add(language)  # ManyToMany ilişkisine ekleme
+                response_data.append(serializer.data)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response(response_data, status=status.HTTP_200_OK)

@@ -16,7 +16,6 @@ import UniversitySelect from "./inputs/UniversitySelect";
 import LanguageSelect from "./inputs/LanguageSelect";
 import CertificateSelect from "./inputs/CertificateSelect";
 import UniversityContainer from "./inputs/containers/UniversityContainer";
-import LanguageContainer from "./inputs/containers/LanguageContainer";
 import CertificateContainer from "./inputs/containers/CertificateContainer";
 import MyMenu from "./menu/Menu";
 import Form from "./form/Main";
@@ -45,7 +44,6 @@ export {
   UniversityContainer,
   Password,
   University,
-  LanguageContainer,
   CertificateContainer,
   MyMenu,
   MyTextField,

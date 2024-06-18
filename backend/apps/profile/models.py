@@ -21,7 +21,7 @@ class Certificate(models.Model):
 class Languages(models.Model):
     uuid = models.CharField(max_length=100,primary_key = True)
     name = models.CharField(max_length = 50, blank = True ,null = True)
-    level = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)])
+    level = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])
     
 class References(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='references')
