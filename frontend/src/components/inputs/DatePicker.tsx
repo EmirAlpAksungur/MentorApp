@@ -12,10 +12,13 @@ interface DatePickerProps {
 
 const DatePicker: React.FC<DatePickerProps> = (props) => {
   const { value, handleChangeFunc, error, ...rest } = props;
+  console.log(value);
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DesktopDatePicker
-        defaultValue={props?.value !== 0 ? dayjs(props?.value) : undefined}
+        defaultValue={value !== 0 ? dayjs(value) : undefined}
+        value={value !== 0 ? dayjs(value) : undefined}
         onChange={(newValue) => {
           if (newValue) props.handleChangeFunc(newValue.valueOf());
         }}
