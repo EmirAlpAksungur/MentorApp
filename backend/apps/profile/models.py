@@ -11,7 +11,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator ,FileExt
 class UnKnownSkills(models.Model):
     uuid = models.CharField(max_length=100,primary_key = True)
     skill = models.ForeignKey(Skill,on_delete=models.CASCADE)
-    level = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)])
+    level = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])
     
 class Certificate(models.Model):
     uuid = models.CharField(max_length=100,primary_key = True)

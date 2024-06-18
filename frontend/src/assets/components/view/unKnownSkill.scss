@@ -1,9 +1,30 @@
+@import "../../palette/palette.scss";
 .unknownskill {
+  max-width: 400px;
   &__text {
     font-size: 1.4rem;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    @include themify($themes) {
+      color: themed("text-secondary");
+    }
+  }
+  &__level-bar {
+    .MuiLinearProgress-bar {
+      @include themify($themes) {
+        background-color: themed("bg-warning");
+      }
+    }
+    @include themify($themes) {
+      background-color: themed("bg-warning-active");
+    }
+  }
+  &__level-text {
+    font-size: 1.2rem;
+    @include themify($themes) {
+      color: themed("text-secondary-darker");
+    }
   }
   &__tooltip {
     font-size: 1.1rem;

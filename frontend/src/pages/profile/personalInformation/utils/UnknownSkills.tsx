@@ -1,4 +1,4 @@
-import { ABOUT_UPDATE_VALUE } from "../../../../services/types/redux";
+import { UNKNOWNSKILLS_UPDATE_VALUE } from "../../../../services/types/redux";
 import { useEffect, useState } from "react";
 import { Card, MyDialog, Form } from "../../../../components";
 import { useAppSelector, useAppDispatch } from "../../../../hooks/redux";
@@ -7,13 +7,15 @@ import { asyncLoadText } from "../../../../services/actions/translations";
 import { TextListClass } from "../../../../utils/textContent";
 import { Divider, IconButton, Grid, Button } from "@mui/material";
 import ProfileService from "../../../../services/api/profile";
-import LongText from "../../../../components/view/LongText";
 import EditIcon from "@mui/icons-material/Edit";
-import { AboutFormType } from "../../../../services/types/about";
 import "../../../../assets/pages/profile/personalInfo.scss";
-import { handleSubmit } from "../../../../services/actions/about";
-
-const AboutMeUpdate: React.FC<any> = ({
+import UnKnownSkill from "../../../../components/view/UnKnownSkill";
+import {
+  UnKnownSkillsFormType,
+  UnKnownSkillsType,
+} from "../../../../services/types/unKnownSkills";
+import { handleSubmit } from "../../../../services/actions/unKnownSkills";
+const UnKnownSkillsUpdate: React.FC<any> = ({
   value,
   fetchData,
   handleClose,
@@ -34,12 +36,13 @@ const AboutMeUpdate: React.FC<any> = ({
   }, [LanguageId]);
   useEffect(() => {
     dispatch({
-      type: ABOUT_UPDATE_VALUE,
-      payload: { key: "about", value },
+      type: UNKNOWNSKILLS_UPDATE_VALUE,
+      payload: { key: "unKnownSkills", value },
     });
   }, []);
   return (
     <div
+      className="about-me-update"
       style={{
         width,
         height,
@@ -47,13 +50,16 @@ const AboutMeUpdate: React.FC<any> = ({
     >
       <Card>
         <div
-          className="update-body "
+          className="update-body about-me-update__body"
           style={{
             width,
             height,
           }}
         >
-          <Form reduxConnectionString={"about"} formElements={AboutFormType} />
+          <Form
+            reduxConnectionString={"unKnownSkills"}
+            formElements={UnKnownSkillsFormType}
+          />
           <div className="update-body__btn-group">
             <Button
               onClick={handleClose}
@@ -66,8 +72,6 @@ const AboutMeUpdate: React.FC<any> = ({
               variant="contained"
               className="update-body__btn-group__save"
               onClick={async () => {
-                console.log(await dispatch(handleSubmit()));
-
                 if (await dispatch(handleSubmit())) {
                   fetchData();
                   handleClose();
@@ -83,25 +87,25 @@ const AboutMeUpdate: React.FC<any> = ({
   );
 };
 
-const AboutMe: React.FC<{ user_id: number }> = ({ user_id }) => {
+const SkillsCard: React.FC<{ user_id: number }> = ({ user_id }) => {
   const [text, setText] = useState<TextListClass | null>(null);
-  const [content, setContent] = useState<string | null>(null);
-  const [isLoaded, setiIsLoaded] = useState<boolean>(false);
+  const [content, setContent] = useState<UnKnownSkillsType[] | null>(null);
   const LanguageId = useAppSelector(
     (state: RootState) => state.languages.LanguageId
   );
   const user = useAppSelector((state: RootState) => state.auth?.user?.user);
   const token = useAppSelector((state: RootState) => state.auth?.token);
   const helperAsync = async () => {
-    const result = await asyncLoadText(LanguageId, [1654]);
+    const result = await asyncLoadText(LanguageId, [1666]);
     Array.isArray(result) && setText(new TextListClass(result));
   };
   const fetchData = async () => {
     try {
-      const result = await ProfileService.getAboutMe({ user_id }, token);
-      setContent(result?.data?.about);
-      setiIsLoaded(true);
-    } catch {}
+      const result = await ProfileService.getUnknownSkills({ user_id }, token);
+      setContent(result.data?.unKnownSkills);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
@@ -110,21 +114,21 @@ const AboutMe: React.FC<{ user_id: number }> = ({ user_id }) => {
   }, [LanguageId]);
   return (
     <Card>
-      <div className="personal-information profile-card">
-        <div className=" profile-card__header">
-          {text?.getText(1654)}
+      <div className="unknown-skills profile-card">
+        <div className="profile-card__header">
+          {text?.getText(1666)}
           <MyDialog
-            Element={AboutMeUpdate}
+            Element={UnKnownSkillsUpdate}
             closeProtection={false}
             Button={() =>
-              isLoaded &&
+              content &&
               user === user_id && (
                 <IconButton className=" profile-card__header__btn">
                   <EditIcon />
                 </IconButton>
               )
             }
-            defaultWH={[750, 650]}
+            defaultWH={[550, 450]}
             defaultOpen={false}
             hideBackdrop={false}
             value={content}
@@ -132,17 +136,12 @@ const AboutMe: React.FC<{ user_id: number }> = ({ user_id }) => {
           />
         </div>
         <Divider className="profile-card__divider" />
-        <Grid
-          container
-          className="personal-information__body profile-card__body"
-        >
-          <div className="about-me">
-            <LongText text={content} />
-          </div>
+        <Grid container className="unknown-skills__body profile-card__body">
+          <UnKnownSkill unKnownSkills={content} />
         </Grid>
       </div>
     </Card>
   );
 };
 
-export default AboutMe;
+export default SkillsCard;

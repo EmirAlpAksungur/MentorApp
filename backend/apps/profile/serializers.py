@@ -132,3 +132,27 @@ class SkillsSerializer(serializers.ModelSerializer):
         model = Profile
         fields = ["knownSkills"]
     
+
+class UnknownSkillsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UnKnownSkills
+        fields = ['uuid', 'skill', 'level']
+
+    def create(self, validated_data):
+        unknown_skill = UnKnownSkills.objects.create(**validated_data)
+        return unknown_skill
+
+    def update(self, instance, validated_data):
+        instance.skill = validated_data.get('skill', instance.skill)
+        instance.level = validated_data.get('level', instance.level)
+        instance.save()
+        return instance
+        
+class UnknownSkillsProfileSerializer(serializers.ModelSerializer):
+    unKnownSkills = UnknownSkillsSerializer(many=True) 
+
+    class Meta:
+        model = Profile
+        fields = ['id', 'user', 'unKnownSkills']
+
+

@@ -56,7 +56,7 @@ export const logIn = (values: LoginType) => async (dispatch: AppDispatch) => {
         NotificationText: parseInt(err.response.data.msg_code[0]),
       })
     );
-    return Promise.resolve(null);
+    return null;
   }
 };
 
@@ -77,7 +77,7 @@ export const checkIsAuth =
         type: CLEAN_AUTH,
       });
       localStorage.removeItem("token");
-      return Promise.reject(false);
+      return false;
     }
   };
 

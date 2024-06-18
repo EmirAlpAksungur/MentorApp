@@ -10,6 +10,7 @@ import changePassword from "./changePassword";
 import about from "./about";
 import personalInfo from "./personalInfo";
 import knownSkills from "./knownSkills";
+import unKnownSkills from "./unKnownSkills";
 export {
   auth,
   blog,
@@ -23,4 +24,5 @@ export {
   about,
   personalInfo,
   knownSkills,
+  unKnownSkills,
 };

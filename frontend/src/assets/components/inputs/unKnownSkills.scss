@@ -1,0 +1,24 @@
+@import "../../palette/palette.scss";
+@import "../../components/button/btn.scss";
+.un-known-skills-input {
+  &__values {
+    margin-bottom: 16px;
+  }
+  &__select {
+    display: flex;
+    gap: 8px;
+    &__item {
+      flex: 1;
+    }
+  }
+  &__slide {
+    margin: 16px 0px;
+    @include themify($themes) {
+      color: themed("text-warning");
+    }
+  }
+
+  &__btn {
+    @include btnContained;
+  }
+}

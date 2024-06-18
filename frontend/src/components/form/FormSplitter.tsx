@@ -18,6 +18,7 @@ import { CertificateElementType } from "../inputs/containers/CertificateContaine
 import { FormSplitterType } from "../../services/types/form";
 import { updateFormValue } from "../../services/actions/form";
 import MyUnKnownSkillSelect from "../inputs/UnKnownSkillSelect";
+import { UnKnownSkillsType } from "../../services/types/unKnownSkills";
 const FormSplitter: React.FC<FormSplitterType> = ({
   reduxConnectionString,
   reduxKey,
@@ -124,7 +125,7 @@ const FormSplitter: React.FC<FormSplitterType> = ({
       return (
         <MyUnKnownSkillSelect
           value={value}
-          handleChangeFunc={(val: { value: number; level: number }[]) => {
+          handleChangeFunc={(val: UnKnownSkillsType[]) => {
             helperUpdateValue(val);
           }}
         ></MyUnKnownSkillSelect>

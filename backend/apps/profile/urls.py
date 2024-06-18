@@ -17,7 +17,9 @@ from .views import (
     PersonalInfoView,
     PersonalInfoUpdateView,
     SkillsView,
-    SkillsUpdateView
+    SkillsUpdateView,
+    UnknownSkillsView,
+    UnknownSkillsUpdateView
 )
 urlpatterns = [
     path("register/", CustomRegisterView.as_view(), name="rest_register"),
@@ -36,7 +38,11 @@ urlpatterns = [
     path("personal-info/", PersonalInfoView.as_view(), name="personal_info"),
     path("personal-info-update/", PersonalInfoUpdateView.as_view(), name="personal_info__update"),
     path("skills/", SkillsView.as_view(), name="skills"),
-    path("skills-update/", SkillsUpdateView.as_view(), name="skills__update")
+    path("skills-update/", SkillsUpdateView.as_view(), name="skills__update"),
+    path("unknown-skills/", UnknownSkillsView.as_view(), name="unknown_skills"),
+    path("unknown-skills-update/", UnknownSkillsUpdateView.as_view(), name="unknown_skills__update")
+
+
 ]
 
 

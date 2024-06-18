@@ -5,10 +5,9 @@ import { Grid } from "@mui/material";
 import AboutMe from "./utils/AboutMe";
 import General from "./utils/General";
 import SkillsCard from "./utils/SkillsCard";
-
+import UnknownSkillsCard from "./utils/UnknownSkills";
 const Main = () => {
   const user = useAppSelector((state: RootState) => state.auth?.user?.user);
-  console.log(user);
 
   return (
     user && (
@@ -21,6 +20,9 @@ const Main = () => {
         </Grid>
         <Grid item xs={12}>
           <SkillsCard user_id={user} />
+        </Grid>
+        <Grid item xs={12}>
+          <UnknownSkillsCard user_id={user} />
         </Grid>
       </Grid>
     )

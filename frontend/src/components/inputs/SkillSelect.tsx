@@ -7,6 +7,7 @@ import { IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import AddIcon from "@mui/icons-material/Add";
 import "../../assets/components/inputs/knownSkillsSelect.scss";
+import Loader from "../loading/Loader";
 interface SkillSelectProps {
   value: number[];
   handleChangeFunc: (value: number[]) => void;
@@ -57,7 +58,7 @@ const Skills: React.FC<SkillSelectProps> = (props) => {
         })}
       </div>
     );
-  return <LoadingComponent />;
+  return <Loader />;
 };
 
 const MySkillSelect: React.FC<SkillSelectProps> = (props) => {

@@ -96,6 +96,15 @@ const getSkills = (body: { user_id: number }, token: string) => {
 const updateSklls = (body: KnownSkillsType, token: string) => {
   return instance.post("/profile/skills-update/", body, config(token));
 };
+
+const getUnknownSkills = (body: { user_id: number }, token: string) => {
+  return instance.post("/profile/unknown-skills/", body, config(token));
+};
+
+const updateUnknownSklls = (body: KnownSkillsType, token: string) => {
+  return instance.post("/profile/unknown-skills-update/", body, config(token));
+};
+
 const ProfileService = {
   register,
   login,
@@ -114,6 +123,8 @@ const ProfileService = {
   updatePersonalInfo,
   getSkills,
   updateSklls,
+  getUnknownSkills,
+  updateUnknownSklls,
 };
 
 export default ProfileService;

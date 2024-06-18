@@ -15,6 +15,9 @@
       height: auto;
     }
     &__icon {
+      @include themify($themes) {
+        color: themed("text-warning");
+      }
       width: 60px !important;
       height: 60px !important;
     }

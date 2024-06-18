@@ -59,6 +59,10 @@
       gap: 24px;
       &__left {
         flex: 3;
+        position: -webkit-sticky;
+        position: sticky;
+        top: 97px;
+        align-self: flex-start;
         &__header {
           padding: 24px 24px 0;
           display: flex;

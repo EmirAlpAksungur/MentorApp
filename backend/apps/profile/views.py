@@ -14,7 +14,9 @@ from .serializers import (
     ChangePasswordSerializer,
     AboutMeSerializer,
     PersonalInfoSerializer,
-    SkillsSerializer
+    SkillsSerializer,
+    UnknownSkillsSerializer,
+    UnknownSkillsProfileSerializer
 )
 from rest_framework.authtoken.models import Token
 from .models import Profile,UnKnownSkills,Languages
@@ -267,3 +269,53 @@ class SkillsUpdateView(APIView):
             serializer.save() 
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UnknownSkillsView(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    def post(self, request, *args, **kwargs):
+        try:
+            profile = Profile.objects.get(
+                user=request.data.get('user_id')
+            )
+        except Profile.DoesNotExist:
+            return Response({"error": "Profile not found."}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = UnknownSkillsProfileSerializer(profile)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+class UnknownSkillsUpdateView(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    def post(self, request, *args, **kwargs):
+        try:
+            profile = Profile.objects.get(user=request.user)
+        except Profile.DoesNotExist:
+            return Response({"error": "Profile not found."}, status=status.HTTP_404_NOT_FOUND)
+
+        response_data = []
+        request_uuids = [item["uuid"] for item in request.data.get("unKnownSkills", [])]
+
+        # Remove unKnownSkills that are not in the request data
+        for skill in profile.unKnownSkills.all():
+            if skill.uuid not in request_uuids:
+                profile.unKnownSkills.remove(skill)
+
+        for item in request.data.get("unKnownSkills", []):
+            try:
+                unknown_skill = UnKnownSkills.objects.get(uuid=item["uuid"])
+                serializer = UnknownSkillsSerializer(unknown_skill, data=item)
+            except UnKnownSkills.DoesNotExist:
+                serializer = UnknownSkillsSerializer(data=item)
+
+            if serializer.is_valid():
+                unknown_skill = serializer.save()
+                profile.unKnownSkills.add(unknown_skill)  # ManyToMany ilişkisine ekleme
+                response_data.append(serializer.data)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response(response_data, status=status.HTTP_200_OK)

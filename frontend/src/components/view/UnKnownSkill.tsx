@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Grid, Chip, Tooltip } from "@mui/material";
+import { Grid, Chip, Tooltip, LinearProgress } from "@mui/material";
 import { useAppSelector, useAppDispatch } from "../../hooks/redux";
 import { RootState } from "../../store/configureStore";
 import ProfileService from "../../services/api/profile";
 import { ConnectionBar } from "../";
+import { UnKnownSkillsType } from "../../services/types/unKnownSkills";
 import "../../assets/components/view/unKnownSkill.scss";
-interface UnKnownSkillsType {
-  unKnownSkills: string[];
-}
 
 interface ItemType {
   id: string;
 }
 
-const Item: React.FC<ItemType> = React.memo(({ id }) => {
+export const Item: React.FC<ItemType> = React.memo(({ id }) => {
   const [text, setText] = useState<string>("");
   const [level, setLevel] = useState<number>(0);
   const token = useAppSelector((state: RootState) => state.auth.token);
@@ -46,11 +44,22 @@ const Item: React.FC<ItemType> = React.memo(({ id }) => {
           alignItems={"center"}
           wrap="nowrap"
         >
-          <Grid item xs className={"unknownskill__text"}>
+          <Grid item xs={6} className={"unknownskill__text"}>
             {text}
           </Grid>
-          <Grid item>
-            <ConnectionBar connection={level} />
+          <Grid item xs={6}>
+            <Grid container alignItems={"center"} columnGap={2}>
+              <Grid item xs>
+                <LinearProgress
+                  variant="determinate"
+                  value={level}
+                  className="unknownskill__level-bar"
+                />
+              </Grid>
+              <Grid item className="unknownskill__level-text">
+                %{level}
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
       </Tooltip>
@@ -58,13 +67,15 @@ const Item: React.FC<ItemType> = React.memo(({ id }) => {
   );
 });
 
-const Main: React.FC<UnKnownSkillsType> = ({ unKnownSkills }) => {
+const Main: React.FC<{ unKnownSkills: UnKnownSkillsType[] | null }> = ({
+  unKnownSkills,
+}) => {
   return (
     <Grid container spacing={1} className={"unknownskill"}>
-      {unKnownSkills?.map((skill_id) => {
+      {unKnownSkills?.map((skill_id: UnKnownSkillsType) => {
         return (
-          <Grid item xs={6} key={skill_id}>
-            <Item id={skill_id} />
+          <Grid item xs={12} key={skill_id.uuid}>
+            <Item id={skill_id.uuid} />
           </Grid>
         );
       })}
