@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Divider } from "@mui/material";
+import { Box } from "@mui/material";
 import DialogHeader from "./DialogHeader";
 import DialogBody from "./DialogBody";
 import { ElementProps } from "../../../../components/dialog/Main";
@@ -17,15 +17,7 @@ const Main: React.FC<ElementProps> = (props) => {
         receiver={props?.user?.id}
         location={props?.location}
       />
-      <Divider className="user-details-container__divider" />
-      <DialogBody
-        about={props?.about}
-        knownSkills={props?.knownSkills}
-        unKnownSkills={props?.unKnownSkills}
-        languages={props?.languages}
-        location={props?.location}
-        university={props?.university}
-      />
+      <DialogBody user={props?.user} />
     </Box>
   );
 };

@@ -49,29 +49,27 @@ const Main: React.FC<CardPropType> = (props) => {
   return (
     <Card>
       <div className="community-container__main-box__item__body">
-        <div>
-          <Header {...props} />
-          <Divider className="community-container__main-box__item__body__divider" />
-          <div className="community-container__main-box__item__body__title">
-            {props.text.find((e) => e?.TextContentId === 35)?.Translations}
-          </div>
-          <div className="community-container__main-box__item__body__content">
-            <KnownSkill knownSkills={props?.knownSkills} />
-          </div>
-          <div className="community-container__main-box__item__body__title">
-            {props.text.find((e) => e?.TextContentId === 36)?.Translations}
-          </div>
-          <div className="community-container__main-box__item__body__content">
-            <UnKnownSkill unKnownSkills={props?.unKnownSkills} />
-          </div>
+        <Header {...props} />
+        <Divider className="community-container__main-box__item__body__divider" />
+        <div className="community-container__main-box__item__body__title">
+          {props.text.find((e) => e?.TextContentId === 35)?.Translations}
         </div>
-        <Button
-          className="community-container__main-box__item__body__btn"
-          onClick={handleSubmit}
-        >
-          {props.text.find((e) => e?.TextContentId === 34)?.Translations}
-        </Button>
+        <div className="community-container__main-box__item__body__content">
+          <KnownSkill knownSkills={props?.knownSkills} />
+        </div>
+        {/* <div className="community-container__main-box__item__body__title">
+            {props.text.find((e) => e?.TextContentId === 36)?.Translations}
+          </div> */}
+        {/* <div className="community-container__main-box__item__body__content">
+            <UnKnownSkill unKnownSkills={props?.unKnownSkills} />
+          </div> */}
       </div>
+      <Button
+        className="community-container__main-box__item__body__btn"
+        onClick={handleSubmit}
+      >
+        {props.text.find((e) => e?.TextContentId === 34)?.Translations}
+      </Button>
     </Card>
   );
 };

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Grid, Avatar, IconButton, Button, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { RootState } from "../../../../store/configureStore";
 import { asyncLoadText } from "../../../../services/actions/translations";
 import { useAppSelector, useAppDispatch } from "../../../../hooks/redux";
+import { RootState } from "../../../../store/configureStore";
 import { TranslatedTextType } from "../../../../services/types/translations";
 import { sendMessage } from "../../../../services/actions/chat";
 import { follow } from "../../../../services/actions/profile";

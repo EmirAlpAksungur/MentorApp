@@ -25,6 +25,8 @@ const Main: React.FC = () => {
     try {
       setloading(true);
       let res = await ProfileService.getProfile(token, data.length / 30 + 1);
+      console.log(res);
+
       setData((prev: CardPropType[]) => {
         return [...prev, ...res.data.data];
       });

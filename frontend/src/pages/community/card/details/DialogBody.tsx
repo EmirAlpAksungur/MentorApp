@@ -1,21 +1,39 @@
 import React from "react";
-import { Box } from "@mui/material";
-import LongText from "../../../../components/view/LongText";
-import University from "../../../../components/view/University";
+import { Box, Grid } from "@mui/material";
+
+import AboutMe from "../../../profile/personalInformation/utils/AboutMe";
+import General from "../../../profile/personalInformation/utils/General";
+import SkillsCard from "../../../profile/personalInformation/utils/SkillsCard";
+import UnknownSkillsCard from "../../../profile/personalInformation/utils/UnknownSkills";
+import Languages from "../../../profile/personalInformation/utils/Languages";
 interface DialogBodyProps {
-  about: string;
-  knownSkills: number[];
-  unKnownSkills: String[];
-  languages: number[];
-  location: number;
-  university: number[];
+  user: {
+    id: number;
+  };
 }
 
-const Main: React.FC<DialogBodyProps> = (props) => {
+const Main: React.FC<DialogBodyProps> = ({ user }) => {
+  console.log(user);
+
   return (
     <Box className="user-details-container__body">
-      <LongText text={props?.about} />
-      <University university={props?.university} />
+      <Grid container rowGap={3}>
+        <Grid item xs={12}>
+          <AboutMe user_id={user?.id} />
+        </Grid>
+        <Grid item xs={12}>
+          <General user_id={user?.id} />
+        </Grid>
+        <Grid item xs={12}>
+          <SkillsCard user_id={user?.id} />
+        </Grid>
+        <Grid item xs={12}>
+          <UnknownSkillsCard user_id={user?.id} />
+        </Grid>
+        <Grid item xs={12}>
+          <Languages user_id={user?.id} />
+        </Grid>
+      </Grid>
     </Box>
   );
 };
