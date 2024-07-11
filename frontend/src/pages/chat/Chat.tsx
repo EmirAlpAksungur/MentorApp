@@ -9,18 +9,21 @@ import "../../assets/pages/chat/chat.scss";
 import { refreshChat } from "../../services/actions/chat";
 const Chat: React.FC = () => {
   const dispatch = useAppDispatch();
-  const chatId = useAppSelector((state: RootState) => state.chat?.selectedChat);
+  const userId = useAppSelector((state: RootState) => state.auth?.user?.user);
 
+  const chatId = useAppSelector((state: RootState) => state.chat?.selectedChat);
+  const last_message = useAppSelector((state: RootState) => {
+    return state.chat?.chatList?.find((e: any) => e.id === chatId)
+      ?.last_message;
+  });
   const [client, setClient] = useState<ChatWebSocketClient | null>(null);
   useEffect(() => {
     let ws: ChatWebSocketClient | null = null;
-    console.log(chatId);
-
     if (chatId) {
       const refreshFunc = () => {
         dispatch(refreshChat());
       };
-      ws = new ChatWebSocketClient(chatId, refreshFunc);
+      ws = new ChatWebSocketClient(userId, chatId, refreshFunc, last_message);
       setClient(ws);
       ws.openWs();
     }

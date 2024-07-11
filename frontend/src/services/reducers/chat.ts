@@ -9,11 +9,24 @@ interface ParticipantsType {
   first_name: string;
   last_name: string;
   email: string;
+  profil: {
+    photo: string | null;
+  };
+}
+
+export interface MessageType {
+  contact: number;
+  content: string;
+  id: number;
+  is_delivered: boolean;
+  is_read: boolean;
+  is_sent: boolean;
+  timestamp: number;
 }
 
 export interface ChatListType {
   id: string;
-  messages: string;
+  last_message: MessageType;
   participants: ParticipantsType[];
 }
 

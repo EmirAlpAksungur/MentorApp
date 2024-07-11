@@ -7,15 +7,16 @@ import { RootState, AppDispatch } from "../../store/configureStore";
 import ChatService from "../api/chat";
 import history from "../../routers/history";
 export const loadChatList =
-  () => async (dispatch: AppDispatch, getState: () => RootState) => {
+  (data: any | null) =>
+  async (dispatch: AppDispatch, getState: () => RootState) => {
     try {
-      const token = getState().auth.token;
-      let res = await ChatService.loadChatListApi(token);
-      console.log(res);
-      dispatch({
-        type: UPDATE_CHAT_LIST,
-        payload: res.data,
-      });
+      console.log(data);
+
+      data &&
+        dispatch({
+          type: UPDATE_CHAT_LIST,
+          payload: data,
+        });
     } catch (err) {
       console.log(err);
     }

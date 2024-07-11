@@ -40,9 +40,63 @@
       }
       &__name {
         font-size: 1.6rem;
-        padding-left: 16px;
         @include themify($themes) {
           color: darken(themed("text"), 2);
+        }
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      &__timestamp {
+        font-size: 1.2rem;
+        @include themify($themes) {
+          color: themed("text-secondary-darker");
+        }
+        text-align: right;
+      }
+      &__msg {
+        font-size: 1.2rem;
+        @include themify($themes) {
+          color: themed("text-secondary-darker");
+        }
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      &__msg-type {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &__contact-unread {
+          @include themify($themes) {
+            color: themed("text-warning");
+          }
+        }
+        &__read {
+          @include themify($themes) {
+            color: themed("text-warning");
+          }
+        }
+        &__delivered {
+          @include themify($themes) {
+            color: themed("text-secondary-darker");
+          }
+        }
+        &__sent {
+          @include themify($themes) {
+            color: themed("text-secondary-darker");
+          }
+        }
+      }
+    }
+
+    &__item-selected {
+      @include themify($themes) {
+        background-color: themed("bg-warning-active");
+      }
+      &:hover {
+        @include themify($themes) {
+          background-color: themed("bg-warning-active-hover");
         }
       }
     }

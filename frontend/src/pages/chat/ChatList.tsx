@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Divider, InputAdornment, IconButton } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { useAppSelector, useAppDispatch } from "../../hooks/redux";
-import { loadChatList } from "../../services/actions/chat";
 import { RootState } from "../../store/configureStore";
 
 import "../../assets/pages/chat/chat.scss";
@@ -13,9 +12,6 @@ const Main: React.FC = () => {
   const chatList = useAppSelector((state: RootState) => state.chat.chatList);
   const [value, setValue] = useState("");
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(loadChatList());
-  }, []);
 
   const handleChangeFunc = (val: any) => {
     setValue(val);
@@ -43,7 +39,7 @@ const Main: React.FC = () => {
         chatList.map((props: ChatListType) => (
           <ChatListItem
             id={props.id}
-            messages={props.messages}
+            last_message={props.last_message}
             participants={props.participants}
           />
         ))}

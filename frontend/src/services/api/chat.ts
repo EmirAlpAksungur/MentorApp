@@ -5,6 +5,7 @@ const startChat = (body: any, token: string) => {
 };
 
 const loadChatListApi = (token: string) => {
+  //remove
   return instance.get("/chat/", config(token));
 };
 
