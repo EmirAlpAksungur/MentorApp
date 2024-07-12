@@ -9,6 +9,27 @@ import { routeToUrl } from "../../../routers/utils";
 import { RootState } from "../../../store/configureStore";
 import { logOut } from "../../../services/actions/auth";
 import { MyMenu } from "../../../components";
+const MyBadget: React.FC = () => {
+  const chatList = useAppSelector((state: RootState) => state.chat?.chatList);
+  const userId = useAppSelector((state: RootState) => state.auth?.user?.user);
+  const selectedChat = useAppSelector(
+    (state: RootState) => state.chat?.selectedChat
+  );
+
+  return (
+    <div className="app-header__mobile-menu__menu-item__badge">
+      {
+        chatList?.filter((e: any) => {
+          return (
+            e.last_message.contact !== userId &&
+            !e.last_message.is_read &&
+            selectedChat !== e.id
+          );
+        }).length
+      }
+    </div>
+  );
+};
 
 const Element: React.FC = () => {
   const first_name = useAppSelector(
@@ -86,6 +107,7 @@ const Main: React.FC = () => {
         }}
       >
         {text.find((e) => e?.TextContentId === 28)?.Translations}
+        <MyBadget />
       </MenuItem>
       <MenuItem
         className={"app-header__mobile-menu__menu-item " + isActive("blog")}

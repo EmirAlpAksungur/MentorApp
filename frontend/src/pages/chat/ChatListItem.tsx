@@ -15,10 +15,14 @@ const MsgType: React.FC<{
   is_delivered: boolean;
   is_read: boolean;
   contact: number;
+  current_chat_id: string;
 }> = (props) => {
-  const { is_sent, is_delivered, is_read, contact } = props;
+  const { is_sent, is_delivered, is_read, contact, current_chat_id } = props;
   const userId = useAppSelector((state: RootState) => state.auth?.user?.user);
-  if (userId !== contact && !is_read) {
+  const selectedChat = useAppSelector(
+    (state: RootState) => state.chat?.selectedChat
+  );
+  if (userId !== contact && !is_read && selectedChat !== current_chat_id) {
     return (
       <FiberManualRecordIcon className="chat-container__chat-list__item__msg-type__contact-unread" />
     );
@@ -166,6 +170,7 @@ const Main: React.FC<ChatListType> = ({ id, last_message, participants }) => {
                 is_sent={last_message?.is_sent}
                 is_read={last_message?.is_read}
                 contact={last_message?.contact}
+                current_chat_id={id}
               />
             </Grid>
           </Grid>

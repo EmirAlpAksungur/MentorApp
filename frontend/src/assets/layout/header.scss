@@ -28,6 +28,15 @@
         }
       }
     }
+    &__unauth-profile__badge {
+      .MuiBadge-badge {
+        @include themify($themes) {
+          font-size: 1.2rem;
+          background-color: themed("bg-warning");
+          color: #fff;
+        }
+      }
+    }
   }
   &__unauth-profile__btn-log-in {
     @include btnOutlined;
@@ -41,6 +50,19 @@
     display: none;
     &__menu-item {
       width: 100px;
+      &__badge {
+        border-radius: 999px;
+        @include themify($themes) {
+          font-size: 1.2rem;
+          background-color: themed("bg-warning");
+          color: #fff;
+          min-width: 18px;
+          margin: auto;
+          margin-right: 0px;
+          display: flex;
+          justify-content: center;
+        }
+      }
       &__active {
         @include themify($themes) {
           background-color: themed("bg-warning-active");
@@ -61,6 +83,9 @@
   .app-header {
     &__left {
       &__unauth-profile__btn {
+        display: none !important;
+      }
+      &__unauth-profile__badge {
         display: none !important;
       }
     }

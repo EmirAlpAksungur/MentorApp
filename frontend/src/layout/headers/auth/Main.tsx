@@ -1,12 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Button, Grid } from "@mui/material";
+import Badge from "@mui/material/Badge";
 import { useAppSelector } from "../../../hooks/redux";
 import { routeToUrl } from "../../../routers/utils";
 import { RootState } from "../../../store/configureStore";
 import { asyncLoadText } from "../../../services/actions/translations";
 import { TranslatedTextType } from "../../../services/types/translations";
 import "../../../assets/layout/header.scss";
+
+const MyBadget: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const chatList = useAppSelector((state: RootState) => state.chat?.chatList);
+  const userId = useAppSelector((state: RootState) => state.auth?.user?.user);
+  const selectedChat = useAppSelector(
+    (state: RootState) => state.chat?.selectedChat
+  );
+
+  return (
+    <Badge
+      badgeContent={
+        chatList?.filter((e: any) => {
+          return (
+            e.last_message.contact !== userId &&
+            !e.last_message.is_read &&
+            selectedChat !== e.id
+          );
+        }).length
+      }
+      className="app-header__left__unauth-profile__badge"
+    >
+      {children}
+    </Badge>
+  );
+};
 
 const Main: React.FC = () => {
   const location = useLocation();
@@ -46,15 +72,17 @@ const Main: React.FC = () => {
           </Button>
         </Grid>
         <Grid item>
-          <Button
-            variant="text"
-            className={
-              "app-header__left__unauth-profile__btn " + isActive("chat")
-            }
-            onClick={() => routeToUrl("/chat")}
-          >
-            {text.find((e) => e?.TextContentId === 28)?.Translations}
-          </Button>
+          <MyBadget>
+            <Button
+              variant="text"
+              className={
+                "app-header__left__unauth-profile__btn " + isActive("chat")
+              }
+              onClick={() => routeToUrl("/chat")}
+            >
+              {text.find((e) => e?.TextContentId === 28)?.Translations}
+            </Button>
+          </MyBadget>
         </Grid>
         <Grid item>
           <Button
