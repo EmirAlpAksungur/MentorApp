@@ -8,11 +8,11 @@
     margin: 2px;
     width: 18px;
     background-color: #fff;
+    transition-duration: 300ms;
     height: 18px;
     &:hover {
       background-color: #fff;
     }
-    transition-duration: 300ms;
     &.Mui-checked {
       transform: translateX(22px);
       color: #fff;
@@ -20,11 +20,11 @@
         background-color: #fff;
       }
       & + .MuiSwitch-track {
+        opacity: 1;
+        border: 0;
         @include themify($themes) {
           background-color: themed("bg-warning");
         }
-        opacity: 1;
-        border: 0;
       }
     }
   }
@@ -35,11 +35,11 @@
     background-color: #fff;
   }
   & .MuiSwitch-track {
+    opacity: 1;
     border-radius: 13px;
     @include themify($themes) {
       background-color: themed("bg-warning");
     }
-    opacity: 1;
   }
   &__icon {
     @include themify($themes) {

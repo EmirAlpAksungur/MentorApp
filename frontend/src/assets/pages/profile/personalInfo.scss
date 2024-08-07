@@ -13,8 +13,8 @@
     text-align: right;
     margin-top: 20px;
     &__cancel {
-      @include btnOutlined;
       margin-right: 8px;
+      @include btnOutlined;
     }
     &__save {
       @include btnContained;

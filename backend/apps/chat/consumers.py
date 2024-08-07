@@ -92,10 +92,13 @@ class ChatConsumer(WebsocketConsumer):
 
 
     def message_readed(self, message):
-        updated_message = get_object_or_404(Message, id=message["message"])
-        updated_message.is_read = True
-        updated_message.save()
-        self.message_readed_return_message(message["chat_id"],updated_message)
+        try:
+            updated_message = get_object_or_404(Message, id=message["message"])
+            updated_message.is_read = True
+            updated_message.save()
+            self.message_readed_return_message(message["chat_id"],updated_message)
+        except:
+            pass
 
 
     commands = {
@@ -197,10 +200,13 @@ class ChatLastConsumer(WebsocketConsumer):
 
 
     def message_delivered(self, message):
-        updated_message = get_object_or_404(Message, id=message["message"])
-        updated_message.is_delivered = True
-        updated_message.save()
-        self.message_delivered_return_message(message["chat_id"],updated_message)
+        try:
+            updated_message = get_object_or_404(Message, id=message["message"])
+            updated_message.is_delivered = True
+            updated_message.save()
+            self.message_delivered_return_message(message["chat_id"],updated_message)
+        except:
+            pass
 
     commands = {
         'fetch_chats': fetch_chats,

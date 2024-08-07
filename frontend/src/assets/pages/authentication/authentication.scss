@@ -26,8 +26,8 @@
     @include background-img;
   }
   &__right-img {
-    @include background-img;
     right: 0;
+    @include background-img;
   }
   &__body {
     z-index: 1;
@@ -41,7 +41,6 @@
   }
 
   &__footer {
-    @include container-widths;
     position: fixed;
     z-index: 1;
     bottom: 0;
@@ -49,6 +48,7 @@
     display: flex;
     align-self: center;
     justify-content: space-between;
+    @include container-widths;
     &__left {
       .regex-1517 {
         cursor: pointer;
@@ -75,9 +75,9 @@
 
 @media screen and (max-width: 900px) {
   .authentication-container {
+    justify-content: center;
     @include themify($themes) {
       background: themed("bg-secondary");
     }
-    justify-content: center;
   }
 }

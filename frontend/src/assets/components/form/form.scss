@@ -2,12 +2,12 @@
 
 .form-container {
   &__label {
-    @include themify($themes) {
-      color: themed("text-secondary");
-    }
     margin-bottom: 8px;
     font-size: 1.4rem !important;
     font-weight: 400;
+    @include themify($themes) {
+      color: themed("text-secondary");
+    }
   }
   &__error {
     margin-top: 4px;

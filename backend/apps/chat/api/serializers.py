@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.db.utils import IntegrityError
-from apps.chat.models import Chat
+from apps.chat.models import Chat,Message
 from apps.chat.views import get_user_contact
 from apps.profile.serializers import UserSerializer
 
@@ -41,3 +41,9 @@ class ChatListSerializer(serializers.ModelSerializer):
         model = Chat
         fields = ('id', 'messages', 'participants')
         read_only = ('id')
+
+
+class GetMessageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Message
+        fields = "__all__"

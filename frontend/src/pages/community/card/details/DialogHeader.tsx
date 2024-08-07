@@ -8,11 +8,12 @@ import { TranslatedTextType } from "../../../../services/types/translations";
 import { sendMessage } from "../../../../services/actions/chat";
 import { follow } from "../../../../services/actions/profile";
 import LocationService from "../../../../services/api/location";
+import { MyAvatar } from "../../../../components";
 interface HeaderProps {
   photo: string;
   handleClose: Function;
-  first_name: String;
-  last_name: String;
+  first_name: string;
+  last_name: string;
   profession: string;
   receiver: number;
   location: number;
@@ -52,7 +53,6 @@ const Main: React.FC<HeaderProps> = (props) => {
         LanguageId,
         token
       );
-      console.log(result);
 
       setLocaton(result.data);
     } catch (err) {
@@ -74,9 +74,10 @@ const Main: React.FC<HeaderProps> = (props) => {
         className="user-details-container__header"
       >
         <Grid item>
-          <Avatar
-            src={`data:image/jpeg;base64,${props?.photo}`}
-            className="user-details-container__header__img"
+          <MyAvatar
+            photo={props?.photo}
+            first_name={props?.first_name}
+            last_name={props?.last_name}
           />
         </Grid>
         <Grid item>

@@ -13,3 +13,17 @@
     }
   }
 }
+
+@mixin scroll-lg {
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 100%;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    @include themify($themes) {
+      background-color: themed("bg-warning");
+    }
+  }
+}

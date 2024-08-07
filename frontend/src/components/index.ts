@@ -1,3 +1,4 @@
+import MyAvatar from "./avatar/Avatar";
 import ConnectionBar from "./connectionbar/ConnectionBar";
 import ErrorComponent from "./errors/ErrorComponent";
 import NetworkCheck from "./errors/NetworkCheck";
@@ -27,6 +28,7 @@ import ThemeSwitch from "./settings/ThemeSwitch";
 import Language from "./settings/LangSelect";
 import DatePicker from "./inputs/DatePicker";
 export {
+  MyAvatar,
   Language,
   ConnectionBar,
   ErrorComponent,

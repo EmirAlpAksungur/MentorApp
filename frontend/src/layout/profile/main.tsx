@@ -1,5 +1,5 @@
 import React, { ReactNode, useEffect, useState } from "react";
-import { useAppSelector, useAppDispatch } from "../../hooks/redux";
+import { useAppSelector } from "../../hooks/redux";
 import { RootState } from "../../store/configureStore";
 import { asyncLoadText } from "../../services/actions/translations";
 import { TextListClass } from "../../utils/textContent";

@@ -1,67 +1,77 @@
 @import "../../palette/palette.scss";
 @import "../../components/button/btn.scss";
+@import "../../components//scroll/scroll.scss";
 
+@import "../../components/container.scss";
 .chat-container {
   width: 100%;
   min-height: 100vh;
-  padding-top: 73px;
+  padding: 89px 0px 16px;
   @include themify($themes) {
     background-color: themed("bg");
+  }
+  &__media-query {
+    margin: auto;
+    @include container-widths;
   }
   &__chat-list {
     display: inline-block;
     height: 100%;
     border-right: 1px solid;
+    padding: 16px;
     width: 100%;
     @include themify($themes) {
       border-color: themed("border");
     }
-    &__search {
-      padding: 16px 32px;
-    }
-    &__divider {
+    &__messages {
+      font-weight: bold;
+      font-size: 1.8rem;
+      margin-bottom: 16px;
       @include themify($themes) {
-        background-color: themed("border");
+        color: themed("text");
       }
-      width: calc(100% - 32px);
-      margin: auto;
+    }
+    &__search {
+      padding-bottom: 12px;
     }
     &__item {
+      cursor: pointer;
       padding: 16px;
       @include themify($themes) {
         border-bottom: 1px solid;
         border-color: themed("border");
       }
-      cursor: pointer;
       &:hover {
         @include themify($themes) {
-          background-color: darken(themed("bg-secondary"), 2);
+          background-color: themed("bg-secondary-hover");
         }
       }
       &__name {
         font-size: 1.6rem;
-        @include themify($themes) {
-          color: darken(themed("text"), 2);
-        }
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        max-width: 160px;
+        @include themify($themes) {
+          color: themed("text");
+        }
       }
       &__timestamp {
         font-size: 1.2rem;
+        text-align: right;
         @include themify($themes) {
           color: themed("text-secondary-darker");
         }
-        text-align: right;
       }
       &__msg {
         font-size: 1.2rem;
-        @include themify($themes) {
-          color: themed("text-secondary-darker");
-        }
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        max-width: 160px;
+        @include themify($themes) {
+          color: themed("text-secondary-darker");
+        }
       }
       &__msg-type {
         display: flex;
@@ -101,10 +111,32 @@
       }
     }
   }
-
+  &__header {
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 1px solid;
+    @include themify($themes) {
+      border-color: themed("border");
+    }
+    .MuiAvatar-root {
+      cursor: pointer;
+    }
+    &__name {
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 2rem;
+      @include themify($themes) {
+        color: themed("text");
+      }
+    }
+  }
   &__body {
     height: 100%;
     width: 100%;
+    max-height: calc(100vh - 73px - 32px - 73px);
+    flex-wrap: nowrap;
     &__divider {
       @include themify($themes) {
         background-color: themed("border");
@@ -112,35 +144,104 @@
     }
     &__msg-box {
       padding: 8px;
+      & fieldset {
+        border-radius: 0px;
+        border-top: none;
+        border-right: none;
+        border-left: none;
+      }
+      .my-text-field {
+        .Mui-focused {
+          & fieldset {
+            border-top: none !important;
+            border-right: none !important;
+            border-left: none !important;
+            box-shadow: none !important;
+          }
+        }
+      }
     }
     &__messages-box {
+      overflow: auto;
       width: 100%;
       padding: 16px;
+      max-height: calc(100vh - 73px - 53px - 32px - 73px);
+      display: flex;
+      flex-direction: column-reverse;
+
+      @include scroll-lg;
       &__bubble {
-        width: max-content;
-        max-width: 300px;
+        max-width: calc(50% - 40px);
         padding: 8px;
         border-radius: 8px;
         margin-bottom: 2px;
         word-wrap: break-word;
         font-size: 1.4rem;
+        &__right-margin {
+          margin-right: 52px !important;
+        }
+        &__left-margin {
+          margin-left: 52px !important;
+        }
+      }
+      &__self {
+        display: flex;
+        justify-content: end;
+        text-align: end;
+        align-items: flex-end;
+      }
+      &__opposite {
+        display: flex;
+        align-items: flex-end;
       }
       &__bubble-self {
         align-self: flex-end;
+        margin-right: 12px;
         @include themify($themes) {
-          background-color: themed("msg-self");
-          color: darken(#fff, 5);
+          background-color: themed("bg-warning");
+          color: themed("text");
         }
       }
       &__bubble-opposite {
+        margin-left: 12px;
         @include themify($themes) {
           color: themed("text");
         }
         @include themify($themes) {
-          background-color: lighten(themed("border"), 7);
+          background-color: themed("bg-secondary-hover");
           color: themed(text);
         }
       }
     }
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .chat-container__chat-list__item__name {
+    max-width: 120px;
+  }
+  .chat-container__chat-list__item__msg {
+    max-width: 120px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .chat-container__chat-list__item__name {
+    max-width: 60px;
+  }
+  .chat-container__chat-list__item__msg {
+    max-width: 60px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .chat-container__chat-list__item__avatar {
+    display: none;
+  }
+  .chat-container__chat-list__item__name {
+    max-width: fit-content;
+  }
+  .chat-container__chat-list__item__msg {
+    max-width: fit-content;
   }
 }

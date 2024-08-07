@@ -88,6 +88,18 @@ class GetProfileView(APIView):
             "data":serializer.data
         }, status=status.HTTP_200_OK)
 
+
+class GetProfileByIdView(APIView):
+    
+    def get(self, request,user, *args, **kwargs):
+        queryset = Profile.objects.filter(
+            user=user
+        )
+        serializer = GetProfileSerializer(queryset, many=True)
+        return Response(
+            serializer.data
+      , status=status.HTTP_200_OK)
+
 class IsAuthView(APIView):
     def get(self, request, *args, **kwargs):
         queryset = Token.objects.filter(user=request.user)

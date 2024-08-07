@@ -3,15 +3,36 @@ import { Grid, Divider } from "@mui/material";
 import { useAppSelector, useAppDispatch } from "../../hooks/redux";
 import { RootState } from "../../store/configureStore";
 import SendMessage from "./SendMessage";
-import Messages from "./Messages";
+import { Messages } from "./Messages";
 import { ChatWebSocketClient } from "../../services/webSocket/chat";
 import "../../assets/pages/chat/chat.scss";
 import { refreshChat } from "../../services/actions/chat";
+import ChatHeader from "./ChatHeader";
 const Chat: React.FC = () => {
   const dispatch = useAppDispatch();
   const userId = useAppSelector((state: RootState) => state.auth?.user?.user);
 
   const chatId = useAppSelector((state: RootState) => state.chat?.selectedChat);
+  const photo = useAppSelector((state: RootState) => {
+    return state.chat?.chatList
+      ?.find((a: any) => a?.id === chatId)
+      ?.participants?.find((e: any) => e.id !== userId)?.profil?.photo;
+  });
+  const first_name = useAppSelector((state: RootState) => {
+    return state.chat?.chatList
+      ?.find((a: any) => a?.id === chatId)
+      ?.participants?.find((e: any) => e.id !== userId)?.first_name;
+  });
+  const last_name = useAppSelector((state: RootState) => {
+    return state.chat?.chatList
+      ?.find((a: any) => a?.id === chatId)
+      ?.participants?.find((e: any) => e.id !== userId)?.last_name;
+  });
+  const user_id = useAppSelector((state: RootState) => {
+    return state.chat?.chatList
+      ?.find((a: any) => a?.id === chatId)
+      ?.participants?.find((e: any) => e.id !== userId)?.id;
+  });
   const last_message = useAppSelector((state: RootState) => {
     return state.chat?.chatList?.find((e: any) => e.id === chatId)
       ?.last_message;
@@ -31,20 +52,36 @@ const Chat: React.FC = () => {
       if (ws) ws.closeWs();
     };
   }, [chatId]);
-  return (
-    <Grid
-      container
-      className="chat-container__body"
-      flexDirection={"column-reverse"}
-    >
-      <Grid item>
-        <SendMessage client={client} />
+  return client ? (
+    <>
+      <ChatHeader
+        photo={photo}
+        first_name={first_name}
+        last_name={last_name}
+        user_id={user_id}
+      />
+      <Grid
+        container
+        className="chat-container__body"
+        flexDirection={"column-reverse"}
+      >
+        <Grid item>
+          <SendMessage client={client} />
+        </Grid>
+        <Divider className="chat-container__body__divider" />
+        <Grid
+          item
+          sx={{
+            display: "flex",
+            flexDirection: "column-reverse",
+          }}
+        >
+          <Messages chatId={chatId} client={client} photo={photo} />
+        </Grid>
       </Grid>
-      <Divider className="chat-container__body__divider" />
-      <Grid item>
-        <Messages client={client} />
-      </Grid>
-    </Grid>
+    </>
+  ) : (
+    <></>
   );
 };
 

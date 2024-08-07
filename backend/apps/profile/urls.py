@@ -22,7 +22,8 @@ from .views import (
     UnknownSkillsUpdateView,
     ProfilePhotoUpdateView,
     LanguagesView,
-    LanguagesUpdateView
+    LanguagesUpdateView,
+    GetProfileByIdView
 )
 urlpatterns = [
     path("register/", CustomRegisterView.as_view(), name="rest_register"),
@@ -30,6 +31,7 @@ urlpatterns = [
     path("logout/", CustomLogoutView.as_view(), name="rest_logout"),
     path("user-details/", UserDetalisView.as_view(), name="rest_user_details"),
     path("get-profile/<int:page>/", GetProfileView.as_view(), name="rest_user_details"),
+    path("get-profile-byid/<int:user>/", GetProfileByIdView.as_view(), name="user_details_byid"),
     path("is-auth/", IsAuthView.as_view(), name="rest_user_details"),
     path("get-un-known-skill-content/", GetUnKnownSkillView.as_view(), name="get_un_known_skill_content"),
     path("follow/", FollowView.as_view(), name="follow"),

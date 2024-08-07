@@ -27,6 +27,9 @@ $light-border-warning: rgb(255, 176, 102);
 $dark-border-warning: rgb(125, 67, 25);
 
 //hover
+$light-bg-secondary-hover: rgba(0, 0, 0, 0.04);
+$dark-bg-secondary-hover: rgba(255, 255, 255, 0.08);
+
 $light-bg-warning-hover: rgb(204, 82, 6);
 $dark-bg-warning-hover: rgb(233, 136, 58);
 
@@ -72,6 +75,7 @@ $themes: (
       ),
     //hover
     bg-warning-hover: $light-bg-warning-hover,
+    bg-secondary-hover: $light-bg-secondary-hover,
     //activ
     bg-warning-active: $light-bg-warning-active,
     //activ-hover
@@ -150,6 +154,7 @@ $themes: (
       ),
     //hover
     bg-warning-hover: $dark-bg-warning-hover,
+    bg-secondary-hover: $dark-bg-secondary-hover,
     //activ
     bg-warning-active: $dark-bg-warning-active,
     //activ-hover

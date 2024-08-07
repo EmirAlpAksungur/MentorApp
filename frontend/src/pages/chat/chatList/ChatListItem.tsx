@@ -1,14 +1,15 @@
 import React from "react";
-import { useAppSelector, useAppDispatch } from "../../hooks/redux";
-import { RootState } from "../../store/configureStore";
+import { useAppSelector, useAppDispatch } from "../../../hooks/redux";
+import { RootState } from "../../../store/configureStore";
 
-import { Avatar, Grid } from "@mui/material";
-import { ChatListType } from "../../services/reducers/chat";
-import { changeSelectedChat } from "../../services/actions/chat";
+import { Grid } from "@mui/material";
+import { ChatListType } from "../../../services/reducers/chat";
+import { changeSelectedChat } from "../../../services/actions/chat";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import DoneIcon from "@mui/icons-material/Done";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
-import "../../assets/pages/chat/chat.scss";
+import "../../../assets/pages/chat/chat.scss";
+import { MyAvatar } from "../../../components";
 
 const MsgType: React.FC<{
   is_sent: boolean;
@@ -62,46 +63,6 @@ function formatTimestamp(timestamp: number) {
   }
 }
 
-const ChatAvatar: React.FC<{
-  photo: string | null;
-  name: string;
-  surname: string;
-}> = ({ photo, name, surname }) => {
-  function stringToColor(string: string) {
-    let hash = 0;
-    let i;
-
-    for (i = 0; i < string.length; i += 1) {
-      hash = string.charCodeAt(i) + ((hash << 5) - hash);
-    }
-
-    let color = "#";
-
-    for (i = 0; i < 3; i += 1) {
-      const value = (hash >> (i * 8)) & 0xff;
-      color += `00${value.toString(16)}`.slice(-2);
-    }
-
-    return color;
-  }
-
-  function stringAvatar(name: string) {
-    return {
-      sx: {
-        bgcolor: stringToColor(name),
-      },
-      children: `${name.split(" ")?.[0]?.[0]}${name.split(" ")?.[1]?.[0]}`,
-    };
-  }
-
-  return (
-    <Avatar
-      src={`data:image/jpeg;base64,${photo}`}
-      {...stringAvatar(name + " " + surname)}
-    ></Avatar>
-  );
-};
-
 const Main: React.FC<ChatListType> = ({ id, last_message, participants }) => {
   const userId = useAppSelector((state: RootState) => state.auth?.user?.user);
   const selected = useAppSelector(
@@ -117,38 +78,27 @@ const Main: React.FC<ChatListType> = ({ id, last_message, participants }) => {
         dispatch(changeSelectedChat(id));
       }}
     >
-      <Grid
-        container
-        alignItems={"center"}
-        flexWrap={"nowrap"}
-        columnGap={2}
-        width={"100%"}
-      >
-        <Grid item xs={3}>
-          <ChatAvatar
+      <Grid container alignItems={"center"} flexWrap={"nowrap"} columnGap={2}>
+        <Grid item className="chat-container__chat-list__item__avatar">
+          <MyAvatar
             photo={participants.find((e) => e.id != userId)!.profil?.photo}
-            name={participants.find((e) => e.id != userId)!.first_name}
-            surname={participants.find((e) => e.id != userId)!.last_name}
+            first_name={participants.find((e) => e.id != userId)!.first_name}
+            last_name={participants.find((e) => e.id != userId)!.last_name}
           />
         </Grid>
-
-        <Grid item xs={9}>
+        <Grid item xs>
           <Grid
             container
             justifyContent={"space-between"}
             alignItems={"center"}
             flexWrap={"nowrap"}
           >
-            <Grid item xs={9} className="chat-container__chat-list__item__name">
+            <Grid item xs className="chat-container__chat-list__item__name">
               {participants.find((e) => e.id != userId)!.first_name}{" "}
               {participants.find((e) => e.id != userId)!.last_name}
             </Grid>
 
-            <Grid
-              item
-              xs={3}
-              className="chat-container__chat-list__item__timestamp"
-            >
+            <Grid item className="chat-container__chat-list__item__timestamp">
               {formatTimestamp(last_message?.timestamp)}
             </Grid>
           </Grid>
@@ -157,14 +107,10 @@ const Main: React.FC<ChatListType> = ({ id, last_message, participants }) => {
             justifyContent={"space-between"}
             alignItems={"center"}
           >
-            <Grid item xs={9} className="chat-container__chat-list__item__msg">
+            <Grid item xs className="chat-container__chat-list__item__msg">
               {last_message?.content}
             </Grid>
-            <Grid
-              item
-              xs={3}
-              className="chat-container__chat-list__item__msg-type"
-            >
+            <Grid item className="chat-container__chat-list__item__msg-type">
               <MsgType
                 is_delivered={last_message?.is_delivered}
                 is_sent={last_message?.is_sent}

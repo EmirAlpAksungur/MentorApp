@@ -16,9 +16,9 @@
   }
   &__body {
     height: calc(100vh - 73px);
+    align-content: flex-start;
     overflow: auto;
     @include scroll;
-    align-content: flex-start;
     &__btn-group {
       padding: 24px;
       &__container {
@@ -84,11 +84,11 @@
     &__header {
       padding: 12px 12px 11px;
       border-bottom: 1px solid;
+      cursor: pointer;
       container-type: inline-size;
       @include themify($themes) {
         border-color: themed("border");
       }
-      cursor: pointer;
       &__img-blog {
         position: relative;
         height: 300px;
@@ -161,11 +161,12 @@
           width: 100%;
           height: auto;
           &__container {
+            height: auto;
+
             &__icon-group {
               width: 20%;
               min-width: 200px;
             }
-            height: auto;
             &__summary {
               height: auto;
             }

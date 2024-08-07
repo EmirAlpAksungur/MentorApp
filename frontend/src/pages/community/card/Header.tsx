@@ -1,11 +1,10 @@
 import React from "react";
-import { Avatar, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import MainDetails from "./details/MainDetails";
 import { CardPropType } from "./Card";
+import { MyAvatar } from "../../../components";
 
 const Main: React.FC<CardPropType> = (props) => {
-  console.log(props);
-
   return (
     <div className="community-container__main-box__item__body__header">
       <Grid
@@ -15,7 +14,11 @@ const Main: React.FC<CardPropType> = (props) => {
         justifyContent={"space-between"}
       >
         <Grid item>
-          <Avatar src={`data:image/jpeg;base64,${props?.photo}`} />
+          <MyAvatar
+            photo={props?.photo}
+            first_name={props?.user?.first_name}
+            last_name={props?.user?.last_name}
+          />
         </Grid>
         <Grid
           item

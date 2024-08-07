@@ -43,11 +43,14 @@ export class AllChatWebSocketClient {
     };
 
     const message_delivered = (chat_id: string, last_message: MessageType) => {
-      if (this.userId !== last_message.contact && !last_message.is_delivered) {
+      if (
+        this.userId !== last_message?.contact &&
+        !last_message?.is_delivered
+      ) {
         this.client.send(
           JSON.stringify({
             command: "message_delivered",
-            message: last_message.id,
+            message: last_message?.id,
             chat_id,
           })
         );

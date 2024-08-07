@@ -41,7 +41,7 @@ export class ChatWebSocketClient {
       }
     };
     this.client.onopen = (): void => {
-      is_read(this.last_message.id, this.last_message.contact);
+      is_read(this.last_message?.id, this.last_message?.contact);
       console.log("WebSocket Client Connected");
     };
 
@@ -50,7 +50,7 @@ export class ChatWebSocketClient {
     };
 
     const new_message = (data: any) => {
-      this.messages = [...this.messages, data.message];
+      this.messages = [data.message, ...this.messages];
     };
 
     this.client.onmessage = (e: MessageEvent): void => {

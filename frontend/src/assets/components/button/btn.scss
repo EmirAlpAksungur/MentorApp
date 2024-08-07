@@ -4,7 +4,9 @@
   text-transform: capitalize;
 }
 @mixin btnRounded {
-  border-radius: 999px !important;
+  & {
+    border-radius: 999px !important;
+  }
 }
 
 @mixin btnOutlined {
@@ -13,7 +15,6 @@
     border-color: themed("border-btn-outlined");
     color: themed("text-btn-outlined");
     @include textOptions();
-    // transition: background-color 5s;
   }
   &:hover {
     @include themify($themes) {
@@ -33,12 +34,12 @@
     @include textOptions();
   }
   &:hover {
+    transform: scale(1.05);
+    translate: 0px;
     @include themify($themes) {
       background-color: themed("bg-warning-hover");
       border-color: themed("bg-warning-hover");
     }
-    transform: scale(1.05);
-    translate: 0px;
   }
 }
 

@@ -15,8 +15,8 @@
         border: 1px solid themed("border-warning") !important;
       }
       &__btn {
-        @include btnOutlined;
         margin-left: 4px !important;
+        @include btnOutlined;
       }
     }
   }

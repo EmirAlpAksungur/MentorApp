@@ -21,11 +21,12 @@ const MyBadget: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       badgeContent={
         chatList?.filter((e: any) => {
           return (
-            e.last_message.contact !== userId &&
-            !e.last_message.is_read &&
-            selectedChat !== e.id
+            e?.last_message?.contact !== userId &&
+            !e?.last_message?.is_read &&
+            selectedChat !== e.id &&
+            e?.last_message
           );
-        }).length
+        })?.length
       }
       className="app-header__left__unauth-profile__badge"
     >

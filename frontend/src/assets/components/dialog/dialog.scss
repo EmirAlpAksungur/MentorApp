@@ -7,14 +7,14 @@
   .react-resizable-handle {
     border-right: 1px solid;
     border-bottom: 1px solid;
-    @include themify($themes) {
-      border-color: themed("text");
-    }
     content: "";
     position: absolute;
     width: 5px;
     height: 5px;
     background-image: none;
+    @include themify($themes) {
+      border-color: themed("text");
+    }
     &-nw {
       top: 5px;
       left: 5px;

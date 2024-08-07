@@ -3,9 +3,9 @@
 @import "../../components/scroll/scroll.scss";
 .policy {
   width: 100%;
+  position: relative;
   height: 100%;
   @include popUpBackGroundColor();
-  position: relative;
 
   &__header {
     position: absolute;
@@ -15,16 +15,21 @@
     height: 60px;
     border-radius: 10px;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.209);
-    @include themify($themes) {
-      background: themed("bg-fancy");
-      color: $dark-text;
-    }
     display: flex;
     align-items: center;
     font-size: 2rem;
     padding-left: 5%;
+    @include themify($themes) {
+      background: themed("bg-fancy");
+      color: $dark-text;
+    }
   }
   &__body {
+    margin-top: 30px;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    padding: 20px;
     &::-webkit-scrollbar {
       width: 4px;
       height: 100%;
@@ -36,11 +41,7 @@
         background-color: themed("border-warning");
       }
     }
-    margin-top: 30px;
-    height: 100%;
-    width: 100%;
-    overflow: auto;
-    padding: 20px;
+
     &__content {
       font-size: 1.2rem;
       margin-bottom: 12px;
@@ -51,11 +52,11 @@
       margin-bottom: 8px;
     }
     &__list {
+      margin-bottom: 12px;
       li {
         font-size: 1.2rem;
         margin-bottom: 4px;
       }
-      margin-bottom: 12px;
     }
   }
 }

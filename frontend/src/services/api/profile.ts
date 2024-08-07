@@ -23,6 +23,10 @@ const getUser = (token: string) => {
   return instance.get("/profile/user-details/", config(token));
 };
 
+const getUserById = (id: number, token: string) => {
+  return instance.get(`/profile/get-profile-byid/${id}/`, config(token));
+};
+
 let cancelToken: null | CancelTokenSource;
 const getProfile = (token: string, pageNumber: number) => {
   if (cancelToken) {
@@ -142,6 +146,7 @@ const ProfileService = {
   updatePhoto,
   getProfileLanguages,
   updateProfileLanguages,
+  getUserById,
 };
 
 export default ProfileService;

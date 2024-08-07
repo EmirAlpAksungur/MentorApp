@@ -22,3 +22,4 @@ def get_chats(user_id):
     if not chats:
         raise ObjectDoesNotExist("No chats found for this user.")
     return chats
+
