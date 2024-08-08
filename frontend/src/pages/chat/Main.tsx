@@ -1,8 +1,10 @@
 import React from "react";
 import { Grid } from "@mui/material";
+
 import ChatList from "./chatList/ChatList";
 import Chat from "./Chat";
 import "../../assets/pages/chat/chat.scss";
+
 const Main: React.FC = () => {
   return (
     <div className="chat-container">

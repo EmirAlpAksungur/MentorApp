@@ -38,6 +38,7 @@ const Chat: React.FC = () => {
       if (ws) ws.closeWs();
     };
   }, [chatId]);
+
   return client ? (
     <>
       <ChatHeader chatId={chatId} />

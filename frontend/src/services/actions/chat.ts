@@ -21,7 +21,7 @@ export const loadChatList =
   };
 
 export const changeSelectedChat =
-  (chatId: string) => async (dispatch: AppDispatch) => {
+  (chatId: string | null) => async (dispatch: AppDispatch) => {
     dispatch({
       type: CHANGE_SELECTED_CHAT,
       payload: chatId,

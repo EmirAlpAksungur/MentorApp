@@ -10,6 +10,9 @@ import { TranslatedTextType } from "../../../services/types/translations";
 import "../../../assets/layout/header.scss";
 
 const MyBadget: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const location = useLocation();
+
+  const isChatPage = location.pathname.startsWith("/chat");
   const chatList = useAppSelector((state: RootState) => state.chat?.chatList);
   const userId = useAppSelector((state: RootState) => state.auth?.user?.user);
   const selectedChat = useAppSelector(
@@ -20,10 +23,16 @@ const MyBadget: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     <Badge
       badgeContent={
         chatList?.filter((e: any) => {
+          const check = () => {
+            if (selectedChat === e.id && isChatPage) {
+              return false;
+            }
+            return true;
+          };
           return (
             e?.last_message?.contact !== userId &&
             !e?.last_message?.is_read &&
-            selectedChat !== e.id &&
+            check() &&
             e?.last_message
           );
         })?.length
