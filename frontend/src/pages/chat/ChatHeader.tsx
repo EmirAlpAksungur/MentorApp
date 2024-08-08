@@ -8,17 +8,16 @@ import { CardPropType } from "../community/card/Card";
 import DialogContent from "../community/card/details/DialogContent";
 import { MyDialog } from "../../components";
 const ChatHeader: React.FC<{
-  photo: string | null;
-  first_name: string;
-  last_name: string;
   user_id: number;
-}> = ({ photo, first_name, last_name, user_id }) => {
+}> = ({ user_id }) => {
   const [data, setData] = React.useState<CardPropType | null>(null);
   const token = useAppSelector((state: RootState) => state.auth?.token);
   const asyncHelper = async () => {
     try {
       if (user_id) {
         let res = await ProfileService.getUserById(user_id, token);
+        console.log(data);
+
         setData(res.data[0]);
       }
     } catch (err) {
@@ -27,7 +26,7 @@ const ChatHeader: React.FC<{
   };
   React.useEffect(() => {
     asyncHelper();
-  }, []);
+  }, [user_id]);
   return (
     <div className="chat-container__header">
       {data && (
@@ -38,12 +37,12 @@ const ChatHeader: React.FC<{
             return (
               <Grid container columnGap={2} alignItems={"center"}>
                 <MyAvatar
-                  photo={photo}
-                  first_name={first_name}
-                  last_name={last_name}
+                  photo={data?.photo}
+                  first_name={data?.user?.first_name}
+                  last_name={data?.user?.last_name}
                 />
                 <span className="chat-container__header__name">
-                  {first_name} {last_name}
+                  {data?.user?.first_name} {data?.user?.last_name}
                 </span>
               </Grid>
             );

@@ -32,7 +32,7 @@ const PrivateRouter: React.FC = () => {
   useEffect(() => {
     setToken(localStorage.getItem("token"));
   }, [isAuth]);
-  return isAuth ? (
+  return isAuth && profileFillRate ? (
     profileFillRate !== 100 && !isProfilePage ? (
       <Navigate to="/profile/personal-information" />
     ) : (

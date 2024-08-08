@@ -18,16 +18,6 @@ const Chat: React.FC = () => {
       ?.find((a: any) => a?.id === chatId)
       ?.participants?.find((e: any) => e.id !== userId)?.profil?.photo;
   });
-  const first_name = useAppSelector((state: RootState) => {
-    return state.chat?.chatList
-      ?.find((a: any) => a?.id === chatId)
-      ?.participants?.find((e: any) => e.id !== userId)?.first_name;
-  });
-  const last_name = useAppSelector((state: RootState) => {
-    return state.chat?.chatList
-      ?.find((a: any) => a?.id === chatId)
-      ?.participants?.find((e: any) => e.id !== userId)?.last_name;
-  });
   const user_id = useAppSelector((state: RootState) => {
     return state.chat?.chatList
       ?.find((a: any) => a?.id === chatId)
@@ -54,12 +44,7 @@ const Chat: React.FC = () => {
   }, [chatId]);
   return client ? (
     <>
-      <ChatHeader
-        photo={photo}
-        first_name={first_name}
-        last_name={last_name}
-        user_id={user_id}
-      />
+      <ChatHeader user_id={user_id} />
       <Grid
         container
         className="chat-container__body"
