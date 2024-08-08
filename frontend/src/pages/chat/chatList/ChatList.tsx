@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Divider, InputAdornment, IconButton } from "@mui/material";
+import React, { useState } from "react";
+import { InputAdornment, IconButton } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import { useAppSelector, useAppDispatch } from "../../../hooks/redux";
+import { useAppSelector } from "../../../hooks/redux";
 import { RootState } from "../../../store/configureStore";
 
 import Messages from "./Messages";
@@ -43,6 +43,7 @@ const Main: React.FC = () => {
           (props: ChatListType) =>
             props.last_message && (
               <ChatListItem
+                key={props.id}
                 id={props.id}
                 last_message={props.last_message}
                 participants={props.participants}

@@ -28,6 +28,24 @@ class ChatConsumer(WebsocketConsumer):
                     'message': content
                 }
             )
+    
+    def first_message(self, chat):
+        channel_layer = get_channel_layer()
+        for participant in chat.participants.all():
+            room_group_name = f'chat_all_{participant.id}'
+            serializer = GetChatSerializer(chat)
+            content = {
+                'command': 'first_message',
+                'message': serializer.data,
+                'chat_id': chat.id
+            }
+            async_to_sync(channel_layer.group_send)(
+                room_group_name,
+                {
+                    'type': 'first_message',
+                    'message': content
+                }
+            )
 
     def fetch_messages(self, data):
         messages = get_last_10_messages(data['chatId'])
@@ -45,12 +63,15 @@ class ChatConsumer(WebsocketConsumer):
             is_sent=True)
         current_chat = get_current_chat(data['chatId'])
         current_chat.messages.add(message)
+        temp = current_chat.last_message
         current_chat.last_message = message
         current_chat.save()
         content = {
             'command': 'new_message',
             'message': self.message_to_json(message)
         }
+        if not temp:
+            self.first_message(current_chat)
         self.notify_users(current_chat, self.message_to_json(message))
         return self.send_chat_message(content)
 
@@ -156,7 +177,11 @@ class ChatLastConsumer(WebsocketConsumer):
             }
             self.send_message(content)
         except:
-            pass
+            content = {
+                'command': 'fetch_chats',
+                'data': []
+            }
+            self.send_message(content)
     def messages_to_json(self, messages):
         result = []
         for message in messages:
@@ -256,3 +281,6 @@ class ChatLastConsumer(WebsocketConsumer):
         message = event['message']
         self.send(text_data=json.dumps(message))
 
+    def first_message(self,event):
+        message = event['message']
+        self.send(text_data=json.dumps(message))

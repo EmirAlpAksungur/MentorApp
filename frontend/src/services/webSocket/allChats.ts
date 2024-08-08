@@ -41,6 +41,13 @@ export class AllChatWebSocketClient {
       this.chats = chats;
       return chats;
     };
+    const first_message = (data: any) => {
+      console.log(data);
+
+      let chats = [...this.chats, data];
+      this.chats = chats;
+      return chats;
+    };
 
     const message_delivered = (chat_id: string, last_message: MessageType) => {
       if (
@@ -76,6 +83,7 @@ export class AllChatWebSocketClient {
       const sendNumber = (): void => {
         if (this.client.readyState === this.client.OPEN) {
           let data = JSON.parse(e.data);
+
           switch (data?.command) {
             case "fetch_chats":
               const chats = fetch_chats(data);
@@ -95,6 +103,9 @@ export class AllChatWebSocketClient {
               break;
             case "message_readed":
               this.refreshChat(last_message(data));
+              break;
+            case "first_message":
+              this.refreshChat(first_message(data?.message));
               break;
             default:
               break;

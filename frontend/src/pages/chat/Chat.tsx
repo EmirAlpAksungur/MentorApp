@@ -18,11 +18,7 @@ const Chat: React.FC = () => {
       ?.find((a: any) => a?.id === chatId)
       ?.participants?.find((e: any) => e.id !== userId)?.profil?.photo;
   });
-  const user_id = useAppSelector((state: RootState) => {
-    return state.chat?.chatList
-      ?.find((a: any) => a?.id === chatId)
-      ?.participants?.find((e: any) => e.id !== userId)?.id;
-  });
+
   const last_message = useAppSelector((state: RootState) => {
     return state.chat?.chatList?.find((e: any) => e.id === chatId)
       ?.last_message;
@@ -44,7 +40,7 @@ const Chat: React.FC = () => {
   }, [chatId]);
   return client ? (
     <>
-      <ChatHeader user_id={user_id} />
+      <ChatHeader chatId={chatId} />
       <Grid
         container
         className="chat-container__body"
@@ -61,7 +57,12 @@ const Chat: React.FC = () => {
             flexDirection: "column-reverse",
           }}
         >
-          <Messages chatId={chatId} client={client} photo={photo} />
+          <Messages
+            key={chatId}
+            chatId={chatId}
+            client={client}
+            photo={photo}
+          />
         </Grid>
       </Grid>
     </>

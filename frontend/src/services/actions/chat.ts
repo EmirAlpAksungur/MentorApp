@@ -10,8 +10,6 @@ export const loadChatList =
   (data: any | null) =>
   async (dispatch: AppDispatch, getState: () => RootState) => {
     try {
-      console.log(data);
-
       data &&
         dispatch({
           type: UPDATE_CHAT_LIST,

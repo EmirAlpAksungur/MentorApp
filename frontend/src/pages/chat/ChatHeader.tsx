@@ -8,17 +8,21 @@ import { CardPropType } from "../community/card/Card";
 import DialogContent from "../community/card/details/DialogContent";
 import { MyDialog } from "../../components";
 const ChatHeader: React.FC<{
-  user_id: number;
-}> = ({ user_id }) => {
+  chatId: string;
+}> = ({ chatId }) => {
   const [data, setData] = React.useState<CardPropType | null>(null);
   const token = useAppSelector((state: RootState) => state.auth?.token);
+  const id = useAppSelector((state: RootState) => state.auth?.user?.user);
   const asyncHelper = async () => {
     try {
-      if (user_id) {
-        let res = await ProfileService.getUserById(user_id, token);
-        console.log(data);
+      if (chatId) {
+        const user_id = chatId?.split("_").find((e) => e != id);
+        if (user_id) {
+          let res = await ProfileService.getUserById(user_id, token);
+          console.log(data);
 
-        setData(res.data[0]);
+          setData(res.data[0]);
+        }
       }
     } catch (err) {
       console.log(err);
@@ -26,7 +30,7 @@ const ChatHeader: React.FC<{
   };
   React.useEffect(() => {
     asyncHelper();
-  }, [user_id]);
+  }, [chatId]);
   return (
     <div className="chat-container__header">
       {data && (

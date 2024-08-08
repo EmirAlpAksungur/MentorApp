@@ -23,7 +23,7 @@ const getUser = (token: string) => {
   return instance.get("/profile/user-details/", config(token));
 };
 
-const getUserById = (id: number, token: string) => {
+const getUserById = (id: string | number, token: string) => {
   return instance.get(`/profile/get-profile-byid/${id}/`, config(token));
 };
 
