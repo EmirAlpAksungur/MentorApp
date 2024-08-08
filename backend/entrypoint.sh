@@ -49,4 +49,5 @@ python manage.py collectstatic --noinput
 echo "Static files collected"
 
 echo "Starting Server"
+# python manage.py runserver 0.0.0.0:$APP_PORT
 daphne -b 0.0.0.0 -p 8000 core.asgi:application
