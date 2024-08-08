@@ -13,6 +13,9 @@ const Main: React.FC<{ children: ReactNode }> = ({ children }) => {
   const LanguageId = useAppSelector(
     (state: RootState) => state.languages.LanguageId
   );
+  const profileFillRate = useAppSelector(
+    (state: RootState) => state.auth?.user?.profileFillRate
+  );
   const helperAsync = async () => {
     const result = await asyncLoadText(LanguageId, [1627, 1628]);
     Array.isArray(result) && setText(new TextListClass(result));
@@ -21,29 +24,33 @@ const Main: React.FC<{ children: ReactNode }> = ({ children }) => {
   useEffect(() => {
     helperAsync();
   }, [LanguageId]);
+
   return (
     <div className="profile-container">
       <div className="profile-container__box">
-        <div className="profile-container__box__header">
-          <div className="profile-container__box__header__chart">
-            <HeaderChart />
-          </div>
-          <div className="profile-container__box__header__text">
-            <div className="profile-container__box__header__text__header">
-              {text?.getText(1627)}
+        {profileFillRate !== 100 && (
+          <div className="profile-container__box__header">
+            <div className="profile-container__box__header__chart">
+              <HeaderChart value={profileFillRate} />
             </div>
-            <div className="profile-container__box__header__text__content">
-              {text?.getText(1628)}
+
+            <div className="profile-container__box__header__text">
+              <div className="profile-container__box__header__text__header">
+                {text?.getText(1627)}
+              </div>
+              <div className="profile-container__box__header__text__content">
+                {text?.getText(1628)}
+              </div>
             </div>
           </div>
-        </div>
+        )}
+
         <div className="profile-container__box__body">
           <div className="profile-container__box__body__left">
             <Card>
               <LeftBox />
             </Card>
           </div>
-
           <div className="profile-container__box__body__right">{children}</div>
         </div>
       </div>

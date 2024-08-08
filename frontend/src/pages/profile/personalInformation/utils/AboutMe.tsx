@@ -12,6 +12,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { AboutFormType } from "../../../../services/types/about";
 import "../../../../assets/pages/profile/personalInfo.scss";
 import { handleSubmit } from "../../../../services/actions/about";
+import { loadUser } from "../../../../services/actions/login";
 
 const AboutMeUpdate: React.FC<any> = ({
   value,
@@ -25,6 +26,7 @@ const AboutMeUpdate: React.FC<any> = ({
   const LanguageId = useAppSelector(
     (state: RootState) => state.languages.LanguageId
   );
+  const token = useAppSelector((state: RootState) => state.auth?.token);
   const helperAsync = async () => {
     const result = await asyncLoadText(LanguageId, [31, 1650]);
     Array.isArray(result) && setText(new TextListClass(result));
@@ -66,10 +68,9 @@ const AboutMeUpdate: React.FC<any> = ({
               variant="contained"
               className="update-body__btn-group__save"
               onClick={async () => {
-                console.log(await dispatch(handleSubmit()));
-
                 if (await dispatch(handleSubmit())) {
                   fetchData();
+                  dispatch(loadUser(token));
                   handleClose();
                 }
               }}

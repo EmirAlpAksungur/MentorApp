@@ -15,6 +15,7 @@ import {
   UnKnownSkillsType,
 } from "../../../../services/types/unKnownSkills";
 import { handleSubmit } from "../../../../services/actions/unKnownSkills";
+import { loadUser } from "../../../../services/actions/login";
 const UnKnownSkillsUpdate: React.FC<any> = ({
   value,
   fetchData,
@@ -27,6 +28,7 @@ const UnKnownSkillsUpdate: React.FC<any> = ({
   const LanguageId = useAppSelector(
     (state: RootState) => state.languages.LanguageId
   );
+  const token = useAppSelector((state: RootState) => state.auth?.token);
   const helperAsync = async () => {
     const result = await asyncLoadText(LanguageId, [31, 1650]);
     Array.isArray(result) && setText(new TextListClass(result));
@@ -74,6 +76,7 @@ const UnKnownSkillsUpdate: React.FC<any> = ({
               onClick={async () => {
                 if (await dispatch(handleSubmit())) {
                   fetchData();
+                  dispatch(loadUser(token));
                   handleClose();
                 }
               }}

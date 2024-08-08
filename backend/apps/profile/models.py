@@ -46,6 +46,7 @@ class Profile(models.Model):
     references =  models.ManyToManyField(References)
     likes = models.IntegerField(default = 0)
     dislikes = models.IntegerField(default = 0)
+    profileFillRate = models.IntegerField(default = 30)
     savedBlog = models.ManyToManyField(Blog)
     dateOfBirth = models.BigIntegerField(default = 0)
     twitter = models.CharField(max_length = 100, blank = True ,null = True)

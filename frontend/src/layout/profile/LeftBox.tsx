@@ -98,6 +98,7 @@ const LeftBox = () => {
   const linkedin = useAppSelector(
     (state: RootState) => state.auth.user?.linkedin
   );
+
   const handleChangeFunc = async (e: string | null) => {
     try {
       e && (await ProfileService.updatePhoto({ photo: e }, token));

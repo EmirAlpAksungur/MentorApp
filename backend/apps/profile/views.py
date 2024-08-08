@@ -112,9 +112,6 @@ class GetUnKnownSkillView(generics.ListAPIView):
         language_id = request.data.get('LanguageId')
         SkillId = request.data.get('SkillId')
         unKnownSkill = UnKnownSkills.objects.filter(uuid=SkillId).first()
-        print(unKnownSkill)
-        print(unKnownSkill.skill.SkillId)
-        print(unKnownSkill.skill.TextContentId)
         translation = Translations.objects.filter(TextContentId=unKnownSkill.skill.TextContentId, LanguageId=language_id).first()
 
         return Response({
@@ -200,6 +197,11 @@ class AboutmeView(APIView):
         serializer = AboutMeSerializer(profile)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+def isProfileFilled(profile):
+    if(profile.profileFillRate == 100):
+        profile.isFilled = True
+    return profile
+
 class AboutmeUpdateView(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]
@@ -209,11 +211,15 @@ class AboutmeUpdateView(APIView):
             profile = Profile.objects.get(
                 user=request.user
             )
+            if not profile.about:
+                profile.profileFillRate = profile.profileFillRate + 10
         except Profile.DoesNotExist:
             return Response({"error": "Profile not found."}, status=status.HTTP_404_NOT_FOUND)
-
+   
         serializer = AboutMeSerializer(profile, data=request.data)
         if serializer.is_valid():
+            profile = isProfileFilled(profile)
+            profile.save()
             serializer.save() 
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -242,11 +248,17 @@ class PersonalInfoUpdateView(APIView):
             profile = Profile.objects.get(
                 user=request.user
             )
+            if not profile.profession and request.data.get('profession') is not None and request.data.get('profession') != "":
+                profile.profileFillRate = profile.profileFillRate + 10
+            if not profile.nationality and request.data.get('nationality') is not None and request.data.get('nationality') != "":
+                profile.profileFillRate = profile.profileFillRate + 10
         except Profile.DoesNotExist:
             return Response({"error": "Profile not found."}, status=status.HTTP_404_NOT_FOUND)
 
         serializer = PersonalInfoSerializer(profile, data=request.data)
         if serializer.is_valid():
+            profile = isProfileFilled(profile)
+            profile.save()
             serializer.save() 
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -276,11 +288,15 @@ class SkillsUpdateView(APIView):
             profile = Profile.objects.get(
                 user=request.user
             )
+            if not profile.knownSkills.exists():
+                profile.profileFillRate = profile.profileFillRate + 10
         except Profile.DoesNotExist:
             return Response({"error": "Profile not found."}, status=status.HTTP_404_NOT_FOUND)
 
         serializer = SkillsSerializer(profile, data=request.data)
         if serializer.is_valid():
+            profile = isProfileFilled(profile)
+            profile.save()
             serializer.save() 
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -308,6 +324,8 @@ class UnknownSkillsUpdateView(APIView):
     def post(self, request, *args, **kwargs):
         try:
             profile = Profile.objects.get(user=request.user)
+            if not profile.unKnownSkills.exists():
+                profile.profileFillRate = profile.profileFillRate + 10
         except Profile.DoesNotExist:
             return Response({"error": "Profile not found."}, status=status.HTTP_404_NOT_FOUND)
 
@@ -327,6 +345,8 @@ class UnknownSkillsUpdateView(APIView):
                 serializer = UnknownSkillsSerializer(data=item)
 
             if serializer.is_valid():
+                profile = isProfileFilled(profile)
+                profile.save()
                 unknown_skill = serializer.save()
                 profile.unKnownSkills.add(unknown_skill)  # ManyToMany ilişkisine ekleme
                 response_data.append(serializer.data)
@@ -344,11 +364,15 @@ class ProfilePhotoUpdateView(APIView):
             profile = Profile.objects.get(
                 user=request.user
             )
+            if not profile.photo:
+                profile.profileFillRate = profile.profileFillRate + 10
         except Profile.DoesNotExist:
             return Response({"error": "Profile not found."}, status=status.HTTP_404_NOT_FOUND)
 
         serializer = PhotoSerializer(profile, data=request.data)
         if serializer.is_valid():
+            profile = isProfileFilled(profile)
+            profile.save()
             serializer.save() 
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -376,6 +400,8 @@ class LanguagesUpdateView(APIView):
     def post(self, request, *args, **kwargs):
         try:
             profile = Profile.objects.get(user=request.user)
+            if not profile.languages.exists():
+                profile.profileFillRate = profile.profileFillRate + 10
         except Profile.DoesNotExist:
             return Response({"error": "Profile not found."}, status=status.HTTP_404_NOT_FOUND)
         response_data = []
@@ -393,8 +419,10 @@ class LanguagesUpdateView(APIView):
                 serializer = LanguagesSerializer(data=item)
 
             if serializer.is_valid():
+                profile = isProfileFilled(profile)
+                profile.save()
                 language = serializer.save()
-                profile.languages.add(language)  # ManyToMany ilişkisine ekleme
+                profile.languages.add(language) 
                 response_data.append(serializer.data)
             else:
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

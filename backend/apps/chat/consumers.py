@@ -147,14 +147,16 @@ class ChatConsumer(WebsocketConsumer):
 
 class ChatLastConsumer(WebsocketConsumer):
     def fetch_chats(self, data):
-        chats = get_chats(data['user_id'])
-        serializer = GetChatSerializer(chats, many=True)
-        content = {
-            'command': 'fetch_chats',
-            'data': serializer.data
-        }
-        self.send_message(content)
-
+        try:
+            chats = get_chats(data['user_id'])
+            serializer = GetChatSerializer(chats, many=True)
+            content = {
+                'command': 'fetch_chats',
+                'data': serializer.data
+            }
+            self.send_message(content)
+        except:
+            pass
     def messages_to_json(self, messages):
         result = []
         for message in messages:

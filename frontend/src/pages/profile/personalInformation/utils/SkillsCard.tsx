@@ -12,6 +12,7 @@ import "../../../../assets/pages/profile/personalInfo.scss";
 import KnownSkill from "../../../../components/view/KnownSkill";
 import { KnownSkillsFormType } from "../../../../services/types/knownSkills";
 import { handleSubmit } from "../../../../services/actions/knownSkills";
+import { loadUser } from "../../../../services/actions/login";
 const KnownSkillsUpdate: React.FC<any> = ({
   value,
   fetchData,
@@ -24,6 +25,7 @@ const KnownSkillsUpdate: React.FC<any> = ({
   const LanguageId = useAppSelector(
     (state: RootState) => state.languages.LanguageId
   );
+  const token = useAppSelector((state: RootState) => state.auth?.token);
   const helperAsync = async () => {
     const result = await asyncLoadText(LanguageId, [31, 1650]);
     Array.isArray(result) && setText(new TextListClass(result));
@@ -73,6 +75,7 @@ const KnownSkillsUpdate: React.FC<any> = ({
 
                 if (await dispatch(handleSubmit())) {
                   fetchData();
+                  dispatch(loadUser(token));
                   handleClose();
                 }
               }}

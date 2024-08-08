@@ -16,6 +16,7 @@ import {
   LanguageType,
   LanguagesFormType,
 } from "../../../../services/types/languages";
+import { loadUser } from "../../../../services/actions/login";
 const LanguageUpdate: React.FC<any> = ({
   value,
   fetchData,
@@ -28,6 +29,7 @@ const LanguageUpdate: React.FC<any> = ({
   const LanguageId = useAppSelector(
     (state: RootState) => state.languages.LanguageId
   );
+  const token = useAppSelector((state: RootState) => state.auth?.token);
   const helperAsync = async () => {
     const result = await asyncLoadText(LanguageId, [31, 1650]);
     Array.isArray(result) && setText(new TextListClass(result));
@@ -75,6 +77,7 @@ const LanguageUpdate: React.FC<any> = ({
               onClick={async () => {
                 if (await dispatch(handleSubmit())) {
                   fetchData();
+                  dispatch(loadUser(token));
                   handleClose();
                 }
               }}

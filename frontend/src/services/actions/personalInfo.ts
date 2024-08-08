@@ -10,7 +10,7 @@ const validationSchema = yup.object({
   last_name: yup.string().required("13"),
   email: yup.string().email("14").required("15"),
   dateOfBirth: yup.number().nullable(),
-  profession: yup.string().max(100, "1669"),
+  profession: yup.string().required("1667").max(100, "1669"),
   location: yup.number().required("1667"),
   nationality: yup.number().required("1667"),
   github: yup.string().nullable(),

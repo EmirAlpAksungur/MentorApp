@@ -22,6 +22,7 @@ import Location from "../../../../components/view/Location";
 import Age from "../../../../components/view/Age";
 import { handleSubmit } from "../../../../services/actions/personalInfo";
 import "../../../../assets/pages/profile/personalInfo.scss";
+import { loadUser } from "../../../../services/actions/login";
 
 const GeneralUpdate: React.FC<any> = ({
   value,
@@ -35,6 +36,7 @@ const GeneralUpdate: React.FC<any> = ({
   const LanguageId = useAppSelector(
     (state: RootState) => state.languages.LanguageId
   );
+  const token = useAppSelector((state: RootState) => state.auth?.token);
   const helperAsync = async () => {
     const result = await asyncLoadText(LanguageId, [31, 1650]);
     Array.isArray(result) && setText(new TextListClass(result));
@@ -82,6 +84,7 @@ const GeneralUpdate: React.FC<any> = ({
               onClick={async () => {
                 if (await dispatch(handleSubmit())) {
                   fetchData();
+                  dispatch(loadUser(token));
                   handleClose();
                 }
               }}
