@@ -125,7 +125,7 @@ const AboutMe: React.FC<{ user_id: number }> = ({ user_id }) => {
                 </IconButton>
               )
             }
-            defaultWH={[750, 650]}
+            defaultWH={[550, 450]}
             defaultOpen={false}
             hideBackdrop={false}
             value={content}

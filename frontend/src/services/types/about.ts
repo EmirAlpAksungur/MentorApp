@@ -8,6 +8,6 @@ export const AboutFormType = [
     size: 12,
     type: "long-string",
     labelId: 1508,
-    rows: 30,
+    rows: 25,
   },
 ];
