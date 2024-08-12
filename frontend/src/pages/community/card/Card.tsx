@@ -8,6 +8,8 @@ import KnownSkill from "../../../components/view/KnownSkill";
 import UnKnownSkill from "../../../components/view/UnKnownSkill";
 import { sendMessage } from "../../../services/actions/chat";
 import { Card } from "../../../components";
+import ProfileService from "../../../services/api/profile";
+import { UnKnownSkillsType } from "../../../services/types/unKnownSkills";
 interface UserType {
   first_name: string;
   last_name: string;
@@ -42,10 +44,32 @@ export interface CardPropType {
 const Main: React.FC<CardPropType> = (props) => {
   const dispatch = useAppDispatch();
   const userId = useAppSelector((state: RootState) => state.auth.user?.user);
+  const [content, setContent] = React.useState<UnKnownSkillsType[] | null>(
+    null
+  );
+  const LanguageId = useAppSelector(
+    (state: RootState) => state.languages.LanguageId
+  );
+  const token = useAppSelector((state: RootState) => state.auth?.token);
   const handleSubmit = async () => {
     dispatch(sendMessage(userId, props.user.id));
   };
+  console.log(props?.knownSkills);
+  const fetchData = async () => {
+    try {
+      const result = await ProfileService.getUnknownSkills(
+        { user_id: props?.user?.id },
+        token
+      );
+      setContent(result.data?.unKnownSkills);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
+  React.useEffect(() => {
+    fetchData();
+  }, [LanguageId]);
   return (
     <Card>
       <div className="community-container__main-box__item__body">
@@ -57,12 +81,12 @@ const Main: React.FC<CardPropType> = (props) => {
         <div className="community-container__main-box__item__body__content">
           <KnownSkill knownSkills={props?.knownSkills} />
         </div>
-        {/* <div className="community-container__main-box__item__body__title">
-            {props.text.find((e) => e?.TextContentId === 36)?.Translations}
-          </div> */}
-        {/* <div className="community-container__main-box__item__body__content">
-            <UnKnownSkill unKnownSkills={props?.unKnownSkills} />
-          </div> */}
+        <div className="community-container__main-box__item__body__title">
+          {props.text.find((e) => e?.TextContentId === 36)?.Translations}
+        </div>
+        <div className="community-container__main-box__item__body__content">
+          <UnKnownSkill unKnownSkills={content} />
+        </div>
       </div>
       <Button
         className="community-container__main-box__item__body__btn"

@@ -115,6 +115,8 @@ const SkillsCard: React.FC<{ user_id: number }> = ({ user_id }) => {
     helperAsync();
     fetchData();
   }, [LanguageId]);
+  console.log(content);
+
   return (
     <Card>
       <div className="unknown-skills profile-card">

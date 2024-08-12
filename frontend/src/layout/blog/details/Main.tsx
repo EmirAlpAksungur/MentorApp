@@ -8,6 +8,7 @@ import LoadingComp from "../../../components/loading/LoadingComp";
 import CloseIcon from "@mui/icons-material/Close";
 import BlogService from "../../../services/api/blog";
 import history from "../../../routers/history";
+import LongText from "../../../components/view/LongText";
 const Main: React.FC = (props: any) => {
   let [data, setData] = useState<BlogType | null>(null);
   const token = useAppSelector((state: RootState) => state.auth.token);
@@ -45,7 +46,9 @@ const Main: React.FC = (props: any) => {
           </IconButton>
         </Box>
         <BlogBody data={data} />
-        <Box className={"blog-container__body__content"}>{data?.blog}</Box>
+        <Box className={"blog-container__body__content"}>
+          <LongText text={data?.blog} />
+        </Box>
       </Box>
     );
   else return <LoadingComp />;

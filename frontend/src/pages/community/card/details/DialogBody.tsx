@@ -13,8 +13,6 @@ interface DialogBodyProps {
 }
 
 const Main: React.FC<DialogBodyProps> = ({ user }) => {
-  console.log(user);
-
   return (
     <Box className="user-details-container__body">
       <Grid container rowGap={3}>
