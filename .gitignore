@@ -163,5 +163,3 @@ backend/apps/skill/migrations/*
 backend/apps/blog/migrations/*
 !backend/apps/blog/migrations/__init__.py
 
-#------frontend
-frontend/package-lock.json
