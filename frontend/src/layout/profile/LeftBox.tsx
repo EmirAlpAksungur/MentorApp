@@ -16,6 +16,8 @@ import { asyncLoadText } from "../../services/actions/translations";
 import { loadUser } from "../../services/actions/login";
 import { TextListClass } from "../../utils/textContent";
 import ProfileService from "../../services/api/profile";
+import ModelService from "../../services/api/models";
+import { changeNotification } from "../../services/actions/notification";
 const ButtonGroup = () => {
   const location = useLocation();
   const [text, setText] = useState<TextListClass | null>(null);
@@ -101,8 +103,29 @@ const LeftBox = () => {
 
   const handleChangeFunc = async (e: string | null) => {
     try {
-      e && (await ProfileService.updatePhoto({ photo: e }, token));
-      dispatch(loadUser(token));
+      if (e) {
+        const res = await ModelService.faceDetectionYOLO({ image_base64: e });
+        console.log(res);
+        const persons = res.data.prediction.filter((e: any) => e.class === 0);
+        if (persons.length === 0) {
+          dispatch(
+            changeNotification({
+              NotificationCode: "error",
+              NotificationText: 1676,
+            })
+          );
+        } else if (persons.length > 1) {
+          dispatch(
+            changeNotification({
+              NotificationCode: "error",
+              NotificationText: 1677,
+            })
+          );
+        } else {
+          await ProfileService.updatePhoto({ photo: e }, token);
+          dispatch(loadUser(token));
+        }
+      }
     } catch (err) {
       console.log(err);
     }

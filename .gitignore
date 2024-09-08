@@ -130,6 +130,7 @@ dist
 .pnp.*
 
 # virtual evironment
+.venv
 venv
 /backend/static
 build
@@ -163,3 +164,7 @@ backend/apps/skill/migrations/*
 backend/apps/blog/migrations/*
 !backend/apps/blog/migrations/__init__.py
 
+#model
+data
+*.pt
+*.pkl

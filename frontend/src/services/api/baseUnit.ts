@@ -31,3 +31,10 @@ export const unAuthConfig = {
     "Content-Type": "application/json",
   },
 };
+
+//model
+const modelUrl = "http://localhost:8001";
+
+export const modelInstance = axios.create({
+  baseURL: `${modelUrl}`,
+});

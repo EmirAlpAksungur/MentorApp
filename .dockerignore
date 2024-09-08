@@ -173,3 +173,6 @@ __pycache__/
 *.css.map
 *.egg-info
 *.sql.gz
+
+model/models/faceDetection/data
+.venv
