@@ -14,26 +14,26 @@ Kullanılan Teknolojiler
 
 Frontend
 
-React.js: Kullanıcı arayüzünü oluşturmak için kullanılan JavaScript kütüphanesi.
-TypeScript: JavaScript'in statik tip denetimi sunan üst kümesi. Uygulama geliştiricilerine daha güvenli ve hatasız kod yazma imkanı sunar.
-Material UI: UI bileşenleri için kullanılan popüler bir kütüphane.
-Redux: Uygulamanın durum yönetimi için kullanıldı.
-Axios: Backend API ile iletişim kurmak için HTTP istemcisi.
-Sass: CSS yazımı için kullanılan güçlü bir stil dilidir.
-React Virtualized: Uzun listeleri ve tablolara performans optimizasyonu sağlar.
-Yup: Form doğrulama için kullanılan bir şemadır.
-WebSocket: Gerçek zamanlı chat ve anlık güncellemeler için kullanıldı.
+- React.js: Kullanıcı arayüzünü oluşturmak için kullanılan JavaScript kütüphanesi.
+- TypeScript: JavaScript'in statik tip denetimi sunan üst kümesi. Uygulama geliştiricilerine daha güvenli ve hatasız kod yazma imkanı sunar.-
+- Material UI: UI bileşenleri için kullanılan popüler bir kütüphane.
+- Redux: Uygulamanın durum yönetimi için kullanıldı.
+- Axios: Backend API ile iletişim kurmak için HTTP istemcisi.
+- Sass: CSS yazımı için kullanılan güçlü bir stil dilidir.
+- React Virtualized: Uzun listeleri ve tablolara performans optimizasyonu sağlar.
+- Yup: Form doğrulama için kullanılan bir şemadır.
+- WebSocket: Gerçek zamanlı chat ve anlık güncellemeler için kullanıldı.
 
 Backend
 
-Django: Backend geliştirmek için kullanılan Python tabanlı web framework.
-Django REST Framework: API geliştirme için kullanılan güçlü bir Django uzantısı.
-Django Channels: WebSockets ve asenkron işlemleri destekler.
-PostgreSQL: Veritabanı yönetim sistemi olarak kullanıldı.
-Django Allauth ve Dj-rest-auth: Kullanıcı yönetimi ve kimlik doğrulama için kullanıldı.
-Pandas ve OpenPyXL: Veri işleme ve Excel dosyalarıyla çalışma için kullanıldı.
-Django CORS Headers: Cross-origin kaynak paylaşımını yönetmek için kullanıldı.
-Django Redis: Redis ile veritabanı önbellekleme ve asenkron görevler için kullanıldı.
+- Django: Backend geliştirmek için kullanılan Python tabanlı web framework.
+- Django REST Framework: API geliştirme için kullanılan güçlü bir Django uzantısı.
+- Django Channels: WebSockets ve asenkron işlemleri destekler.
+- PostgreSQL: Veritabanı yönetim sistemi olarak kullanıldı.
+- Django Allauth ve Dj-rest-auth: Kullanıcı yönetimi ve kimlik doğrulama için kullanıldı.
+- Pandas ve OpenPyXL: Veri işleme ve Excel dosyalarıyla çalışma için kullanıldı.
+- Django CORS Headers: Cross-origin kaynak paylaşımını yönetmek için kullanıldı.
+- Django Redis: Redis ile veritabanı önbellekleme ve asenkron görevler için kullanıldı.
 
 Docker
 
